@@ -123,7 +123,7 @@ function staticFiles($content, $type = 0){
   if($setting == 'local') {
     $output = Helper::options()->themeUrl.'/'.$content;
   }elseif($setting == 'jsdelivr') {
-    $output = 'https://cdn.jsdelivr.net/gh/Bhaouo/Sweet/'.$content;
+    $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo/'.$content;
   }elseif($setting == 'cdn') {
     $output = $setting_cdn.'/'.$content;
   }
