@@ -36,7 +36,7 @@ function threadedComments($comments, $options) {
     <div class="comment-header-image">
       <img class="mdui-img-circle" src="<?php get_comment_avatar($comments->mail); ?>"/>
     </div>
-    <?php if($comments->authorId == $comments->ownerId){ ?>
+    <?php get_comment_prefix($comments->mail); if($comments->authorId == $comments->ownerId){ ?>
       <img src="<?php staticFiles('assets/images/grade/author.png') ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}"/>
     <?php } ?>
   </div>

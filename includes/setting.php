@@ -71,6 +71,8 @@ function themeConfig($form) {
   $form->addInput($linksDescribe);
   $linksIndex = new Typecho_Widget_Helper_Form_Element_Radio('linksIndex',array('able' => _t('启用'), 'disable' => _t('禁止'),), 'disable', _t('主页友链展示'), _t('默认开启，在首页将会展示友链中的链接'));
   $form->addInput($linksIndex);
+  $links = new Typecho_Widget_Helper_Form_Element_Text('links', NULL,NULL, _t('友链页面地址'), _t('在这里填写友链页面地址(如https://xxx.xxx/link.html)，没有则不填(需将页面公开度设置为“隐藏”)'));
+  $form->addInput($links);
   $linksIndexNum = new Typecho_Widget_Helper_Form_Element_Text('linksIndexNum', NULL, NULL, _t('主页友链展示个数'), _t('在这里填写主页友链最多展示个数，默认为 无限制，推荐设置为 10 个'));
   $form->addInput($linksIndexNum);
   echo '<script>

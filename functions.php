@@ -79,6 +79,19 @@ function linksDescribe(){
   }
 }
 
+/* 判断是否为好丽友 */
+function get_comment_prefix($mail){
+  $db = Typecho_Db::get();
+  $prefix = $db->getPrefix();
+  $result = $db->fetchAll($db->query("SHOW TABLES LIKE '".$prefix."links'"));
+  if('1' == count($result)){
+    $number = $db->fetchAll($db->query("SELECT user FROM ".$prefix."links WHERE user = '$mail'"));
+    if($number){
+      ?><img src="<?php staticFiles('assets/images/grade/friend.png'); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
+    }
+  }
+}
+
 /* 联系方式 */
 function contact(){
   $setting = Helper::options()->drawerContact;
