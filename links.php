@@ -4,8 +4,8 @@
  * 
  * @package custom
  * @author Bhao
- * @link https://dwd.moe.
- * @version 0.0.1(Beta)
+ * @link https://dwd.moe/
+ * @version 0.0.2(Beta)
  */
 
 $this->comments()->to($comments);
@@ -46,7 +46,7 @@ function threadedComments($comments, $options) {
     <?php $comments->reply('<button class="mdui-btn mdui-btn-dense mdui-ripple comment-reply">回复</button>'); ?>
   </div>
   <div class="comment-content">
-    <?php $comments->content();?>
+    <?php echo preg_replace('#</?[p][^>]*>#','', parseBiaoQing($comments->content)); ?>
   </div>
   <?php if ($comments->children) { ?>
   <div class="comment-children">
@@ -63,22 +63,23 @@ $this->need('includes/header.php');
 $this->need('includes/sidebar.php');
 ?>
   <div class="left">
-    <div class="sweet-links-content">
+    <div class="links-content">
       <?php Links_Plugin::output("
-      <a class='sweet-links-url' href='{url}'>
+      <a class='links-url' href='{url}'>
         <div class='mdui-col-sm-6'>
-          <div class='sweet-links-card mdui-shadow-10'>
-            <div class='sweet-links-img'><img class='mdui-img-circle' src='{image}'/></div>
-            <div class='sweet-links-name'>{name}</div>
-            <div class='sweet-links-describe'>{description}</div>
+          <div class='links-card mdui-shadow-10'>
+            <div class='links-img'><img class='mdui-img-circle' src='{image}'/></div>
+            <div class='links-name'>{name}</div>
+            <div class='links-describe'>{description}</div>
           </div>
         </div>
       </a>
       "); 
     echo '</div>';
     if($this->allow('comment')):?>
-    <div class="mdui-card page-card mdui-shadow-10 sweet-links-comments">
+    <div class="mdui-card page-card mdui-shadow-10 links-comments">
       <div class="comment-cancel">
+      <button class='mdui-btn mdui-btn-icon' mdui-dialog="{target: '#emoji'}"><i class='mdui-icon material-icons'>insert_emoticon</i></button>
         <?php $comments->cancelReply("<button class='mdui-btn mdui-btn-icon'><i class='mdui-icon material-icons'>cancel</i></button>"); ?>
       </div>
       <h3>交换友链</h3>
@@ -143,4 +144,19 @@ $this->need('includes/sidebar.php');
     <?php endif; ?>
   </div>
 </div></div>
+<div class="mdui-dialog" id="emoji">
+  <div class="emoji-box">
+    <div class="emoji-top mdui-dialog-title">
+      Emoji
+      <div class="emoji-cancel">
+        <button class='mdui-btn mdui-btn-icon' mdui-dialog-close><i class='mdui-icon material-icons'>cancel</i></button>
+      </div>
+    </div>
+    <div class="mdui-divider"></div>
+    <div class="mdui-dialog-body mdui-dialog-content"><?php Smile::getOwO(); ?></div>
+    <div class="mdui-tab mdui-tab-full-width tab" mdui-tab>
+    <?php Smile::getTitle(); ?>
+    </div>
+  </div>
+</div>
 <?php $this->need('includes/footer.php'); ?>

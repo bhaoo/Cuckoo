@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.1(Beta)
+ * @version 0.0.2(Beta)
  */
 ?>
 <div class="right">
@@ -28,8 +28,8 @@
      <ul class="mdui-list">
       <div class="sidebar-reply-title">个人介绍</div>
       <li class="mdui-divider mdui-m-y-0"></li>
-        <li class="sweet-links-list">
-          <div class="sweet-links-text"><?php linksDescribe(); ?></div>
+        <li class="links-list">
+          <div class="links-text"><?php linksDescribe(); ?></div>
         </li>
     </ul>
   </div>

@@ -6,12 +6,11 @@
  * |  |_)  | |  |  |  |  /  _____  \  |  `--'  |
  * |______/  |__|  |__| /__/     \__\  \______/
  * 
- * Sweet Setting
+ * Cuckoo Setting
  * 
  * @author Bhao
- * @link https://bhmo.cn
- * @version 0.0.8
- * @date 2019-08-02
+ * @link https://dwd.moe/
+ * @version 0.0.2(Beta)
  */
 
  .typecho-option-tabs,.typecho-page-title,.typecho-foot{
@@ -29,14 +28,14 @@
     width: 90%;
   }
 }
-.sweet-setting-container {
+.setting-container {
   color: #FFFFFF;
 }
-.sweet-setting-notice {
+.setting-notice {
   padding: 0px 40px 5px 40px;
   color: #FFFFFF;
 }
-.sweet-setting-table {
+.setting-table {
   width: 100%;
   margin: 0 auto;
 }

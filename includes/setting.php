@@ -1,4 +1,19 @@
 <?php
+/**
+ * .______    __    __       ___        ______
+ * |   _  \  |  |  |  |     /   \      /  __  \
+ * |  |_)  | |  |__|  |    /  ^  \    |  |  |  |
+ * |   _  <  |   __   |   /  /_\  \   |  |  |  |
+ * |  |_)  | |  |  |  |  /  _____  \  |  `--'  |
+ * |______/  |__|  |__| /__/     \__\  \______/
+ * 
+ * Setting
+ * 
+ * @author Bhao
+ * @link https://dwd.moe/
+ * @version 0.0.2(Beta)
+ */
+
 function themeConfig($form) {
   // 引用静态资源文件
   echo '<link rel="stylesheet" href="'.staticFiles('assets/css/mdui.min.css',1).'" />';
@@ -29,7 +44,7 @@ function themeConfig($form) {
   echo "<h2>".THEME_NAME." 主题设置 <small>作者：<a href='https://dwd.moe/'>Bhao</a></small></h2>";
   $get_ver = THEME_VERSION;
   echo "
-  <div class='sweet-setting-table'>
+  <div class='setting-table'>
     <div class='mdui-table-fluid'>
       <table class='mdui-table'>
         <tbody>

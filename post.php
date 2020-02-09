@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.1(Beta)
+ * @version 0.0.2(Beta)
  */
 
 $this->need('includes/header.php'); ?>
@@ -38,7 +38,7 @@ $this->need('includes/header.php'); ?>
           </div>
         </div>
       </div>
-      <div class="article-page mdui-typo sweet-markdown">
+      <div class="article-page mdui-typo">
         <?php $this->content(); ?>
         <div class="article-cc">
           <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">

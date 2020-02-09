@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.1(Beta)
+ * @version 0.0.2(Beta)
  */
 ?>
 <html>
@@ -19,20 +19,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-  <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');
-          $this->options->title(); ?></title>
+  <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->title(); ?></title>
   <link rel="shortcut icon" href="<?php favicon() ?>" /> 
   <link rel="stylesheet" href="<?php staticFiles('assets/css/mdui.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('assets/css/iconfont.css') ?>">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.5.0/tocbot.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.5.0/tocbot.css">
-<link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.css'); ?>">
-
-  <?php $this->header();
-  bgUrl(); ?>
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/tocbot.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.css'); ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/nprogress.css'); ?>">
+  <script src="<?php staticFiles('assets/js/nprogress.js') ?>"></script>
+  <script src="<?php staticFiles('assets/js/tocbot.min.js') ?>"></script>
+  <?php $this->header(); bgUrl(); ?>
 </head>
 
-<body class="body">
+<body class="body" id="body">
   <div class="mdui-appbar mdui-shadow-0">
     <div class="mdui-toolbar">
       <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#menu', swipe: 'true', overlay: 'false'}">
