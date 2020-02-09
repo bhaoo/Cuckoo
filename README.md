@@ -1,6 +1,6 @@
-<center><h1>Cuckoo</h1></center>
+# Cuckoo
 
-> 这是一款适用于“Typecho”，基于[MDUI][https://www.mdui.org/]框架的双栏主题。
+> 这是一款适用于“Typecho”，基于 [MDUI][https://www.mdui.org/] 框架的双栏主题。
 >
 > 主题的名字翻译为中文即为“布谷鸟”，其寓意是“不咕”～希望大家可以当一只“不咕”鸟。
 
