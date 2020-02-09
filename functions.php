@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "0.0.1");
+define("THEME_VERSION", "0.0.2");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
