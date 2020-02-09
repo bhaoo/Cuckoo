@@ -138,6 +138,7 @@ $(document).pjax('a[href^="'+document.location.protocol+'//'+window.location.hos
     NProgress.start();
   }).on('pjax:complete',
   function () {
+    mdui.mutation(mdui.JQ('#emoji'));
     NProgress.done();
     jQuery(".article-pic").lazyload({
       threshold: 200,
