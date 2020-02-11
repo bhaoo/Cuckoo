@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.3(Beta)
  */
 
 $this->need('includes/header.php'); ?>
@@ -39,7 +39,7 @@ $this->need('includes/header.php'); ?>
         </div>
       </div>
       <div class="article-page mdui-typo">
-        <?php $this->content(); ?>
+        <?php echo parsePicture(parseBiaoQing($this->content)); ?>
         <div class="article-cc">
           <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">
             知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
