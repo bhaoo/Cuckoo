@@ -68,11 +68,16 @@ function themeConfig($form) {
   ";
   $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('网站图标'), _t('在这里填入一个图片 URL 地址, 以加上一个 Favicon图标，没有则不填'));
   $form->addInput($favicon);
-  $staticFiles = new Typecho_Widget_Helper_Form_Element_Select('staticFiles',array('local' => '本地', 'jsdelivr' => 'Jsdelivr源', 'cdn' => '自定义CDN源'), 'jsdelivr', _t('静态文件源'), _t('主题静态资源引用'));
+  $staticFiles = new Typecho_Widget_Helper_Form_Element_Select('staticFiles',array('local' => '本地', 'jsdelivr' => 'Jsdelivr源', 'cdn' => '自定义CDN源'), 'local', _t('静态文件源'), _t('主题静态资源引用'));
   $form->addInput($staticFiles->multiMode());
   $staticCdn = new Typecho_Widget_Helper_Form_Element_Text('staticCdn', NULL, NULL, _t('自定义CDN源'), _t('在这里填写你自己的CDN(如 api.bhmo.cn)，以获取静态文件(需在上方选择自定义CDN)'));
   $form->addInput($staticCdn);
-  $drawerContact = new Typecho_Widget_Helper_Form_Element_Textarea('drawerContact', NULL, NULL, _t('联系方式'), _t('在此填写您的联系方式，最多仅能展示6个。'));
+  $drawerContact = new Typecho_Widget_Helper_Form_Element_Textarea('drawerContact', NULL, 
+  '{"qq":"657997987",
+    "github":"bhaoo",
+    "telegram":"bhaouo",
+    "twitter":"bhaouo",
+    "bilibili":"66737341"}', _t('联系方式'), _t('在此填写您的联系方式，最多仅能展示6个。'));
   $form->addInput($drawerContact);
   $logoUrl = new Typecho_Widget_Helper_Form_Element_Text('logoUrl', NULL, NULL, _t('LOGO'), _t('在这里填入一个图片 URL 地址, 以加上一个 LOGO'));
   $form->addInput($logoUrl);

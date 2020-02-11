@@ -6,7 +6,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 0.0.2(Beta)
+ * @version 0.0.3(Beta)
  * @link https://dwd.moe
  * @date 2020-02-02
  */

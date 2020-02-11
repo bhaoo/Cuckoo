@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.3(Beta)
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "0.0.2");
+define("THEME_VERSION", "0.0.3");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -124,7 +124,7 @@ function staticFiles($content, $type = 0){
   if($setting == 'local') {
     $output = Helper::options()->themeUrl.'/'.$content;
   }elseif($setting == 'jsdelivr') {
-    $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@0.0.2/'.$content;
+    $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/'.$content;
   }elseif($setting == 'cdn') {
     $output = $setting_cdn.'/'.$content;
   }
@@ -153,6 +153,13 @@ function bgUrl(){
       echo "<style>.body{background-image: url('$setting');}@media(max-width: 900px){.body{background-image: url('$setting_phone');}}</style>";
     }
   }
+}
+
+function parsePicture($content){
+  $pattern = '/<img(.*?)src="(.*?)"(.*?)>/s';
+  $text = '<img${1}src="${2}" class="article-page-img">';
+  $content = preg_replace($pattern, $text, $content);
+  return $content;
 }
 
 /* 表情包解析  感谢ohmyga */

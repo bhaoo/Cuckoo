@@ -10,7 +10,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.3(Beta)
  */
 
 /* 顶部导航栏 */
@@ -319,17 +319,52 @@ a.toc-link {
   color: #ffffff;
 }
 
-.article-page h1,
-.article-page h2,
+.article-page h2 {
+  font-weight: 400;
+  padding-bottom: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.mdui-typo h2 {
+  font-size: 1.5em;
+}
+
+.mdui-typo h3 {
+  font-size: 1.17em;
+}
+
+.mdui-typo h4 {
+  font-size: unset;
+}
+
+.mdui-typo h5 {
+  font-size: 0.83em;
+}
+
+.mdui-typo h6 {
+  font-size: 0.67em;
+}
+
+.article-page h2::before {
+  content: '# ';
+  color: #ff4081;
+}
+
 .article-page h3,
 .article-page h4,
 .article-page h5,
 .article-page h6 {
-  padding: 0 0 0 15px;
+  padding: 0 0 0 7px;
   font-weight: 400;
-  line-height: 1.5;
-  border-left: 3px solid #ff4081 !important;
+  line-height: 1.3;
+  border-left: 4px solid #ff4081 !important;
   margin: 20px 0 10px;
+}
+
+.article-page-img {
+  max-width: 100%;
+  display: block;
+  margin: 10px auto;
 }
 
 .mdui-card-header-subtitle p {
@@ -495,6 +530,7 @@ a.toc-link {
   margin-left: 5px;
   opacity: .8;
 }
+
 .comment-reply-name {
   padding-right: 5px;
 }
@@ -605,37 +641,37 @@ a.toc-link {
 }
 
 .emoji-emoji {
-  margin: 3px!important;
-  width: 40px!important;
-  height: 30px!important;
-  padding: 3px!important;
-  margin-top: 5px!important;
-  min-width: 20px!important;
-  min-height: 20px!important;
-  line-height: 28px!important;
-  margin-bottom: 5px!important;
-  border-radius: 5px!important;
+  margin: 3px !important;
+  width: 40px !important;
+  height: 30px !important;
+  padding: 3px !important;
+  margin-top: 5px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  line-height: 28px !important;
+  margin-bottom: 5px !important;
+  border-radius: 5px !important;
 }
 
-.emoji-tieba{
-  margin: 3px!important;
-  width: 40px!important;
-  height: 30px!important;
-  padding: 3px!important;
-  margin-top: 5px!important;
-  min-width: 20px!important;
-  min-height: 20px!important;
-  line-height: 28px!important;
-  margin-bottom: 5px!important;
-  border-radius: 5px!important;
+.emoji-tieba {
+  margin: 3px !important;
+  width: 40px !important;
+  height: 30px !important;
+  padding: 3px !important;
+  margin-top: 5px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  line-height: 28px !important;
+  margin-bottom: 5px !important;
+  border-radius: 5px !important;
 }
 
 .emoji-hj {
-  margin: 3px!important;
-  padding: 3px!important;
-  height: auto!important;
-  min-width: auto!important;
-  border-radius: 5px!important;
+  margin: 3px !important;
+  padding: 3px !important;
+  height: auto !important;
+  min-width: auto !important;
+  border-radius: 5px !important;
 }
 
 .emoji-hj img {
@@ -644,16 +680,16 @@ a.toc-link {
 }
 
 .emoji-qwq {
-  margin: 3px!important;
-  width: 40px!important;
-  padding: 3px!important;
-  height: 36px!important;
-  margin-top: 5px!important;
-  min-width: 20px!important;
-  min-height: 20px!important;
-  line-height: 0!important;
-  margin-bottom: 5px!important;
-  border-radius: 5px!important;
+  margin: 3px !important;
+  width: 40px !important;
+  padding: 3px !important;
+  height: 36px !important;
+  margin-top: 5px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  line-height: 0 !important;
+  margin-bottom: 5px !important;
+  border-radius: 5px !important;
 }
 
 .emoji-qwq img {
