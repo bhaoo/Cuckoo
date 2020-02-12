@@ -36,11 +36,7 @@ class Smile {
  }
 
  public static function getOwO() {
-  if (get_headers(Helper::options()->siteUrl.'usr/themes/Cuckoo/includes/owo.json',1)[0] == 'HTTP/1.1 200 OK') {
-   $getJson =file_get_contents(Helper::options()->siteUrl.'usr/themes/Cuckoo/includes/owo.json');
-  }else{
-   $getJson =file_get_contents(Helper::options()->siteUrl.'usr/themes/Cuckoo/includes/owo.json');
-  }
+  $getJson =file_get_contents(staticFiles('includes/owo.json', 1));
   $owoArray = json_decode($getJson, true);
   $owoName = array_keys($owoArray);
   for ($i=0; $i<count($owoName); $i++) {
@@ -81,7 +77,7 @@ class Smile {
  }
  
  public static function getTitle() {
-  $getJson =file_get_contents(Helper::options()->siteUrl.'usr/themes/Cuckoo/includes/owo.json');
+  $getJson =file_get_contents(staticFiles('includes/owo.json', 1));
   $owoArray = json_decode($getJson, true);
   $owoName = array_keys($owoArray);
   for ($i=0; $i<count($owoName); $i++) {

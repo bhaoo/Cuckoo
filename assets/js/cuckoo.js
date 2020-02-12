@@ -10,9 +10,10 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.4(Beta)
  */
 
+hljs.initHighlightingOnLoad();
 var ias = jQuery.ias({
   container: ".left",
   item: ".page",
@@ -78,6 +79,7 @@ $("#comment-form").submit(function () {
           timeout: 3000
         });
         $('#submit').attr("disabled", false);
+        $('#comment-textarea').val('');
         mdui.snackbar({
           message: '评论成功！',
           position: 'right-bottom'
@@ -128,7 +130,7 @@ jQuery(".page-img").lazyload({
   threshold: 200,
   effect: "fadeIn"
 });
-$(document).pjax('a[href^="'+document.location.protocol+'//'+window.location.host+'/"]:not(a[target="_blank"], a[no-pjax])', {
+$(document).pjax('a[href^="' + document.location.protocol + '//' + window.location.host + '/"]:not(a[target="_blank"], a[no-pjax])', {
   container: '.container',
   fragment: '.container',
   timeout: 8000
@@ -140,6 +142,7 @@ $(document).pjax('a[href^="'+document.location.protocol+'//'+window.location.hos
   function () {
     mdui.mutation(mdui.JQ('#emoji'));
     NProgress.done();
+    otherPjax();
     jQuery(".article-pic").lazyload({
       threshold: 200,
       effect: "fadeIn"
@@ -163,7 +166,7 @@ $(document).pjax('a[href^="'+document.location.protocol+'//'+window.location.hos
           $(this).attr('id', headerId);
         }
       });
-    
+
       tocbot.init({
         tocSelector: '.toc',
         contentSelector: content,
@@ -177,20 +180,20 @@ $(document).pjax('a[href^="'+document.location.protocol+'//'+window.location.hos
     }
   });
 
-  Smilies = {
-    domId: function (id) {
-      return document.getElementById(id)
-    },
-    domTag: function (id) {
-      return document.getElementsByTagName(id)[0]
-    },
-    grin: function (tag) {
-      tag = ' ' + tag + ' ';
-      myField = this.domId("comment-textarea");
-      document.selection ? (myField.focus(), sel = document.selection.createRange(), sel.text = tag, myField.focus()) : this.insertTag(tag)
-    },
-    insertTag: function (tag) {
-      myField = Smilies.domId("comment-textarea");
-      myField.selectionStart || myField.selectionStart == "0" ? (startPos = myField.selectionStart, endPos = myField.selectionEnd, cursorPos = startPos, myField.value = myField.value.substring(0, startPos) + tag + myField.value.substring(endPos, myField.value.length), cursorPos += tag.length, myField.focus(), myField.selectionStart = cursorPos, myField.selectionEnd = cursorPos) : (myField.value += tag, myField.focus())
-    }
-  };
+Smilies = {
+  domId: function (id) {
+    return document.getElementById(id)
+  },
+  domTag: function (id) {
+    return document.getElementsByTagName(id)[0]
+  },
+  grin: function (tag) {
+    tag = ' ' + tag + ' ';
+    myField = this.domId("comment-textarea");
+    document.selection ? (myField.focus(), sel = document.selection.createRange(), sel.text = tag, myField.focus()) : this.insertTag(tag)
+  },
+  insertTag: function (tag) {
+    myField = Smilies.domId("comment-textarea");
+    myField.selectionStart || myField.selectionStart == "0" ? (startPos = myField.selectionStart, endPos = myField.selectionEnd, cursorPos = startPos, myField.value = myField.value.substring(0, startPos) + tag + myField.value.substring(endPos, myField.value.length), cursorPos += tag.length, myField.focus(), myField.selectionStart = cursorPos, myField.selectionEnd = cursorPos) : (myField.value += tag, myField.focus())
+  }
+};
