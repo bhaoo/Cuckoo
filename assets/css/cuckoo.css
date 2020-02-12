@@ -10,7 +10,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.3(Beta)
+ * @version 0.0.4(Beta)
  */
 
 /* 顶部导航栏 */
@@ -367,8 +367,63 @@ a.toc-link {
   margin: 10px auto;
 }
 
+.article-page pre{
+  position: relative;
+  background: #21252b;
+  border-radius: 5px;
+  font: 15px/22px "Microsoft YaHei", Arial, Sans-Serif;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 100%;
+  overflow: auto;
+  text-shadow: none;
+  color: #000;
+  padding-top: 30px;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .2);
+}
+
+.article-page pre::before{
+  content: " ";
+    position: absolute;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #fc625d;
+    width: 12px;
+    height: 12px;
+    left: 12px;
+    margin-top: -18px;
+    -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+    box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+    z-index: 2;
+}
+
+.mdui-typo pre code {
+  color: #abb2bf;;
+}
+
 .mdui-card-header-subtitle p {
   margin: 0px;
+}
+
+.daily-media {
+  padding: 30px 20px 0px 20px;
+}
+
+.daily-card-title{
+  display: block;
+  font-size: 30px;
+  line-height: 40px;
+  opacity: .87;
+}
+
+.daily-card-subtitle{
+  border-bottom: 1px dashed #797979;
+  padding-bottom: 20px;
+}
+
+.daily-card-subtitle a{
+  text-decoration: none;
+  color: rgba(0, 0, 0);
 }
 
 /* 评论页面 */

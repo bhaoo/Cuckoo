@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.4(Beta)
  */
 ?>
 <html>
@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="<?php staticFiles('assets/css/tocbot.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.css'); ?>">
   <link rel="stylesheet" href="<?php staticFiles('assets/css/nprogress.css'); ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/atom-one-dark.min.css'); ?>">
   <script src="<?php staticFiles('assets/js/nprogress.js') ?>"></script>
   <script src="<?php staticFiles('assets/js/tocbot.min.js') ?>"></script>
   <?php $this->header(); bgUrl(); ?>

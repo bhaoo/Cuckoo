@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.4(Beta)
  */
 
 function themeConfig($form) {
@@ -95,11 +95,17 @@ function themeConfig($form) {
   $form->addInput($links);
   $linksIndexNum = new Typecho_Widget_Helper_Form_Element_Text('linksIndexNum', NULL, NULL, _t('主页友链展示个数'), _t('在这里填写主页友链最多展示个数，默认为 无限制，推荐设置为 10 个'));
   $form->addInput($linksIndexNum);
+  $sticky = new Typecho_Widget_Helper_Form_Element_Text('sticky', NULL,NULL, _t('文章置顶'), _t('置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔'));
+  $form->addInput($sticky);
+  $statisticsBaidu = new Typecho_Widget_Helper_Form_Element_Text('statisticsBaidu', NULL,NULL, _t('百度统计代码'), _t('仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"'));
+  $form->addInput($statisticsBaidu);
+  $otherPjax = new Typecho_Widget_Helper_Form_Element_Textarea('otherPjax', NULL, NULL, _t('PJAX回调'), _t('在这里可以自行添加PJAX回调内容,引号需用“单引号”'));
+  $form->addInput($otherPjax);
   echo '<script>
   $(function(){
     $("#typecho-option-item-staticCdn-1").hide();
     $("#staticFiles-0-1").change(function() {
-        if($("#staticFiles-0-1").val()=="cdn"){
+        if($("#staticFiles-0-2").val()=="cdn"){
           $("#typecho-option-item-staticCdn-1").show();
         }else{
           $("#typecho-option-item-staticCdn-1").hide();

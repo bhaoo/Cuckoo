@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.3(Beta)
+ * @version 0.0.4(Beta)
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "0.0.3");
+define("THEME_VERSION", "0.0.4");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -213,6 +213,22 @@ function randPic(){
    $output = adSetting('randPic', 'url');
   }
   print_r($output);
+}
+
+/* 百度统计 */
+function statisticsBaidu(){
+  $setting = Helper::options()->statisticsBaidu;
+  if(!empty($setting)){
+    echo '<script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?'.$setting.'";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script>';
+  }
+}
+
+/* 更多Pjax回调 */
+function otherPjax(){
+  $setting = Helper::options()->otherPjax;
+  if(!empty($setting)){
+    echo "<script>function otherPjax() {".$setting."}</script>";
+  }
 }
 
 /* 个人描述 */
