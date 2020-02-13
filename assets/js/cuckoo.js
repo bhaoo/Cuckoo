@@ -10,29 +10,43 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.4(Beta)
+ * @version 0.0.5(Beta)
  */
 
-hljs.initHighlightingOnLoad();
-var ias = jQuery.ias({
-  container: ".left",
-  item: ".page",
-  pagination: ".changePage",
-  next: ".next"
-});
-ias.extension(new IASTriggerExtension({
-  text: "加载更多",
-  offset: 2,
-}));
-ias.extension(new IASSpinnerExtension({
-  html: '<div class="mdui-spinner mdui-spinner-colorful"></div>'
-}));
-ias.extension(new IASNoneLeftExtension({
-  text: "到底了啦"
-}));
-ias.on("rendered", function (items) {
+highlight = function () {
+  $(document).ready(function () {
+    $('pre code').each(function (i, block) {
+      hljs.highlightBlock(block)
+    })
+  });
+  $("pre code").each(function () {
+    $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>")
+  })
+};
+highlight();
 
-});
+jqueryIAS = function () {
+  var ias = jQuery.ias({
+    container: ".left",
+    item: ".page",
+    pagination: ".changePage",
+    next: ".next"
+  });
+  ias.extension(new IASTriggerExtension({
+    text: "加载更多",
+    offset: 2,
+  }));
+  ias.extension(new IASSpinnerExtension({
+    html: '<div class="mdui-spinner mdui-spinner-colorful"></div>'
+  }));
+  ias.extension(new IASNoneLeftExtension({
+    text: "到底了啦"
+  }));
+  ias.on("rendered", function (items) {
+
+  });
+};
+jqueryIAS();
 
 $(function () {
   $(".top")
@@ -95,33 +109,39 @@ $("#comment-form").submit(function () {
   });
   return false;
 });
-if ($('.toc').length > 0) {
-  var headerEl = 'h1,h2,h3,h4',
-    content = '.article-page',
-    idArr = {};
-  $(content).children(headerEl).each(function () {
-    var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-    headerId = headerId.toLowerCase();
-    if (idArr[headerId]) {
-      $(this).attr('id', headerId + '-' + idArr[headerId]);
-      idArr[headerId]++;
-    } else {
-      idArr[headerId] = 1;
-      $(this).attr('id', headerId);
-    }
-  });
 
-  tocbot.init({
-    tocSelector: '.toc',
-    contentSelector: content,
-    headingSelector: headerEl,
-    positionFixedSelector: '#toc',
-    positionFixedClass: 'is-position-fixed',
-    scrollSmooth: true,
-    scrollSmoothOffset: -80,
-    headingsOffset: -50,
-  });
+pageToc = function () {
+  if ($('.toc').length > 0) {
+    var headerEl = 'h1,h2,h3,h4',
+      content = '.article-page',
+      idArr = {};
+    $(content).children(headerEl).each(function () {
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      } else {
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      tocSelector: '.toc',
+      contentSelector: content,
+      headingSelector: headerEl,
+      positionFixedSelector: '#toc',
+      positionFixedClass: 'is-position-fixed',
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: -50,
+    });
+  }
 }
+pageToc();
+
+jqLazyload = function () {
 jQuery(".article-pic").lazyload({
   threshold: 200,
   effect: "fadeIn"
@@ -130,6 +150,10 @@ jQuery(".page-img").lazyload({
   threshold: 200,
   effect: "fadeIn"
 });
+}
+jqLazyload();
+
+function otherPjax() {}
 $(document).pjax('a[href^="' + document.location.protocol + '//' + window.location.host + '/"]:not(a[target="_blank"], a[no-pjax])', {
   container: '.container',
   fragment: '.container',
@@ -140,6 +164,11 @@ $(document).pjax('a[href^="' + document.location.protocol + '//' + window.locati
     NProgress.start();
   }).on('pjax:complete',
   function () {
+    highlight();
+    jqLazyload();
+    jqueryIAS();
+    pageToc();
+    new mdui.Drawer('#menu').close();
     mdui.mutation(mdui.JQ('#emoji'));
     NProgress.done();
     otherPjax();
@@ -151,34 +180,11 @@ $(document).pjax('a[href^="' + document.location.protocol + '//' + window.locati
       threshold: 200,
       effect: "fadeIn"
     });
-    if ($('.toc').length > 0) {
-      var headerEl = 'h1,h2,h3,h4',
-        content = '.article-page',
-        idArr = {};
-      $(content).children(headerEl).each(function () {
-        var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-        headerId = headerId.toLowerCase();
-        if (idArr[headerId]) {
-          $(this).attr('id', headerId + '-' + idArr[headerId]);
-          idArr[headerId]++;
-        } else {
-          idArr[headerId] = 1;
-          $(this).attr('id', headerId);
-        }
-      });
-
-      tocbot.init({
-        tocSelector: '.toc',
-        contentSelector: content,
-        headingSelector: headerEl,
-        positionFixedSelector: '#toc',
-        positionFixedClass: 'is-position-fixed',
-        scrollSmooth: true,
-        scrollSmoothOffset: -80,
-        headingsOffset: -50,
-      });
-    }
-  });
+  }).on('pjax:beforeReplace', function () {
+  $.ias().destroy();
+}).on('pjax:end', function () {
+  $.ias().reinitialize();
+});;
 
 Smilies = {
   domId: function (id) {

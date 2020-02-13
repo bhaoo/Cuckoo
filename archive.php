@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.1(Beta)
+ * @version 0.0.5(Beta)
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('includes/header.php');
@@ -69,7 +69,7 @@ $this->need('includes/header.php');
             <div class="mdui-card-actions daily-button">
               <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right">
                   <font color="#E91E63">点击查看</font>
-                </button>ß</a>
+                </button></a>
             </div>
           </div>
       <?php
