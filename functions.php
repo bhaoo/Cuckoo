@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.4(Beta)
+ * @version 0.0.5(Beta)
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "0.0.4");
+define("THEME_VERSION", "0.0.5");
 
 function themeFields($layout) { 
   /* 文章封面设置  */

@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.4(Beta)
+ * @version 0.0.5(Beta)
  */
 
 function themeConfig($form) {
@@ -99,7 +99,7 @@ function themeConfig($form) {
   $form->addInput($sticky);
   $statisticsBaidu = new Typecho_Widget_Helper_Form_Element_Text('statisticsBaidu', NULL,NULL, _t('百度统计代码'), _t('仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"'));
   $form->addInput($statisticsBaidu);
-  $otherPjax = new Typecho_Widget_Helper_Form_Element_Textarea('otherPjax', NULL, NULL, _t('PJAX回调'), _t('在这里可以自行添加PJAX回调内容,引号需用“单引号”'));
+  $otherPjax = new Typecho_Widget_Helper_Form_Element_Textarea('otherPjax', NULL, ' ', _t('PJAX回调'), _t('在这里可以自行添加PJAX回调内容,引号需用“单引号”'));
   $form->addInput($otherPjax);
   echo '<script>
   $(function(){
