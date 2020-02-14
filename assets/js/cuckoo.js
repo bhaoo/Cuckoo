@@ -157,7 +157,7 @@ function otherPjax() {}
 $(document).pjax('a[href^="' + document.location.protocol + '//' + window.location.host + '/"]:not(a[target="_blank"], a[no-pjax])', {
   container: '.container',
   fragment: '.container',
-  timeout: 8000
+  timeout: 15000
 }).on('pjax:send',
   function () {
     if ($('.toc').length) tocbot.destroy();
