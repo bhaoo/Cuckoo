@@ -6,7 +6,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 0.0.5(Beta)
+ * @version 0.0.6(Beta)
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -47,7 +47,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
   <div class="left">
     <?php if ($this->have()) :
       while ($this->next()) :
-        if ($this->fields->articleType == "article") { ?>
+        if ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
           <div class="mdui-card page-card mdui-shadow-10 page">
             <div class="mdui-card-media">
               <div class="page-img" data-original="<?php $wzimg = $this->fields->wzimg;

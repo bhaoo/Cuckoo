@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.5(Beta)
+ * @version 0.0.6(Beta)
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "0.0.5");
+define("THEME_VERSION", "0.0.6");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -157,8 +157,11 @@ function bgUrl(){
 
 function parsePicture($content){
   $pattern = '/<img(.*?)src="(.*?)"(.*?)>/s';
+  $pattern_2 = '/<a\b([^>]+?)\bhref="((?!'.addcslashes(Helper::options()->index, '/._-+=#?&').'|\#).*?)"([^>]*?)>/i';
   $text = '<img${1}src="${2}" class="article-page-img">';
+  $text_2 = '<a\1href="\2"\3 target="_blank">';
   $content = preg_replace($pattern, $text, $content);
+  $content = preg_replace($pattern_2, $text_2, $content);
   return $content;
 }
 
@@ -226,8 +229,23 @@ function statisticsBaidu(){
 /* 更多Pjax回调 */
 function otherPjax(){
   $setting = Helper::options()->otherPjax;
+  $setting_baidu = Helper::options()->statisticsBaidu;
   if(!empty($setting)){
-    echo "<script>function otherPjax() {".$setting."}</script>";
+    if(!empty($setting_baidu)){
+      $output_baidu = "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search]);}";
+    }
+    echo "<script>function otherPjax() {".$output_baidu.$setting."}</script>";
+  }
+}
+
+/* 底部信息*/
+function Footer(){
+  $setting = Helper::options()->Footer;
+  if(!empty($setting)){ 
+    $setting = '<p>'.$setting.'</p>';
+    echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>｜Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
+  }else{
+    echo '<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a><br><br>Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>';
   }
 }
 
