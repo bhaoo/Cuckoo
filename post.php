@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.4(Beta)
+ * @version 0.0.7(Beta)
  */
 
 $this->need('includes/header.php'); ?>
