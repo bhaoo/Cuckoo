@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.5(Beta)
+ * @version 0.0.6(Beta)
  */
 
 function themeConfig($form) {
@@ -68,7 +68,7 @@ function themeConfig($form) {
   ";
   $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('网站图标'), _t('在这里填入一个图片 URL 地址, 以加上一个 Favicon图标，没有则不填'));
   $form->addInput($favicon);
-  $staticFiles = new Typecho_Widget_Helper_Form_Element_Select('staticFiles',array('local' => '本地', 'jsdelivr' => 'Jsdelivr源', 'cdn' => '自定义CDN源'), 'local', _t('静态文件源'), _t('主题静态资源引用'));
+  $staticFiles = new Typecho_Widget_Helper_Form_Element_Select('staticFiles',array('local' => '本地', 'jsdelivr' => 'Jsdelivr源', 'cdn' => '自定义CDN源'), 'jsdelivr', _t('静态文件源'), _t('主题静态资源引用'));
   $form->addInput($staticFiles->multiMode());
   $staticCdn = new Typecho_Widget_Helper_Form_Element_Text('staticCdn', NULL, NULL, _t('自定义CDN源'), _t('在这里填写你自己的CDN(如 api.bhmo.cn)，以获取静态文件(需在上方选择自定义CDN)'));
   $form->addInput($staticCdn);
@@ -101,6 +101,8 @@ function themeConfig($form) {
   $form->addInput($statisticsBaidu);
   $otherPjax = new Typecho_Widget_Helper_Form_Element_Textarea('otherPjax', NULL, ' ', _t('PJAX回调'), _t('在这里可以自行添加PJAX回调内容,引号需用“单引号”'));
   $form->addInput($otherPjax);
+  $Footer = new Typecho_Widget_Helper_Form_Element_Textarea('Footer', NULL, '', _t('底部信息'), _t('在这里填写的信息将在底部显示哦～'));
+  $form->addInput($Footer);
   echo '<script>
   $(function(){
     $("#typecho-option-item-staticCdn-1").hide();
