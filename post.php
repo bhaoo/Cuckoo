@@ -25,7 +25,7 @@ $this->need('includes/header.php'); ?>
           <div class="daily-card-title"><?php $this->title() ?></div>
           <div class="mdui-card-primary-subtitle daily-card-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?></div>
         </div>
-      <?php } elseif ($this->fields->articleType == "article") { ?>
+      <?php } elseif ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
         <div class="mdui-card-media">
           <div class="article-pic" data-original="<?php $wzimg = $this->fields->wzimg;
                                                   if (!empty($wzimg)) {

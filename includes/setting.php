@@ -89,28 +89,26 @@ function themeConfig($form) {
   $form->addInput($describe);
   $linksDescribe = new Typecho_Widget_Helper_Form_Element_Textarea('linksDescribe', NULL,NULL, _t('友链页面介绍'), _t('在这里填写友链页面的个人介绍(支持 html )，没有则不填(需先安装友链插件哦)'));
   $form->addInput($linksDescribe);
-  $linksIndex = new Typecho_Widget_Helper_Form_Element_Radio('linksIndex',array('able' => _t('启用'), 'disable' => _t('禁止'),), 'disable', _t('主页友链展示'), _t('默认开启，在首页将会展示友链中的链接'));
-  $form->addInput($linksIndex);
-  $links = new Typecho_Widget_Helper_Form_Element_Text('links', NULL,NULL, _t('友链页面地址'), _t('在这里填写友链页面地址(如https://xxx.xxx/link.html)，没有则不填(需将页面公开度设置为“隐藏”)'));
-  $form->addInput($links);
-  $linksIndexNum = new Typecho_Widget_Helper_Form_Element_Text('linksIndexNum', NULL, NULL, _t('主页友链展示个数'), _t('在这里填写主页友链最多展示个数，默认为 无限制，推荐设置为 10 个'));
+  $linksIndexNum = new Typecho_Widget_Helper_Form_Element_Text('linksIndexNum', NULL, '0', _t('主页友链展示个数'), _t('在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个'));
   $form->addInput($linksIndexNum);
   $sticky = new Typecho_Widget_Helper_Form_Element_Text('sticky', NULL,NULL, _t('文章置顶'), _t('置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔'));
   $form->addInput($sticky);
   $statisticsBaidu = new Typecho_Widget_Helper_Form_Element_Text('statisticsBaidu', NULL,NULL, _t('百度统计代码'), _t('仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"'));
   $form->addInput($statisticsBaidu);
+  $otherMenu = new Typecho_Widget_Helper_Form_Element_Textarea('otherMenu', NULL, NULL, _t('自定义导航栏'), _t('在这里可以自行添加更多的菜单，请遵循JSON语法进行使用，简易使用方法见作者博客文章'));
+  $form->addInput($otherMenu);
   $otherPjax = new Typecho_Widget_Helper_Form_Element_Textarea('otherPjax', NULL, ' ', _t('PJAX回调'), _t('在这里可以自行添加PJAX回调内容,引号需用“单引号”'));
   $form->addInput($otherPjax);
-  $Footer = new Typecho_Widget_Helper_Form_Element_Textarea('Footer', NULL, '', _t('底部信息'), _t('在这里填写的信息将在底部显示哦～'));
+  $Footer = new Typecho_Widget_Helper_Form_Element_Textarea('Footer', NULL, NULL, _t('底部信息'), _t('在这里填写的信息将在底部显示哦～'));
   $form->addInput($Footer);
   echo '<script>
   $(function(){
-    $("#typecho-option-item-staticCdn-1").hide();
-    $("#staticFiles-0-1").change(function() {
+    $("#typecho-option-item-staticCdn-2").hide();
+    $("#staticFiles-0-2").change(function() {
         if($("#staticFiles-0-2").val()=="cdn"){
-          $("#typecho-option-item-staticCdn-1").show();
+          $("#typecho-option-item-staticCdn-2").show();
         }else{
-          $("#typecho-option-item-staticCdn-1").hide();
+          $("#typecho-option-item-staticCdn-2").hide();
         }
     });
 });

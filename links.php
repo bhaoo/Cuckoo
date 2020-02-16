@@ -143,8 +143,7 @@ $this->need('includes/sidebar.php');
     </div>
     <?php endif; ?>
   </div>
-</div></div>
-<div class="mdui-dialog" id="emoji">
+</div><div class="mdui-dialog" id="emoji">
   <div class="emoji-box">
     <div class="emoji-top mdui-dialog-title">
       Emoji
@@ -158,5 +157,6 @@ $this->need('includes/sidebar.php');
     <?php Smile::getTitle(); ?>
     </div>
   </div>
+</div></div>
 </div>
 <?php $this->need('includes/footer.php'); ?>
