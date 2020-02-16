@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.4(Beta)
+ * @version 0.0.7(Beta)
  */
 ?>
 <html>
@@ -111,7 +111,7 @@
           </ul>
         </li>
       </div>
-      <?php links(); ?>
+      <?php otherMenu(); ?>
       <div class="mdui-divider"></div>
       <a href="<?php $this->options->feedUrl(); ?>">
         <li class="mdui-list-item mdui-ripple">

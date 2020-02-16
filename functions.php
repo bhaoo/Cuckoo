@@ -443,19 +443,6 @@ function getBrowser($agent) {
   echo '<i class="iconfont '.$icon.' comment-ua" mdui-tooltip="{content: \''.$name.'\'}"></i>';
  }
 
-/* 友链页面地址 */
-function links(){
-  $setting = Helper::options()->links;
-  if(!empty($setting)){
-    echo "
-    <a href='$setting'><li class='mdui-list-item mdui-ripple'>
-    <i class='mdui-list-item-icon mdui-icon material-icons'>link</i>
-    <div class='mdui-list-item-content'>友链</div>
-    </li></a>
-    ";
-  }
-}
-
 /* Favicon图标 */
 function favicon(){
   $setting = Helper::options()->favicon;
@@ -470,5 +457,31 @@ function favicon(){
 function themeUpdate(){
   $output = 'https://api.qwq.asia/typecho/theme/?s='.$_SERVER['HTTP_HOST'].'&v='.THEME_VERSION;
   return $output;
+}
+
+function otherMenu(){
+  $data = Helper::options()->otherMenu;
+  if (!empty($data)) {
+    $json = json_decode($data, true);
+    foreach($json as $i) {
+      if ($i['type'] == '0') {
+        echo '<a href="'.$i['link'].'" class="mdui-list-item mdui-ripple" mdui-drawer-close>
+        <i class="mdui-icon material-icons mdui-list-item-icon">'.$i['icon'].'</i>
+        <div class="mdui-list-item-content">'.$i['name'].'</div>
+       </a>';
+      }elseif($i['type'] == '4'){
+        echo ' <div class="mdui-collapse" mdui-collapse>
+        <li class="mdui-collapse-item">
+          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">'.$i['icon'].'</i>
+            <div class="mdui-list-item-content">'.$i['name'].'</div>
+            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+          </div>
+          <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">';
+          foreach($i['list'] as $ii){ echo '<a class="mdui-list-item mdui-ripple" href="'.$ii['link'].'" mdui-drawer-close>'.$ii['name'].'</a>';} 
+        echo '</ul></li></div>';
+      }
+    }
+  }
 }
 ?>

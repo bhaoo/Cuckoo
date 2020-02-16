@@ -49,7 +49,7 @@
       <?php endwhile; ?>
     </ul>
   </div>
-  <?php if($this->options->linksIndex == "able"){?>
+  <?php if($this->options->linksIndexNum != "0"){?>
   <div class="sidebar-info mdui-shadow-10">
     <ul class="mdui-list">
       <div class="sidebar-reply-title">友情链接</div>

@@ -50,16 +50,10 @@ if ($sticky && $this->is('index') || $this->is('front')) {
         if ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
           <div class="mdui-card page-card mdui-shadow-10 page">
             <div class="mdui-card-media">
-              <div class="page-img" data-original="<?php $wzimg = $this->fields->wzimg;
-                                                    if (!empty($wzimg)) {
-                                                      echo $wzimg;
-                                                    } else {
-                                                      echo randPic();
-                                                    } ?>"></div>
+              <div class="page-img" data-original="<?php $wzimg = $this->fields->wzimg;if (!empty($wzimg)) { echo $wzimg;} else {echo randPic();} ?>"></div>
             </div>
             <div class="mdui-card-primary page-primary">
-              <div class="mdui-card-primary-title"><a href="<?php $this->permalink() ?>"><?php $this->sticky();
-                                                                                          $this->title(); ?></a></div>
+              <div class="mdui-card-primary-title"><a href="<?php $this->permalink() ?>"><?php $this->sticky();$this->title(); ?></a></div>
               <div class="mdui-card-primary-subtitle"><?php $this->date(); ?>｜<?php $this->commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
             </div>
             <div class="mdui-card-content page-content"><?php $this->excerpt(70, ' ...'); ?></div>
@@ -74,7 +68,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
           <div class="mdui-card page-card mdui-shadow-10 page">
             <div class="mdui-card-primary">
               <div class="daily-icon"><i class="mdui-icon material-icons">insert_comment</i></div>
-              <div class="mdui-card-primary-title daily-title"><a href="<?php $this->permalink() ?>"><?php $this->title(); ?></a></div>
+              <div class="mdui-card-primary-title daily-title"><a href="<?php $this->permalink() ?>"><?php $this->sticky();$this->title(); ?></a></div>
               <div class="mdui-card-primary-subtitle daily-subtitle"><?php $this->date(); ?>｜<?php $this->commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
             </div>
             <div class="mdui-card-actions daily-button">
