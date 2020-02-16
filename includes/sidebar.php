@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 0.0.7(Beta)
  */
 ?>
 <div class="right">
