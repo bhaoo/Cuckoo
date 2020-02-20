@@ -12,16 +12,9 @@
 
 ### 文章目录树
 
-![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/3301945240.png)
-
-
-![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/1326135897.png)
-
 在“文章编辑->自定义字段->文章目录”中，可按需开启或关闭文章的目录树哦～
 
 ### 用户UA以及仿Biibili认证
-
-![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/186469640.png)
 
 黄色小闪电：代表的是自己的好朋友～
 
@@ -35,13 +28,9 @@
 
 ### 评论表情
 
-![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/856444410.png)
-
 在“发表评论”的右上角点击即可弹出表情选择框，目前支持的有”Emoji“、“颜文字”、“贴吧”等，详细的大家可以亲自去看看，顺便别忘了评论一下哦（嘿嘿
 
 ### 奇妙的评论输入框
-
-![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/3943972505.png)
 
 看到右下角的书记了嘛！之后咱会再做一些别的（只要咱布谷23333
 
