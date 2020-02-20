@@ -12,14 +12,16 @@
 
 ### 文章目录树
 
-<center><img src="https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/3301945240.png"/></center><center><img src="https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/1326135897.png"/></center>
+![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/3301945240.png)
+
+
+![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/1326135897.png)
 
 在“文章编辑->自定义字段->文章目录”中，可按需开启或关闭文章的目录树哦～
 
 ### 用户UA以及仿Biibili认证
 
-
-<center><img src="https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/186469640.png"/></center>
+![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/186469640.png)
 
 黄色小闪电：代表的是自己的好朋友～
 
@@ -33,17 +35,17 @@
 
 ### 评论表情
 
-<center><img src="https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/856444410.png"/></center>
+![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/856444410.png)
 
 在“发表评论”的右上角点击即可弹出表情选择框，目前支持的有”Emoji“、“颜文字”、“贴吧”等，详细的大家可以亲自去看看，顺便别忘了评论一下哦（嘿嘿
 
 ### 奇妙的评论输入框
 
-<center><img src="https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/3943972505.png"/></center>
+![](https://cdn.jsdelivr.net/gh/bhaoo/Bhao-s-Blog@latest/images/uploads/2020/02/3943972505.png)
 
 看到右下角的书记了嘛！之后咱会再做一些别的（只要咱布谷23333
 
-### [更新] 友人帐
+### [v0.0.7更新] 友人帐
 
 咱专门给“友人帐”做了独立页面，需要的小伙伴请撰写一个独立页面（内容可为空），把“自定义模版”设置成“Links”并且在高级设置里把“公开度”设置为“隐藏”！最后在“模版设置”中的“自定义导航栏”填写以下内容：
 
@@ -55,8 +57,6 @@
  "type":"0"
 }]
 ```
-
-
 
 **注意⚠️：使用“友人帐”需要安装“Links”插件，否则就会出现报错（咚咚咚**
 
