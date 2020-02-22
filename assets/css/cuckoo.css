@@ -500,7 +500,7 @@ a.toc-link {
 }
 
 .comment-line {
-  border-bottom: 1px dashed #797979;
+  border-bottom: 1px solid #bababa;
 }
 
 .comment-info {
@@ -527,7 +527,7 @@ a.toc-link {
   position: relative;
   box-sizing: border-box;
   padding: 10px 0 0 20px;
-  border-top: 1px dashed #797979;
+  border-top: 1px solid #bababa;
 }
 
 .comment-container {
@@ -572,13 +572,13 @@ a.toc-link {
   color: rgb(236, 64, 122);
 }
 
-.comment-list {
+.comment-list{
   margin: 0;
   padding-left: 0;
 }
 
-.comment-children {
-  padding-left: 5px;
+.comment-children .comment-children > .comment-list {
+    margin-left: -20px;
 }
 
 .comment-ua {
