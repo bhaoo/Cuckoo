@@ -1,11 +1,18 @@
 <?php
 /**
+ * .______    __    __       ___        ______
+ * |   _  \  |  |  |  |     /   \      /  __  \
+ * |  |_)  | |  |__|  |    /  ^  \    |  |  |  |
+ * |   _  <  |   __   |   /  /_\  \   |  |  |  |
+ * |  |_)  | |  |  |  |  /  _____  \  |  `--'  |
+ * |______/  |__|  |__| /__/     \__\  \______/
+ * 
  * OwO Class
- * Author: ohmyga
- * Version: 2019/06/02 V1.0
- * Link: https://ohmyga.cn/
- * GitHub: https://github.com/ohmyga233
- **/
+ * 
+ * @author Bhao
+ * @link https://dwd.moe/
+ * @version 1.0.0
+ */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 class Smile {
@@ -36,7 +43,7 @@ class Smile {
  }
 
  public static function getOwO() {
-  $getJson =file_get_contents(staticFiles('includes/owo.json', 1));
+  $getJson =file_get_contents(staticFiles('assets/json/owo.json', 1));
   $owoArray = json_decode($getJson, true);
   $owoName = array_keys($owoArray);
   for ($i=0; $i<count($owoName); $i++) {
@@ -77,7 +84,7 @@ class Smile {
  }
  
  public static function getTitle() {
-  $getJson =file_get_contents(staticFiles('includes/owo.json', 1));
+  $getJson =file_get_contents(staticFiles('assets/json/owo.json', 1));
   $owoArray = json_decode($getJson, true);
   $owoName = array_keys($owoArray);
   for ($i=0; $i<count($owoName); $i++) {

@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.7(Beta)
+ * @version 1.0.0
  */
 ?>
 <html>
@@ -22,12 +22,12 @@
   <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->title(); ?></title>
   <link rel="shortcut icon" href="<?php favicon() ?>" /> 
   <link rel="stylesheet" href="<?php staticFiles('assets/css/mdui.min.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/iconfont.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/tocbot.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.css'); ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/nprogress.css'); ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/iconfont.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/tocbot.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.min.css'); ?>">
+  <link rel="stylesheet" href="<?php staticFiles('assets/css/nprogress.min.css'); ?>">
   <link rel="stylesheet" href="<?php staticFiles('assets/css/atom-one-dark.min.css'); ?>">
-  <script src="<?php staticFiles('assets/js/nprogress.js') ?>"></script>
+  <script src="<?php staticFiles('assets/js/nprogress.min.js') ?>"></script>
   <script src="<?php staticFiles('assets/js/tocbot.min.js') ?>"></script>
   <?php $this->header(); bgUrl(); ?>
 </head>

@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.7(Beta)
+ * @version 1.0.0
  */
 ?>
 <div class="right">
@@ -23,7 +23,7 @@
       <?php describe(); ?>
     </div>
   </div>
-  <?php if ($this->is('page', '10')): ?>
+  <?php if ($this->is('page', $this->options->linksCid) && $this->options->linksDescribe != NULL): ?>
   <div class="sidebar-info mdui-shadow-10">
      <ul class="mdui-list">
       <div class="sidebar-reply-title">个人介绍</div>
