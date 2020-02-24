@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.7(Beta)
+ * @version 1.0.0
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "0.0.7");
+define("THEME_VERSION", "1.0.0");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -198,27 +198,23 @@ function commentsReply($comment) {
   }
  }
 
-/* 随机文章背景图 */
 function randPic(){
-  //$setting = Helper::options()->randimg;
-  $setting = "api.ohmyga.cn";
+  $setting = Helper::options()->randimg;
+  $setting_cdn = Helper::options()->randimgCdn;
   $rand = mt_rand(0,99);
   if ($setting == 'api.ohmyga.cn') {
    $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
   }elseif ($setting == 'local') {
-   $openfile = glob(Helper::options()->themeFile(getTheme(), "random/*"), GLOB_BRACE);
+   $openfile = glob(Helper::options()->themeFile("Cuckoo", "random/*"), GLOB_BRACE);
    $img = array_rand($openfile);
    preg_match('/\/random\/\S*\.(jpg|png|gif)/', $openfile[$img], $out);
-   $output = Helper::options()->siteUrl.'usr/themes/'.getTheme().$out[0];
+   $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
   }elseif ($setting == 'cdn'){
-   $output = adSetting('randPic', 'url').'?rand='.$rand;
-  }elseif ($setting == 'cdnno'){
-   $output = adSetting('randPic', 'url');
+    $output = $setting_cdn.'/?rand='.$rand;
   }
   print_r($output);
 }
 
-/* 百度统计 */
 function statisticsBaidu(){
   $setting = Helper::options()->statisticsBaidu;
   if(!empty($setting)){
@@ -226,11 +222,11 @@ function statisticsBaidu(){
   }
 }
 
-/* 更多Pjax回调 */
 function otherPjax(){
   $setting = Helper::options()->otherPjax;
   $setting_baidu = Helper::options()->statisticsBaidu;
   if(!empty($setting)){
+    $output_baidu = "";
     if(!empty($setting_baidu)){
       $output_baidu = "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search]);}";
     }
@@ -238,7 +234,11 @@ function otherPjax(){
   }
 }
 
-/* 底部信息*/
+/** 
+ * 
+ * 既然你能找到这里，那么我想说，保留版权是对作者的尊重。
+ * 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。
+*/
 function Footer(){
   $setting = Helper::options()->Footer;
   if(!empty($setting)){ 
@@ -249,7 +249,6 @@ function Footer(){
   }
 }
 
-/* 个人描述 */
 function describe(){
   $setting = Helper::options()->describe;
   if(empty($setting)){
@@ -260,7 +259,6 @@ function describe(){
   }
 }
 
-/* 文章阅读次数(含Cookie) */
 function get_post_view($archive){
   $cid = $archive->cid;
   $db = Typecho_Db::get();
@@ -288,7 +286,6 @@ function get_post_view($archive){
   echo $row['views'];
 }
 
-/* 获取评论者头像 */
 function get_comment_avatar($moe=NULL){
   $host = 'https://cdn.v2ex.com/gravatar';
   $hash = md5(strtolower($moe));
@@ -307,7 +304,6 @@ function get_comment_avatar($moe=NULL){
   echo $avatar;
 }
 
-/* 获取浏览器信息 */
 function getBrowser($agent) {
   if (preg_match('/MSIE\s([^\s|;]+)/i', $agent, $regs)) {
    $name = 'IE';
@@ -379,7 +375,6 @@ function getBrowser($agent) {
   echo '<i class="iconfont '.$icon.' comment-ua" mdui-tooltip="{content: \''.$name.'\'}"></i>';
  }
  
- /* 获取操作系统 */
  function getOs($agent) {
   if (preg_match('/win/i', $agent)) {
    if (preg_match('/nt 5.1/i', $agent)) {
@@ -443,7 +438,6 @@ function getBrowser($agent) {
   echo '<i class="iconfont '.$icon.' comment-ua" mdui-tooltip="{content: \''.$name.'\'}"></i>';
  }
 
-/* Favicon图标 */
 function favicon(){
   $setting = Helper::options()->favicon;
   if(empty($setting)){
@@ -453,10 +447,21 @@ function favicon(){
   }
 }
 
- /* 检查更新&获取公告 */
 function themeUpdate(){
   $output = 'https://api.qwq.asia/typecho/theme/?s='.$_SERVER['HTTP_HOST'].'&v='.THEME_VERSION;
   return $output;
+}
+
+function themeOptions($name) {
+  static $themeOptions = NULL;
+  if ($themeOptions === NULL) {
+   $db = Typecho_Db::get();
+   $query = $db->select('value')->from('table.options')->where('name = ?', 'theme:Cuckoo');
+   $result = $db->fetchAll($query);
+   $themeOptions = unserialize($result[0]["value"]);
+  }
+
+  return ($name === NULL) ? $themeOptions : (isset($themeOptions[$name]) ? $themeOptions[$name] : NULL);
 }
 
 function otherMenu(){

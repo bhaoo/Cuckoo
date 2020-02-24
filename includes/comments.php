@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.2(Beta)
+ * @version 1.0.0
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -55,7 +55,7 @@ function threadedComments($comments, $options)
     <div class="mdui-card-menu">
       <?php $comments->reply('<button class="mdui-btn mdui-btn-dense mdui-ripple comment-reply">回复</button>'); ?>
     </div>
-    <div class="comment-content">
+    <div class="comment-content mdui-typo">
       <?php echo commentsReply($comments);echo preg_replace('#</?[p][^>]*>#','', parseBiaoQing($comments->content)); ?>
     </div>
     <?php if ($comments->children) { ?>
@@ -82,7 +82,7 @@ if ($this->allow('comment')) :
         <?php if ($this->user->hasLogin()) : ?>
           <div class="mdui-typo">
             <p>
-              登录身份：<a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>
+              登录身份：<a no-pjax href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>
               <a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('退出'); ?> &raquo;</a>
             </p>
           </div>

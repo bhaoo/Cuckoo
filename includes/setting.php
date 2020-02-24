@@ -11,107 +11,111 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.7(Beta)
+ * @version 1.0.0
  */
 
+require_once(__DIR__ ."/settingConfig.php");
+
 function themeConfig($form) {
-  // 引用静态资源文件
-  echo '<link rel="stylesheet" href="'.staticFiles('assets/css/mdui.min.css',1).'" />';
-  echo '<link rel="stylesheet" href="'.staticFiles('assets/css/setting.css',1).'" />';
-  echo '<script src="'.staticFiles('assets/js/mdui.min.js',1).'"></script>';
-  echo '<script src="'.staticFiles('assets/js/jquery.min.js',1).'"></script>
-  <script>
-  $(function () {  
-    $.ajax({  
-      url: "'.themeUpdate().'",  
-      type: "GET",
-      dataType: "json",     
-      beforeSend: function() {
-        $("#verison").html("正在获取新版本中...");
-        $("#notice").html("正在获取公告中...");
-      }, 
-      error: function() {
-        $("#verison").html("新版本获取出错");
-        $("#notice").html("公告获取出错"); 
-      },   
-      success: function(data) {
-        $("#verison").html(data.version);
-        $("#notice").html(data.notice);
-      }
-    })
-  });
-  </script><div class="mdui-typo">';
-  echo "<h2>".THEME_NAME." 主题设置 <small>作者：<a href='https://dwd.moe/'>Bhao</a></small></h2>";
-  $get_ver = THEME_VERSION;
-  echo "
-  <div class='setting-table'>
-    <div class='mdui-table-fluid'>
-      <table class='mdui-table'>
-        <tbody>
-          <tr>
-            <td>当前版本</td>
-            <td>$get_ver</td>
-          </tr>
-          <tr>
-            <td>云端版本</td>
-            <td><span id='verison'></span></td>
-          </tr>
-          <tr>
-            <td>公告</td>
-            <td><span id='notice'></span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  </div>
-  ";
-  $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('网站图标'), _t('在这里填入一个图片 URL 地址, 以加上一个 Favicon图标，没有则不填'));
-  $form->addInput($favicon);
-  $staticFiles = new Typecho_Widget_Helper_Form_Element_Select('staticFiles',array('local' => '本地', 'jsdelivr' => 'Jsdelivr源', 'cdn' => '自定义CDN源'), 'jsdelivr', _t('静态文件源'), _t('主题静态资源引用'));
-  $form->addInput($staticFiles->multiMode());
-  $staticCdn = new Typecho_Widget_Helper_Form_Element_Text('staticCdn', NULL, NULL, _t('自定义CDN源'), _t('在这里填写你自己的CDN(如 api.bhmo.cn)，以获取静态文件(需在上方选择自定义CDN)'));
-  $form->addInput($staticCdn);
-  $drawerContact = new Typecho_Widget_Helper_Form_Element_Textarea('drawerContact', NULL, 
-  '{"qq":"657997987",
-    "github":"bhaoo",
-    "telegram":"bhaouo",
-    "twitter":"bhaouo",
-    "bilibili":"66737341"}', _t('联系方式'), _t('在此填写您的联系方式，最多仅能展示6个。'));
-  $form->addInput($drawerContact);
-  $logoUrl = new Typecho_Widget_Helper_Form_Element_Text('logoUrl', NULL, NULL, _t('LOGO'), _t('在这里填入一个图片 URL 地址, 以加上一个 LOGO'));
-  $form->addInput($logoUrl);
-  $bgUrl = new Typecho_Widget_Helper_Form_Element_Text('bgUrl', NULL, NULL, _t('背景图片(电脑)'), _t('在这里填入一个图片 URL 地址, 以设置博客背景图片'));
-  $form->addInput($bgUrl);
-  $bgphoneUrl = new Typecho_Widget_Helper_Form_Element_Text('bgphoneUrl', NULL, NULL, _t('背景图片(手机)'), _t('在这里填入一个图片 URL 地址, 以设置博客背景图片'));
-  $form->addInput($bgphoneUrl);
-  $describe = new Typecho_Widget_Helper_Form_Element_Text('describe', NULL, NULL, _t('个人描述'), _t('在这里填写个人描述，以在侧边栏显示(若空则自动填充 一言)'));
-  $form->addInput($describe);
-  $linksDescribe = new Typecho_Widget_Helper_Form_Element_Textarea('linksDescribe', NULL,NULL, _t('友链页面介绍'), _t('在这里填写友链页面的个人介绍(支持 html )，没有则不填(需先安装友链插件哦)'));
-  $form->addInput($linksDescribe);
-  $linksIndexNum = new Typecho_Widget_Helper_Form_Element_Text('linksIndexNum', NULL, '0', _t('主页友链展示个数'), _t('在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个'));
-  $form->addInput($linksIndexNum);
-  $sticky = new Typecho_Widget_Helper_Form_Element_Text('sticky', NULL,NULL, _t('文章置顶'), _t('置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔'));
-  $form->addInput($sticky);
-  $statisticsBaidu = new Typecho_Widget_Helper_Form_Element_Text('statisticsBaidu', NULL,NULL, _t('百度统计代码'), _t('仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"'));
-  $form->addInput($statisticsBaidu);
-  $otherMenu = new Typecho_Widget_Helper_Form_Element_Textarea('otherMenu', NULL, NULL, _t('自定义导航栏'), _t('在这里可以自行添加更多的菜单，请遵循JSON语法进行使用，简易使用方法见作者博客文章'));
-  $form->addInput($otherMenu);
-  $otherPjax = new Typecho_Widget_Helper_Form_Element_Textarea('otherPjax', NULL, ' ', _t('PJAX回调'), _t('在这里可以自行添加PJAX回调内容,引号需用“单引号”'));
-  $form->addInput($otherPjax);
-  $Footer = new Typecho_Widget_Helper_Form_Element_Textarea('Footer', NULL, NULL, _t('底部信息'), _t('在这里填写的信息将在底部显示哦～'));
-  $form->addInput($Footer);
-  echo '<script>
-  $(function(){
-    $("#typecho-option-item-staticCdn-2").hide();
-    $("#staticFiles-0-2").change(function() {
-        if($("#staticFiles-0-2").val()=="cdn"){
-          $("#typecho-option-item-staticCdn-2").show();
-        }else{
-          $("#typecho-option-item-staticCdn-2").hide();
+  themeBackup();
+  $config = new Cuckoo_Setting($form);
+  echo $config->themePanel();
+  $config->form(
+    $config->module(
+      $config->input('favicon', '网站图标', '在这里填入一个图片 URL 地址, 以加上一个 Favicon图标，没有则不填。').
+      $config->input('logoUrl', 'LOGO', '在这里填入一个图片 URL 地址, 以加上一个 LOGO, 此LOGO也展示在侧边栏中。').
+      $config->input('describe', '个人描述', '在这里填写个人描述，以在侧边栏显示(若空则自动填充 一言)').
+      $config->textarea('drawerContact', '联系方式', '在此填写您的联系方式，最多仅能展示6个。').
+      $config->input('bgUrl', '背景图片(电脑)', '在这里填入一个图片 URL 地址, 以设置博客电脑背景图片').
+      $config->input('bgphoneUrl', '背景图片(手机)', '在这里填入一个图片 URL 地址, 以设置博客手机背景图片')
+    ,1).
+    $config->module(
+      $config->select('staticFiles', '静态文件源', '推荐选择 “JsDelivr源”',
+      ['local'    =>   '本地',
+       'jsdelivr' =>   'JsDelivr',
+       'cdn'      =>   '自定义 CDN'
+      ],
+      'local'
+      ).$config->input('staticCdn', '自定义静态文件CDN', '在这里填写你自己的CDN(如 api.bhmo.cn)，以获取静态文件(需在上方选择自定义CDN)').
+      $config->select('randimg', '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”',
+      ['api.ohmyga.cn' =>   'OMGのAPI',
+       'local'         =>   '本地',
+       'cdn'           =>   '自定义 CDN'
+      ],
+      'api.ohmyga.cn'
+      ).$config->input('randimgCdn', '自定义随机文章图CDN', '在这里填写你自己的CDN(如 api.bhmo.cn)，以获取随机图片(需在上方选择自定义CDN)').
+      $config->input('sticky', '置顶文章', '置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔。').
+      $config->input('statisticsBaidu', '百度统计', '仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"').
+      $config->textarea('Footer', '底部信息', '在这里填写的信息将在底部显示哦～').
+      $config->textarea('otherMenu', '自定义抽屉', '在这里可以自行添加更多的菜单，请遵循JSON语法进行使用。').
+      $config->textarea('otherPjax', 'PJAX回调', '在这里可以自行添加PJAX回调内容,引号需用“单引号”')
+    ,2).
+    $config->module(
+      $config->isPluginAvailable('Links').
+      $config->text('<h2>友链页面</h2>').
+      $config->input('linksCid', '友链页面CID', '在这里填写友链页面CID,请正确填写。').
+      $config->input('linksIndexNum', '主页友链展示个数', '在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个', 0).
+      $config->textarea('linksDescribe', '友链页面介绍', '在这里填写友链页面的个人介绍(支持 html )，没有则不填').
+      $config->text('<h2>B站追番列表</h2><small>（需要提前创建好独立页面哦～第一次加载会比较慢，缓存后速度就很快啦！）</small>').
+      $config->input('BilibiliUrl', '独立页面链接', '请填写完整链接 例如：https://xxx.xxx/xxx.html').
+      $config->input('BilibiliUid', 'B站UID', '请认真填写好，记得检查别填错啦！').
+      $config->input('CacheTime', '缓存时间', '单位为“秒”，不会填写可留空，默认为一天。').
+      $config->input('Amout', '展示数量', '需要展示的番剧数量，默认为 100 个').
+      $config->textarea('HideMedia', '隐藏番剧', '输入番剧id，多个id用英文逗号隔开，就可以隐藏你所不想展示的番剧啦！')
+    ,3)
+  );
+}
+
+function themeBackup(){
+  $db = Typecho_Db::get();
+  $sjdq=$db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:Cuckoo'));
+  $ysj = $sjdq['value'];
+  if(isset($_POST['type'])){ 
+    if($_POST["type"]=="备份模板数据"){
+      if($db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'))){
+        $update = $db->update('table.options')->rows(array('value'=>$ysj))->where('name = ?', 'theme:CuckooBackup');
+        $updateRows= $db->query($update);
+        echo '<div class="message popup success" style="position: absolute; display: block;">备份已更新，请等待自动刷新！如果等不到请点击 <a href="'.Helper::options()->adminUrl.'options-theme.php">这里</a></div>
+              <script language="JavaScript">window.setTimeout("location=\''.Helper::options()->adminUrl.'options-theme.php\'", 2500);</script>';
+      }else{
+        if($ysj){
+          $insert = $db->insert('table.options')->rows(array('name' => 'theme:CuckooBackup','user' => '0','value' => $ysj));
+          $insertId = $db->query($insert);
+          echo '<div class="message popup success" style="position: absolute; display: block;">备份完成，请等待自动刷新！如果等不到请点击 <a href="'.Helper::options()->adminUrl.'options-theme.php">这里</a></div>
+                <script language="JavaScript">window.setTimeout("location=\''.Helper::options()->adminUrl.'options-theme.php\'", 2500);</script>';
         }
-    });
-});
-  </script>';
+      }
+    }
+    if($_POST["type"]=="还原模板数据"){
+      if($db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'))){
+        $sjdub=$db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'));
+        $bsj = $sjdub['value'];
+        $update = $db->update('table.options')->rows(array('value'=>$bsj))->where('name = ?', 'theme:Cuckoo');
+        $updateRows= $db->query($update);
+        echo '<div class="message popup success" style="position: absolute; display: block;">检测到模板备份数据，恢复完成，请等待自动刷新！如果等不到请点击 <a href="'.Helper::options()->adminUrl.'options-theme.php">这里</a></div>
+              <script language="JavaScript">window.setTimeout("location=\''.Helper::options()->adminUrl.'options-theme.php\'", 2000);</script>';
+      }else{
+        echo '<div class="message popup error" style="position: absolute; display: block;" id="del-error">恢复失败，因为你没备份过设置哇（；´д｀）ゞ</div>
+              <script language="JavaScript">
+              setTimeout( function(){$(\'#del-error\').removeClass(\'moe-a\');$(\'#del-error\').addClass(\'moe-a-off\');}, 2100 );
+              setTimeout( function(){$(\'#del-error\').attr(\'style\', \'display: none;\');}, 2300 );
+              </script>';
+      }
+    }
+    if($_POST["type"] == "删除备份数据"){
+      if($db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'))){
+        $delete = $db->delete('table.options')->where ('name = ?', 'theme:CuckooBackup');
+        $deletedRows = $db->query($delete);
+        echo '<div class="message popup success" style="position: absolute; display: block;">删除成功，请等待自动刷新，如果等不到请点击 <a href="'.Helper::options()->adminUrl.'options-theme.php">这里</a></div>
+              <script language="JavaScript">window.setTimeout("location=\''.Helper::options()->adminUrl.'options-theme.php\'", 2500);</script>';
+      }else{
+        echo '<div class="message popup error" style="position: absolute; display: block;" id="del-error">删除失败，检测不到备份ㄟ( ▔, ▔ )ㄏ</div>
+              <script language="JavaScript">
+              setTimeout( function(){$(\'#del-error\').removeClass(\'moe-a\');$(\'#del-error\').addClass(\'moe-a-off\');}, 2100 );
+              setTimeout( function(){$(\'#del-error\').attr(\'style\', \'display: none;\');}, 2300 );
+              </script>';
+      }
+    }
+  }
 }
 ?>
