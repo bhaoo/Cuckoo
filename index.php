@@ -6,7 +6,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 1.0.0
+ * @version 1.0.1
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -58,9 +58,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
             </div>
             <div class="mdui-card-content page-content"><?php $this->excerpt(70, ' ...'); ?></div>
             <div class="mdui-card-actions">
-              <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right">
-                  <font color="#E91E63">点击查看</font>
-                </button></a>
+              <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right mdui-text-color-theme">点击查看</button></a>
             </div>
           </div>
         <?php
@@ -72,9 +70,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
               <div class="mdui-card-primary-subtitle daily-subtitle"><?php $this->date(); ?>｜<?php $this->commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
             </div>
             <div class="mdui-card-actions daily-button">
-              <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right">
-                  <font color="#E91E63">点击查看</font>
-                </button></a>
+              <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right mdui-text-color-theme">点击查看</button></a>
             </div>
           </div>
       <?php

@@ -11,10 +11,10 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.0
+ * @version 1.0.1
  */
 ?>
-<button class="mdui-fab mdui-fab-fixed mdui-ripple top"><i class="mdui-icon material-icons">arrow_upward</i></button>
+<button class="mdui-fab mdui-fab-fixed mdui-ripple top mdui-color-theme-accent"><i class="mdui-icon material-icons">arrow_upward</i></button>
 <footer class="footer">
   <center><?php Footer(); ?></center>
 </footer>

@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -53,7 +53,7 @@ function threadedComments($comments, $options)
                                                                                               getOs($comments->agent); ?></div>
     <div class="mdui-card-header-subtitle"><?php $comments->date('Y-m-d H:i'); ?></div>
     <div class="mdui-card-menu">
-      <?php $comments->reply('<button class="mdui-btn mdui-btn-dense mdui-ripple comment-reply">回复</button>'); ?>
+      <?php $comments->reply('<button class="mdui-btn mdui-btn-dense mdui-ripple comment-reply mdui-text-color-theme-accent">回复</button>'); ?>
     </div>
     <div class="comment-content mdui-typo">
       <?php echo commentsReply($comments);echo preg_replace('#</?[p][^>]*>#','', parseBiaoQing($comments->content)); ?>
@@ -70,7 +70,7 @@ function threadedComments($comments, $options)
 <?php
 if ($this->allow('comment')) :
 ?>
-  <div id="<?php $this->respondId(); ?>" class="mdui-card page-card">
+  <div id="<?php $this->respondId(); ?>" class="mdui-card page-card comment-id">
     <div class="mdui-card-content">
       <div class="comment-cancel">
         <button class='mdui-btn mdui-btn-icon' mdui-dialog="{target: '#emoji'}"><i class='mdui-icon material-icons'>insert_emoticon</i></button>
@@ -104,7 +104,7 @@ if ($this->allow('comment')) :
           </div>
         <?php endif; ?>
         <center>
-          <button type="submit" id="submit" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple submit">发表评论</button>
+          <button type="submit" id="submit" class="mdui-btn mdui-btn-block mdui-text-color-theme mdui-ripple submit">发表评论</button>
         </center>
       </form>
     </div>
