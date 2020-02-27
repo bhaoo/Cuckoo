@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -224,7 +224,7 @@ class Cuckoo_Setting
     if(array_key_exists($name, $plugins)){
       return '<p class="setting-normal">检测到您已经安装“'.$name.'”插件 请仔细填写好下面的内容哦～</p>';
     }else{
-      return '<p class="setting-error">检测到您还未安装“'.$name.'”插件 请 <a href="//www.imhan.com/archives/typecho_links_20141214">点击此处进行下载</a> 否则将无法正常运行友链功能</p>';
+      return '<p class="setting-error">检测到您还未安装“'.$name.'”插件 请 <a href="//www.imhan.com/archives/typecho_links_20141214/">点击此处进行下载</a> 否则将无法正常运行友链功能</p>';
     }
   }
 }

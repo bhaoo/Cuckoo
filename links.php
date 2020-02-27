@@ -5,7 +5,7 @@
  * @package custom
  * @author Bhao
  * @link https://dwd.moe/
- * @version 0.0.7(Beta)
+ * @version 1.0.1
  */
 
 $this->comments()->to($comments);
@@ -77,7 +77,7 @@ $this->need('includes/sidebar.php');
       "); 
     echo '</div>';
     if($this->allow('comment')):?>
-    <div class="mdui-card page-card mdui-shadow-10 links-comments">
+    <div id="<?php $this->respondId(); ?>" class="mdui-card page-card mdui-shadow-10 links-comments comment-id">
       <div class="comment-cancel">
       <button class='mdui-btn mdui-btn-icon' mdui-dialog="{target: '#emoji'}"><i class='mdui-icon material-icons'>insert_emoticon</i></button>
         <?php $comments->cancelReply("<button class='mdui-btn mdui-btn-icon'><i class='mdui-icon material-icons'>cancel</i></button>"); ?>
@@ -114,7 +114,7 @@ $this->need('includes/sidebar.php');
         </center>
       </form>
     </div>
-    <div id="comment-list" class="mdui-card page-card mdui-shadow-10">
+    <div id="comment-list" class="mdui-card page-card mdui-shadow-10 links-comment-list">
       <div class="mdui-card-content">
         <div class="comment-count">
           <h3>全部留言 <?php $this->commentsNum(_t('(暂无留言)'), _t('(共 1 条留言)'), _t('(共 %d 条留言)')); ?></h3>
