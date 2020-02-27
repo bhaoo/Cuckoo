@@ -18,27 +18,27 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 class Smile {
 
  public static function owo($icon, $text) {
-  $output = '<a href="javascript:Smilies.grin(\''.htmlspecialchars($text).'\');"><span class="emoji-text mdui-btn mdui-card mdui-shadow-2">'.$icon.'</span></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.htmlspecialchars($text).'\');"><span class="emoji-text mdui-btn mdui-card mdui-shadow-2">'.$icon.'</span></a>';
   return $output;
  }
  
  public static function tieba($icon, $img) {
-  $output = '<a href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-tieba mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/tieba/'.$img, 1).'"></img></div></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-tieba mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/tieba/'.$img, 1).'"></img></div></a>';
   return $output;
  }
  
  public static function huaji($icon, $img) {
-  $output = '<a href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-hj mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/huaji/'.$img, 1).'"></div></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-hj mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/huaji/'.$img, 1).'"></div></a>';
   return $output;
  }
  
  public static function qwq($icon, $img) {
-  $output = '<a href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-qwq mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/qwq/'.$img, 1).'"></div></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-qwq mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/qwq/'.$img, 1).'"></div></a>';
   return $output;
  }
  
  public static function emoji($icon, $text) {
-  $output = '<a href="javascript:Smilies.grin(\''.$icon.'\');"><span class="emoji-emoji mdui-btn mdui-card mdui-shadow-2" mdui-dialog-close>'.$text.'</span></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><span class="emoji-emoji mdui-btn mdui-card mdui-shadow-2" mdui-dialog-close>'.$text.'</span></a>';
   return $output;
  }
 
