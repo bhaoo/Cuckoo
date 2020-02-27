@@ -97,7 +97,7 @@ function themeConfig($form) {
         "name":"归档",
         "link":"#",
         "icon":"access_time",
-        "type":"3"
+        "type":"1"
        },{
         "name":"页面",
         "link":"#",

@@ -48,7 +48,7 @@ function themeInit($archive){
     $qq = str_replace('@qq.com','',$email);
     $sjtx = 'mm';
     if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4) {
-      $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+      $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
     }else{
       $avatar = $host.$hash.'?d='.$sjtx;
     }
@@ -250,7 +250,10 @@ function otherPjax(){
 
 function Footer(){
   $setting = Helper::options()->Footer;
-  $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
+  $setting_beian = Helper::options()->beian;
+  if(!empty($setting_beian)){
+    $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
+  }
   if(!empty($setting)){ 
     $setting = '<p>'.$setting.'</p>';
     echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
@@ -302,7 +305,7 @@ function get_comment_avatar($moe=NULL){
   $email = strtolower($moe);
   $qq = str_replace('@qq.com','',$email);
   if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
-   $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+   $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
   }else{
    $avatar = $host.'/'.$hash.'?s=640';
   }
