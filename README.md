@@ -4,6 +4,10 @@
 >
 > 「Cuckoo」主题演示站：[https://dwd.moe][3]
 
+## 下载
+
+获取主题的方法：前往 Github Releases 或者 下方QQ群 下载主题
+
 ## 特点✨
 
 ### 图片懒加载
@@ -70,4 +74,4 @@
 
 [1]: https://ohmyga.cn/
 [2]: https://qwq.best/
-[3]:https://dwd.moe
+[3]:https://dwd.moe/
