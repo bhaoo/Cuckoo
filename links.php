@@ -45,7 +45,7 @@ function threadedComments($comments, $options) {
   <div class="mdui-card-menu">
     <?php $comments->reply('<button class="mdui-btn mdui-btn-dense mdui-ripple comment-reply">回复</button>'); ?>
   </div>
-  <div class="comment-content">
+  <div class="comment-content mdui-typo">
     <?php echo preg_replace('#</?[p][^>]*>#','', parseBiaoQing($comments->content)); ?>
   </div>
   <?php if ($comments->children) { ?>
