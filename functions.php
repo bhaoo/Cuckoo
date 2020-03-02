@@ -78,7 +78,7 @@ function themeInit($archive){
     $qq = str_replace('@qq.com','',$email);
     $sjtx = 'mm';
     if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4) {
-      $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+      $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
     }else{
       $avatar = $host.$hash.'?d='.$sjtx;
     }
@@ -228,7 +228,7 @@ function commentsReply($comment) {
 function randPic(){
   $setting = Helper::options()->randimg;
   $setting_cdn = Helper::options()->randimgCdn;
-  $rand = mt_rand(0,99);
+  $rand = mt_rand(0,999);
   if ($setting == 'api.ohmyga.cn') {
    $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
   }elseif ($setting == 'local') {
@@ -237,7 +237,7 @@ function randPic(){
    preg_match('/\/random\/\S*\.(jpg|png|gif)/', $openfile[$img], $out);
    $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
   }elseif ($setting == 'cdn'){
-    $output = $setting_cdn.'/?rand='.$rand;
+    $output = preg_replace('{rand}', $rand, $setting_cdn);
   }
   print_r($output);
 }
@@ -280,7 +280,10 @@ function otherPjax(){
 
 function Footer(){
   $setting = Helper::options()->Footer;
-  $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
+  $setting_beian = Helper::options()->beian;
+  if(!empty($setting_beian)){
+    $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
+  }
   if(!empty($setting)){ 
     $setting = '<p>'.$setting.'</p>';
     echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
@@ -332,7 +335,7 @@ function get_comment_avatar($moe=NULL){
   $email = strtolower($moe);
   $qq = str_replace('@qq.com','',$email);
   if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
-   $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+   $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
   }else{
    $avatar = $host.'/'.$hash.'?s=640';
   }
