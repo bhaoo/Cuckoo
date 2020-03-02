@@ -34,7 +34,7 @@ function themeFields($layout) {
   $layout->addItem($catalog);
 }
 
-//回复可见实现
+//回复可见功能实现
 function parse_content($content,$cid,$mail,$login){
 	$db = Typecho_Db::get();
 	$sql = $db->select()->from('table.comments')
@@ -61,7 +61,7 @@ class moleft {
       $text = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'此处内容已隐藏',$text);
       }
       return $text;
-	}
+    }
 }
 
 function themeInit($archive){
@@ -503,7 +503,7 @@ function themeOptions($name) {
 }
 
 /*文章字数统计*/
-function  art_count($cid){
+function art_count($cid){
 $db=Typecho_Db::get ();
 $rs=$db->fetchRow ($db->select ('table.contents.text')->from ('table.contents')->where ('table.contents.cid=?',$cid)->order ('table.contents.cid',Typecho_Db::SORT_ASC)->limit (1));
 echo round(mb_strlen($rs['text'], 'UTF-8')/500,1);
