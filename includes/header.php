@@ -30,6 +30,15 @@ $accentColor = $this->options->accentColor;
   <link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.min.css'); ?>">
   <link rel="stylesheet" href="<?php staticFiles('assets/css/nprogress.min.css'); ?>">
   <link rel="stylesheet" href="<?php staticFiles('assets/css/atom-one-dark.min.css'); ?>">
+  <style>
+  	.reply2view {
+	  background:#f8f8f8;
+	  border-radius:5px;
+	  border:1px dashed #888888;
+	  padding:10px 10px 10px 40px;
+      position:relative
+	}
+  </style>
   <script src="<?php staticFiles('assets/js/nprogress.min.js') ?>"></script>
   <script src="<?php staticFiles('assets/js/tocbot.min.js') ?>"></script>
   <?php $this->header('commentReply='); bgUrl(); ?>

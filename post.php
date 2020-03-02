@@ -23,7 +23,7 @@ $this->need('includes/header.php'); ?>
       <?php if ($this->fields->articleType == "daily") { ?>
         <div class="daily-media">
           <div class="daily-card-title"><?php $this->title() ?></div>
-          <div class="mdui-card-primary-subtitle daily-card-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?></div>
+          <div class="mdui-card-primary-subtitle daily-card-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 阅读时间：约<?php art_count($this->cid); ?>分钟</div>
         </div>
       <?php } elseif ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
         <div class="mdui-card-media">
@@ -36,17 +36,15 @@ $this->need('includes/header.php'); ?>
           <div class="mdui-card-media-covered">
             <div class="mdui-card-primary">
               <div class="mdui-card-primary-title"><?php $this->title() ?></div>
-              <div class="mdui-card-primary-subtitle article-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?></div>
+              <div class="mdui-card-primary-subtitle article-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 阅读时间：约<?php art_count($this->cid); ?>分钟</div>
             </div>
           </div>
         </div>
       <?php } ?>
       <div class="article-page mdui-typo">
-        <?php echo parsePicture(parseBiaoQing($this->content)); ?>
+        <?php echo parse_content(parsePicture(parseBiaoQing($this->content)),$this->cid,$this->remember('mail',true),$this->user->hasLogin()); ?>
         <div class="article-cc">
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">
-            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
-          </a>
+          如无特殊说明，则本站文章皆为本人码字原创，在文章创作过程中借鉴了其他学者论文、专著及其他文献等，本人皆会在参考文献中注明，如若侵犯您版权，请联系本人删除。特此声明！
         </div>
       </div>
     </div>

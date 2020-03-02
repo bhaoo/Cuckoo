@@ -34,6 +34,36 @@ function themeFields($layout) {
   $layout->addItem($catalog);
 }
 
+//回复可见实现
+function parse_content($content,$cid,$mail,$login){
+	$db = Typecho_Db::get();
+	$sql = $db->select()->from('table.comments')
+    ->where('cid = ?',$cid)
+    ->where('mail = ?', $mail)
+    ->where('status = ?', 'approved')
+    ->limit(1);
+	$result = $db->fetchAll($sql);
+	if($login || $result) {
+    	$content = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'$1',$content);
+	}
+	else{
+    	$content = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'<div class="reply2view">您需要<a href="/admin/login.php">登录</a>或者<a onclick="window.scrollTo(0, document.documentElement.clientHeight);">回复</a>才能显示此处隐藏内容。</div>',$content);
+	}
+	return $content;
+}
+Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('moleft','one');
+Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = array('moleft','one');
+class moleft {
+    public static function one($con,$obj,$text)
+    {
+      $text = empty($text)?$con:$text;
+      if(!$obj->is('single')){
+      $text = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'此处内容已隐藏',$text);
+      }
+      return $text;
+	}
+}
+
 function themeInit($archive){
   Helper::options()->commentsOrder = 'DESC';
   Helper::options()->commentsMaxNestingLevels = 9999;
@@ -48,7 +78,7 @@ function themeInit($archive){
     $qq = str_replace('@qq.com','',$email);
     $sjtx = 'mm';
     if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4) {
-      $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+      $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
     }else{
       $avatar = $host.$hash.'?d='.$sjtx;
     }
@@ -198,7 +228,7 @@ function commentsReply($comment) {
 function randPic(){
   $setting = Helper::options()->randimg;
   $setting_cdn = Helper::options()->randimgCdn;
-  $rand = mt_rand(0,999);
+  $rand = mt_rand(0,99);
   if ($setting == 'api.ohmyga.cn') {
    $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
   }elseif ($setting == 'local') {
@@ -207,7 +237,7 @@ function randPic(){
    preg_match('/\/random\/\S*\.(jpg|png|gif)/', $openfile[$img], $out);
    $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
   }elseif ($setting == 'cdn'){
-    $output = preg_replace('{rand}', $rand, $setting_cdn);
+    $output = $setting_cdn.'/?rand='.$rand;
   }
   print_r($output);
 }
@@ -250,10 +280,7 @@ function otherPjax(){
 
 function Footer(){
   $setting = Helper::options()->Footer;
-  $setting_beian = Helper::options()->beian;
-  if(!empty($setting_beian)){
-    $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
-  }
+  $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
   if(!empty($setting)){ 
     $setting = '<p>'.$setting.'</p>';
     echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
@@ -305,7 +332,7 @@ function get_comment_avatar($moe=NULL){
   $email = strtolower($moe);
   $qq = str_replace('@qq.com','',$email);
   if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
-   $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+   $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
   }else{
    $avatar = $host.'/'.$hash.'?s=640';
   }
@@ -470,6 +497,13 @@ function themeOptions($name) {
   }
 
   return ($name === NULL) ? $themeOptions : (isset($themeOptions[$name]) ? $themeOptions[$name] : NULL);
+}
+
+/*文章字数统计*/
+function  art_count($cid){
+$db=Typecho_Db::get ();
+$rs=$db->fetchRow ($db->select ('table.contents.text')->from ('table.contents')->where ('table.contents.cid=?',$cid)->order ('table.contents.cid',Typecho_Db::SORT_ASC)->limit (1));
+echo round(mb_strlen($rs['text'], 'UTF-8')/500,1);
 }
 
 function otherMenu(){
