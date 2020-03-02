@@ -198,7 +198,7 @@ function commentsReply($comment) {
 function randPic(){
   $setting = Helper::options()->randimg;
   $setting_cdn = Helper::options()->randimgCdn;
-  $rand = mt_rand(0,99);
+  $rand = mt_rand(0,999);
   if ($setting == 'api.ohmyga.cn') {
    $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
   }elseif ($setting == 'local') {
@@ -207,7 +207,7 @@ function randPic(){
    preg_match('/\/random\/\S*\.(jpg|png|gif)/', $openfile[$img], $out);
    $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
   }elseif ($setting == 'cdn'){
-    $output = $setting_cdn.'/?rand='.$rand;
+    $output = preg_replace('{rand}', $rand, $setting_cdn);
   }
   print_r($output);
 }
