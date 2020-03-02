@@ -80,11 +80,9 @@ if ($sticky && $this->is('index') || $this->is('front')) {
       <div class="changePage">
         <?php $this->pageLink('下一页', 'next'); ?>
       </div>
-  </div>
-<?php
-    else : ?>
+<?php else : ?>
   暂无文章
-<?php
-    endif; ?>
+<?php endif; ?>
+  </div>
 </div>
 <?php $this->need('includes/footer.php'); ?>
