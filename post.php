@@ -23,7 +23,7 @@ $this->need('includes/header.php'); ?>
       <?php if ($this->fields->articleType == "daily") { ?>
         <div class="daily-media">
           <div class="daily-card-title"><?php $this->title() ?></div>
-          <div class="mdui-card-primary-subtitle daily-card-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?> | 阅读时间：约<?php art_count($this->cid); ?>分钟</div>
+          <div class="mdui-card-primary-subtitle daily-card-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?> | 阅读时间：约<?php art_count($this->cid); ?>分钟 </div>
         </div>
       <?php } elseif ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
         <div class="mdui-card-media">
@@ -36,7 +36,7 @@ $this->need('includes/header.php'); ?>
           <div class="mdui-card-media-covered">
             <div class="mdui-card-primary">
               <div class="mdui-card-primary-title"><?php $this->title() ?></div>
-              <div class="mdui-card-primary-subtitle article-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?> | 阅读时间：约<?php art_count($this->cid); ?>分钟</div>
+              <div class="mdui-card-primary-subtitle article-subtitle"><?php get_post_view($this) ?> 浏览 | <?php $this->date(); ?> | 分类：<?php $this->category(','); ?> | 标签：<?php $this->tags(','); ?> | 阅读时间：约<?php art_count($this->cid); ?>分钟 </div>
             </div>
           </div>
         </div>
