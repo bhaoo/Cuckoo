@@ -55,7 +55,7 @@
   <?php if($tags->have()): ?>
   <div class="sidebar-info mdui-shadow-10">
     <ul class="mdui-list">
-      <div class="sidebar-reply-title">文章标签</div>
+      <div class="sidebar-reply-title">标签云</div>
       <li class="mdui-divider mdui-m-y-0"></li>
       <li style="padding:5px">
       <?php if($tags->have()): ?>
