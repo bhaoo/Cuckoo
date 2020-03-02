@@ -36,7 +36,7 @@ $accentColor = $this->options->accentColor;
 	  border-radius:5px;
 	  border:1px dashed #888888;
 	  padding:10px 10px 10px 40px;
-      position:relative
+          position:relative
 	}
   </style>
   <script src="<?php staticFiles('assets/js/nprogress.min.js') ?>"></script>
