@@ -9,7 +9,7 @@
 
 ## 下载 ⏬
 
-a获取主题的方法：前往 [Releases](https://github.com/bhaoo/Cuckoo/releases) 或者 下方QQ群 下载主题
+获取主题的方法：前往 [Releases](https://github.com/bhaoo/Cuckoo/releases) 或者 下方QQ群 下载主题
 
 ## 特点 ✨
 
