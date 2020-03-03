@@ -36,7 +36,7 @@ $this->need('includes/header.php');
       </div>
       <?php
       while ($this->next()) :
-        if ($this->fields->articleType == "article") { ?>
+        if ($this->fields->articleType == "article" || $this->fields->articleType == NULL ) { ?>
           <div class="mdui-card page-card mdui-shadow-10 page">
             <div class="mdui-card-media page-img">
               <div class="page-img" data-original="<?php $wzimg = $this->fields->wzimg;
