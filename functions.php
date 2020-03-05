@@ -307,7 +307,7 @@ function get_comment_avatar($moe=NULL){
   if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
    $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
   }else{
-   $avatar = $host.'/'.$hash.'?s=640';
+   $avatar = $host.'/'.$hash.'?s=100';
   }
   echo $avatar;
 }
