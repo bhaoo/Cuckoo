@@ -33,6 +33,10 @@
 3. 提问前请先阅读 “主题文档” 先哦！
 4. 如果喜欢这个主题，欢迎各位点个 Star ！
 
+## 黑名单⚠️
+
+1. http://kjxy.41f.cn/（删除版权）
+
 ---
 
 Copyright &copy; 2020 [Bhao](https://dwd.moe/), under GPL-3.0 License.
