@@ -7,11 +7,11 @@
 
 ---
 
-## 下载 ⏬
+## 下载
 
 获取主题的方法：前往 [Releases](https://github.com/bhaoo/Cuckoo/releases) 或者 下方QQ群 下载主题
 
-## 特点 ✨
+## 特点
 
 - 全站PJAX+评论AJAX
 - 响应式 / 自适应 
@@ -26,16 +26,16 @@
 - 自定义静态文件源 / 随机图源 
 - 自定义抽屉导航栏
 
-## 最后 💬
+## 最后
 
 1. 欢迎各位加入 [主题交流群](//shang.qq.com/wpa/qunwpa?idkey=ceaeca22d995870dc4e5d35ee0b98542c337c99f0955b648917dc18957818bb4)
 2. 主题文档：[https://cuckoo.owo.show/](https://cuckoo.owo.show/)
 3. 提问前请先阅读 “主题文档” 先哦！
 4. 如果喜欢这个主题，欢迎各位点个 Star ！
 
-## 黑名单⚠️
+## 黑名单
 
-1. http://kjxy.41f.cn/（删除版权）
+1. [http://kjxy.41f.cn/](http://kjxy.41f.cn/)（删除版权）
 
 ---
 

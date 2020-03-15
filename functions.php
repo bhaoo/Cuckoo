@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "1.0.1");
+define("THEME_VERSION", "1.0.2");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -108,6 +108,8 @@ function contact(){
         $website = "//t.me/";
       }elseif($key == "email"){
         $website = "mailto:";
+      }elseif($key == "netease-music"){
+        $website = "//music.163.com/#/user/home?id=";
       }
       print_r('<a target ="_blank" href="'.$website.$value.'"><button class="mdui-btn mdui-btn-icon mdui-ripple"><i class="iconfont icon-'.$key.'"></i></button></a>');
     }
@@ -140,14 +142,14 @@ function bgUrl(){
   .page-img{background-image: url("<?php staticFiles('assets/images/loading.gif'); ?>");}
   .article-pic{background-image: url("<?php staticFiles('assets/images/loading.gif'); ?>");}</style><?php
   if(empty($setting) && empty($setting_phone)){
-    ?><style>.body{background-image: url("<?php staticFiles('assets/images/bg.png'); ?>");}</style><?php
+    ?><style>.background{background-image: url("<?php staticFiles('assets/images/bg.png'); ?>");}</style><?php
   }else{
     if(empty($setting_phone)){
-      echo "<style>.body{background-image: url('$setting');}@media(max-width: 900px){.body{background-image: url('$setting');}}</style>";
+      echo "<style>.background{background-image: url('$setting');}@media(max-width: 900px){.background{background-image: url('$setting');}}</style>";
     }elseif(empty($setting)){
-      echo "<style>.body{background-image: url('$setting_phone');}@media(max-width: 900px){.body{background-image: url('$setting_phone');}}</style>";
+      echo "<style>.background{background-image: url('$setting_phone');}@media(max-width: 900px){.background{background-image: url('$setting_phone');}}</style>";
     }else{
-      echo "<style>.body{background-image: url('$setting');}@media(max-width: 900px){.body{background-image: url('$setting_phone');}}</style>";
+      echo "<style>.background{background-image: url('$setting');}@media(max-width: 900px){.background{background-image: url('$setting_phone');}}</style>";
     }
   }
 }
@@ -238,16 +240,11 @@ function otherPjax(){
     if(!empty($setting_baidu)){
       $output_baidu = "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search]);}";
     }
-    echo "<script>function otherPjax() {".$output_baidu.$setting."}</script>";
+    echo $output_baidu.$setting;
   }
 }
 
-/** 
- * 
- * 既然你能找到这里，那么我想说，保留版权是对作者的尊重。
- * 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。
-*/
-
+/* 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。*/
 function Footer(){
   $setting = Helper::options()->Footer;
   $setting_beian = Helper::options()->beian;
@@ -265,7 +262,6 @@ function Footer(){
 function describe(){
   $setting = Helper::options()->describe;
   if(empty($setting)){
-    echo "<script src='https://v1.hitokoto.cn/?encode=js&select=%23hitokoto' defer></script>";
     echo '<p id="hitokoto">:D 获取中...</p>';
   }else{
     echo '<p>'.$setting.'</p>';
@@ -293,7 +289,7 @@ function get_post_view($archive){
       $db->query($db->update('table.contents')->rows(array('views' => (int) $row['views'] + 1))->where('cid = ?', $cid));
       array_push($views, $cid);
       $views = implode(',', $views);
-      Typecho_Cookie::set('extend_contents_views', $views); //记录查看cookie
+      Typecho_Cookie::set('extend_contents_views', $views);
     }
   }
   echo $row['views'];
@@ -453,11 +449,6 @@ function favicon(){
   }else{
     echo $setting;
   }
-}
-
-function themeUpdate(){
-  $output = 'https://api.qwq.asia/typecho/theme/?s='.$_SERVER['HTTP_HOST'].'&v='.THEME_VERSION;
-  return $output;
 }
 
 function themeOptions($name) {

@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 $primaryColor = $this->options->primaryColor;
@@ -35,7 +35,8 @@ $accentColor = $this->options->accentColor;
   <?php $this->header('commentReply='); bgUrl(); ?>
 </head>
 
-<body class="mdui-theme-primary-<?php echo $primaryColor; ?> mdui-theme-accent-<?php echo $accentColor; ?> body mdui-appbar-with-toolbar" id="body">
+<body class="mdui-theme-primary-<?php echo $primaryColor; ?> mdui-theme-accent-<?php echo $accentColor; ?> mdui-appbar-with-toolbar " id="body">
+  <div class="background"></div>
   <div class="mdui-appbar mdui-shadow-0 mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar">
       <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#menu', swipe: 'true', overlay: 'false'}">
@@ -51,16 +52,17 @@ $accentColor = $this->options->accentColor;
         </form>
         <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
       </div>
+      <button onclick="brightness();" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
     </div>
   </div>
-  <div class="mdui-drawer mdui-drawer-close mdui-color-white mdui-drawer-full-height" id="menu">
+  <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height" id="menu">
     <div class="drawer-img"><img class="mdui-img-circle" src="<?php logo(); ?>" /></div>
     <div class="drawer-contact">
       <?php contact(); ?>
     </div>
     <div class="mdui-divider"></div>
     <ul class="mdui-list" mdui-collapse="{accordion: true}">
-      <a href="/index.php">
+      <a no-go href="<?php Helper::options()->siteUrl() ?>">
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">home</i>
           <div class="mdui-list-item-content">首页</div>
         </li>
