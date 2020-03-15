@@ -253,9 +253,9 @@ function Footer(){
   }
   if(!empty($setting)){ 
     $setting = '<p>'.$setting.'</p>';
-    echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
+    echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="https://github.com/bhaoo/cuckoo">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
   }else{
-    echo '<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>';
+    echo '<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="https://github.com/bhaoo/cuckoo">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>';
   }
 }
 
