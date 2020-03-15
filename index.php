@@ -6,7 +6,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 1.0.1
+ * @version 1.0.2
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -81,7 +81,11 @@ if ($sticky && $this->is('index') || $this->is('front')) {
         <?php $this->pageLink('下一页', 'next'); ?>
       </div>
 <?php else : ?>
-  暂无文章
+    <div class="mdui-card page-card mdui-shadow-10">
+      <div class="archive-title">
+        <p>暂无文章</p>
+      </div>
+    </div>
 <?php endif; ?>
   </div>
 </div>

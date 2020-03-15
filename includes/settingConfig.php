@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -36,28 +36,7 @@ class Cuckoo_Setting
     echo '<script src="' . staticFiles('assets/js/mdui.min.js', 1) . '"></script>' .
       '<link rel="stylesheet" href="' . staticFiles('assets/css/setting.min.css', 1) . '" />' .
       '<script src="' . staticFiles('assets/js/jquery.min.js', 1) . '"></script>' .
-      '<script>
-      mdui.JQ("body").addClass("mdui-theme-primary-pink");
-      $(function () {  
-        $.ajax({  
-          url: "' . themeUpdate() . '",  
-          type: "GET",
-          dataType: "json",     
-          beforeSend: function() {
-            $("#verison").html("正在获取新版本中...");
-            $("#notice").html("正在获取公告中...");
-          }, 
-          error: function() {
-            $("#verison").html("新版本获取出错");
-            $("#notice").html("公告获取出错"); 
-          },   
-          success: function(data) {
-            $("#verison").html(data.version);
-            $("#notice").html(data.notice);
-          }
-        })
-      });
-      </script>';
+      '<script src="' . staticFiles('assets/js/setting.min.js', 1) . '"></script>';
 
 
     $string = '<div class="backgroud"></div>
@@ -83,6 +62,7 @@ class Cuckoo_Setting
         </div>
       </div>
     </div>
+    <div id="data" data-update="'.base64_encode('theme='.THEME_NAME.'&site='.$_SERVER['HTTP_HOST'].'&version='.THEME_VERSION.'&token='.md5('cuckoo@'.THEME_VERSION)).'"></div>
     <div class="mdui-table-fluid">
       <table class="mdui-table">
         <tbody>
