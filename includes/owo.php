@@ -41,7 +41,11 @@ class Smile {
   $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><span class="emoji-emoji mdui-btn mdui-card mdui-shadow-2" mdui-dialog-close>'.$text.'</span></a>';
   return $output;
  }
-
+ public static function AmashiroNatsukiEars($icon, $img) {
+    $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-AmashiroNatsukiEars mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/AmashiroNatsukiEars/'.$img, 1).'"></div></a>';
+    return $output;
+   }
+  
  public static function getOwO() {
   $getJson =file_get_contents(staticFiles('assets/json/owo.json', 1));
   $owoArray = json_decode($getJson, true);
@@ -80,6 +84,13 @@ class Smile {
     }
 	echo '</div>';
    }
+   elseif ($smileType == 'AmashiroNatsukiEars') {
+    echo '<div id="'.$owoName[$i].'" class="mdui-p-a-2">';
+	for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
+     echo self::AmashiroNatsukiEars($owoArray[$smileName]['content'][$to]['icon'], $owoArray[$smileName]['content'][$to]['img']);
+    }
+	echo '</div>';
+	}
   }
  }
  
