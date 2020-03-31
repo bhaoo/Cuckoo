@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.1
+ * @version 1.0.3
  */
 
 require_once(__DIR__ ."/settingConfig.php");
@@ -74,7 +74,7 @@ function themeConfig($form) {
        'jsdelivr' =>   'JsDelivr',
        'cdn'      =>   '自定义 CDN'
       ],
-      'local'
+      'jsdelivr'
       ).$config->input('staticCdn', '自定义静态文件CDN', '在这里填写你自己的CDN(如 api.bhmo.cn)，以获取静态文件(需在上方选择自定义CDN)').
       $config->select('randimg', '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”',
       ['api.ohmyga.cn' =>   'OMGのAPI',
@@ -103,17 +103,26 @@ function themeConfig($form) {
         "link":"#",
         "icon":"view_carousel",
         "type":"3"
-       },{"type":"5"},{"type":"6"}]').
-      $config->textarea('otherPjax', 'PJAX回调', '在这里可以自行添加PJAX回调内容,引号需用“单引号”')
+       },{
+         "type":"5"
+       },{
+         "type":"6"
+       }]').
+      $config->textarea('otherPjax', 'PJAX回调', '在这里可以自行添加PJAX回调内容,引号需用“单引号”').
+      $config->input('tagCloud', '标签云', '请根据自己所需填写展示数量，输入“0”则不显示标签云', '0').
+      $config->textarea('articleCopy', '文章许可协议', '可根据自己所需修改为其他协议',
+      '<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>').
+      $config->text('<h2>自定义字体</h2>').
+      $config->input('fontUrl', '字体CSS链接', '填写即启用了自定义字体功能，不填写仅能使用部分字体').
+      $config->input('globalFont', '全局字体', '填写可使用的字体，否则无法显示所填字体').
+      $config->input('globalFontWeight', '全局字体粗细', '用于设置全局字体粗细，无需填写全局字体也可以进行设置').
+      $config->input('logoFont', 'LOGO字体', '填写可使用的字体，否则无法显示所填字体')
     ,2).
     $config->module(
       $config->isPluginAvailable('Links').
       $config->text('<h2>友链页面</h2>').
-      $config->input('linksCid', '友链页面CID', '在这里填写友链页面CID,请正确填写。').
       $config->input('linksIndexNum', '主页友链展示个数', '在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个', 0).
-      $config->textarea('linksDescribe', '友链页面介绍', '在这里填写友链页面的个人介绍(支持 html )，没有则不填').
       $config->text('<h2>B站追番列表</h2><small>（需要提前创建好独立页面哦～第一次加载会比较慢，缓存后速度就很快啦！注意：需要在隐私设置将追番追剧设置为公开，否则无法正常使用！）</small>').
-      $config->input('BilibiliUrl', '独立页面链接', '请填写完整链接 例如：https://xxx.xxx/xxx.html').
       $config->input('BilibiliUid', 'B站UID', '请认真填写好，记得检查别填错啦！').
       $config->input('CacheTime', '缓存时间', '单位为“秒”，不会填写可留空，默认为一天。').
       $config->input('Amout', '展示数量', '需要展示的番剧数量，默认为 100 个').

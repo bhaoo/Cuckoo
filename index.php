@@ -2,11 +2,13 @@
 
 /**
  * 「Cuckoo」—— 做一只“布咕鸟”
- * 作者：Bhao
+ * 作者：<a href="https://dwd.moe">Bhao</a>
+ * 主题文档：<a href="https://cuckoo.owo.show">https://cuckoo.owo.show</a>
+ * 项目地址：<a href="https://github.com/bhaoo/cuckoo">https://github.com/bhaoo/cuckoo</a>
  *
  * @package Cuckoo
  * @author Bhao
- * @version 1.0.2
+ * @version 1.0.3
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -15,7 +17,7 @@ $this->need('includes/header.php');
 $sticky = $this->options->sticky;
 if ($sticky && $this->is('index') || $this->is('front')) {
   $sticky_cids = explode(',', strtr($sticky, ' ', ','));
-  $sticky_html = "<span style='color:#ff4081'>[置顶] </span>";
+  $sticky_html = "<span id='sticky'>[置顶] </span>";
   $db = Typecho_Db::get();
   $pageSize = $this->options->pageSize;
   $select1 = $this->select()->where('type = ?', 'post');
