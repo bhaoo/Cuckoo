@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 $primaryColor = $this->options->primaryColor;
@@ -32,7 +32,7 @@ $accentColor = $this->options->accentColor;
   <link rel="stylesheet" href="<?php staticFiles('assets/css/atom-one-dark.min.css'); ?>">
   <script src="<?php staticFiles('assets/js/nprogress.min.js') ?>"></script>
   <script src="<?php staticFiles('assets/js/tocbot.min.js') ?>"></script>
-  <?php $this->header('commentReply='); bgUrl(); ?>
+  <?php fontFamily();$this->header('commentReply='); bgUrl(); ?>
 </head>
 
 <body class="mdui-theme-primary-<?php echo $primaryColor; ?> mdui-theme-accent-<?php echo $accentColor; ?> mdui-appbar-with-toolbar " id="body">
@@ -44,7 +44,7 @@ $accentColor = $this->options->accentColor;
       </a>
       <a href="<?php Helper::options()->siteUrl() ?>" class="mdui-typo-title"><?php $this->options->title(); ?></a>
       <div class="mdui-toolbar-spacer"></div>
-      <div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
+      <div class="mdui-textfield mdui-textfield-expandable mdui-float-right search">
         <button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></button>
         <form id="search" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
           <input class="mdui-textfield-input" type="text" id="s" name="s" placeholder="搜索一下" />
@@ -52,7 +52,8 @@ $accentColor = $this->options->accentColor;
         </form>
         <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
       </div>
-      <button onclick="brightness();" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
+      <button onclick="brightness()" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
+      <button onclick="tocBotton()" id="tocBotton" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">bookmark</i></button>
     </div>
   </div>
   <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height" id="menu">

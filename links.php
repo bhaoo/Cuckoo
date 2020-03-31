@@ -5,7 +5,7 @@
  * @package custom
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.1
+ * @version 1.0.3
  */
 
 $this->comments()->to($comments);
@@ -64,7 +64,8 @@ $this->need('includes/sidebar.php');
 ?>
   <div class="left">
     <div class="links-content">
-      <?php Links_Plugin::output("
+      <?php if(array_key_exists("Links", Typecho_Plugin::export()['activated'])){
+      Links_Plugin::output("
       <a class='links-url' href='{url}'>
         <div class='mdui-col-sm-6'>
           <div class='links-card mdui-shadow-10'>
@@ -73,10 +74,10 @@ $this->need('includes/sidebar.php');
             <div class='links-describe'>{description}</div>
           </div>
         </div>
-      </a>
-      "); 
+      </a>");}
     echo '</div>';
-    if($this->allow('comment')):?>
+    if(!$this->content == ""){echo '<div class="mdui-card page-card mdui-shadow-10 mdui-typo links-comments">'.parseContent(parseBiaoQing($this->content)).'</div>';}
+    if($this->allow('comment')): ?>
     <div id="<?php $this->respondId(); ?>" class="mdui-card page-card mdui-shadow-10 links-comments comment-id">
       <div class="comment-cancel">
       <button class='mdui-btn mdui-btn-icon' mdui-dialog="{target: '#emoji'}"><i class='mdui-icon material-icons'>insert_emoticon</i></button>
@@ -96,17 +97,17 @@ $this->need('includes/sidebar.php');
         <div class="mdui-textfield comment-left">
           <img src="<?php staticFiles('assets/images/avatar.png') ?>" class="mdui-icon mdui-img-circle comments-avatar"/>
           <label class="mdui-textfield-label">昵称</label>
-          <textarea class="mdui-textfield-input" type="text" name="author" value="<?php $this->remember('author'); ?>" required></textarea>
+          <input class="mdui-textfield-input" type="text" name="author" value="<?php $this->remember('author'); ?>" required></input>
         </div>
         <div class="mdui-textfield comment-right">
           <i class="mdui-icon material-icons">email</i>
           <label class="mdui-textfield-label" <?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>>邮箱</label>
-          <textarea class="mdui-textfield-input" id="email" type="email" name="mail" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>></textarea>
+          <input class="mdui-textfield-input" id="email" type="email" name="mail" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>></input>
         </div>
         <div class="mdui-textfield comment-middle">
           <i class="mdui-icon material-icons">web</i>
           <label class="mdui-textfield-label" <?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>>网址(选填)</label>
-          <textarea class="mdui-textfield-input" type="url" name="url" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>></textarea>
+          <input class="mdui-textfield-input" type="url" name="url" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>></input>
         </div>
         <?php endif; ?>
         <center>

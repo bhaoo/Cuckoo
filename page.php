@@ -42,11 +42,9 @@ $this->need('includes/header.php'); ?>
         </div>
       <?php } ?>
       <div class="article-page mdui-typo">
-        <?php echo parsePicture(parseBiaoQing($this->content)); ?>
-        <div class="article-cc">
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">
-            知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
-          </a>
+        <?php echo parseContent(parseBiaoQing($this->content)); ?>
+        <div class="article-copy">
+          <?php echo $this->options->articleCopy ?>
         </div>
       </div>
     </div>

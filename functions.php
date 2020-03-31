@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "1.0.2");
+define("THEME_VERSION", "1.0.3");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -48,7 +48,7 @@ function themeInit($archive){
     $qq = str_replace('@qq.com','',$email);
     $sjtx = 'mm';
     if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4) {
-      $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+      $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
     }else{
       $avatar = $host.$hash.'?d='.$sjtx;
     }
@@ -63,14 +63,6 @@ function logo(){
   if(empty($setting)){
     staticFiles('assets/images/head.png');
   }else{
-    echo $setting;
-  }
-}
-
-/* 友链独立页个人介绍 */
-function linksDescribe(){
-  $setting = Helper::options()->linksDescribe;
-  if(!empty($setting)){
     echo $setting;
   }
 }
@@ -95,7 +87,7 @@ function contact(){
   if(is_array($output)){
     foreach($output as $key => $value){
       if($key == "qq"){
-        $website = "//wpa.qq.com/msgrd?uin=";
+        $website = "//wpa.qq.com/msgrd?v=3&site=qq&menu=yes&uin=";
       }elseif($key == "weibo"){
         $website = "//weibo.com/";
       }elseif($key == "bilibili"){
@@ -154,13 +146,29 @@ function bgUrl(){
   }
 }
 
-function parsePicture($content){
-  $pattern = '/<img(.*?)src="(.*?)"(.*?)>/s';
+function parseContent($content){
+  $pattern_1 = '/<img(.*?)src="(.*?)"(.*?)>/s';
   $pattern_2 = '/<a\b([^>]+?)\bhref="((?!'.addcslashes(Helper::options()->index, '/._-+=#?&').'|\#).*?)"([^>]*?)>/i';
-  $text = '<img${1}src="${2}" class="article-page-img">';
+  $pattern_3 = '/<table>(.*?)<\/table>/s';
+  $text_1 = '<img${1}src="${2}" class="article-page-img">';
   $text_2 = '<a\1href="\2"\3 target="_blank">';
-  $content = preg_replace($pattern, $text, $content);
+  $text_3 = '<div class="mdui-table-fluid"><table class="mdui-table">${1}</table></div>';
+  $content = preg_replace($pattern_1, $text_1, $content);
   $content = preg_replace($pattern_2, $text_2, $content);
+  $content = preg_replace($pattern_3, $text_3, $content);
+
+  $pattern_4 = '/\[pl.*?title="(.*?)".*?summary="(.*?)".*?\](.*?)\[\/pl\]/s';
+  $text_4 = '<div class="mdui-panel" mdui-panel>
+               <div class="mdui-panel-item">
+                 <div class="mdui-panel-item-header">
+                   <div class="mdui-panel-item-title">${1}</div>
+                   <div class="mdui-panel-item-summary">${2}</div>
+                   <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                 </div>
+                 <div class="mdui-panel-item-body">${3}</div>
+               </div>
+             </div>';
+  $content = preg_replace($pattern_4, $text_4, $content);
   return $content;
 }
 
@@ -235,13 +243,10 @@ function getTheme() {
 function otherPjax(){
   $setting = Helper::options()->otherPjax;
   $setting_baidu = Helper::options()->statisticsBaidu;
-  if(!empty($setting)){
-    $output_baidu = "";
-    if(!empty($setting_baidu)){
-      $output_baidu = "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search]);}";
-    }
-    echo $output_baidu.$setting;
+  if(!empty($setting_baidu)){
+    echo "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search]);};";
   }
+  echo $setting;
 }
 
 /* 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。*/
@@ -253,19 +258,23 @@ function Footer(){
   }
   if(!empty($setting)){ 
     $setting = '<p>'.$setting.'</p>';
-    echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="https://github.com/bhaoo/cuckoo">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>'; 
+    echo $setting.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>'; 
   }else{
-    echo '<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br>Theme <a href="https://github.com/bhaoo/cuckoo">Cuckoo</a> by <a href="https://dwd.moe/">Bhao</a>｜Powered By <a href="http://www.typecho.org">Typecho</a></p>';
+    echo '<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$setting_beian.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
   }
 }
 
 function describe(){
-  $setting = Helper::options()->describe;
-  if(empty($setting)){
-    echo '<p id="hitokoto">:D 获取中...</p>';
-  }else{
-    echo '<p>'.$setting.'</p>';
-  }
+  echo (Helper::options()->describe) ? '<p>'.Helper::options()->describe.'</p>' : '<p id="hitokoto">:D 获取中...</p>';
+}
+
+function fontFamily(){
+  static $output;
+  $output .= (Helper::options()->fontUrl) ? '<link rel="stylesheet" href="'.Helper::options()->fontUrl.'">' : '';
+  $output .= (Helper::options()->globalFont) ? '<style>body{font-family:'.Helper::options()->globalFont.'}</style>' : '';
+  $output .= (Helper::options()->globalFontWeight) ? '<style>body{font-weight:'.Helper::options()->globalFontWeight.'}</style>' : '';
+  $output .= (Helper::options()->logoFont) ? '<style>.mdui-appbar .mdui-typo-title{font-family:'.Helper::options()->logoFont.'}</style>' : '';
+  echo $output;
 }
 
 function get_post_view($archive){
@@ -301,7 +310,7 @@ function get_comment_avatar($moe=NULL){
   $email = strtolower($moe);
   $qq = str_replace('@qq.com','',$email);
   if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
-   $avatar = 'https://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+   $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
   }else{
    $avatar = $host.'/'.$hash.'?s=100';
   }
