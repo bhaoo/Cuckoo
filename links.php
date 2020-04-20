@@ -5,7 +5,7 @@
  * @package custom
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 $this->comments()->to($comments);
@@ -37,7 +37,7 @@ function threadedComments($comments, $options) {
       <img class="mdui-img-circle" src="<?php get_comment_avatar($comments->mail); ?>"/>
     </div>
     <?php get_comment_prefix($comments->mail); if($comments->authorId == $comments->ownerId){ ?>
-      <img src="<?php staticFiles('assets/images/grade/author.png') ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}"/>
+      <img src="<?php staticFiles('images/grade/author.png') ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}"/>
     <?php } ?>
   </div>
   <div class="mdui-card-header-title mdui-typo comment-author"><?php $comments->author(); ?><?php getBrowser($comments->agent); getOs($comments->agent); ?></div>
@@ -95,7 +95,7 @@ $this->need('includes/sidebar.php');
         </div>
         <?php else: ?>
         <div class="mdui-textfield comment-left">
-          <img src="<?php staticFiles('assets/images/avatar.png') ?>" class="mdui-icon mdui-img-circle comments-avatar"/>
+          <img src="<?php staticFiles('images/avatar.png') ?>" class="mdui-icon mdui-img-circle comments-avatar"/>
           <label class="mdui-textfield-label">昵称</label>
           <input class="mdui-textfield-input" type="text" name="author" value="<?php $this->remember('author'); ?>" required></input>
         </div>

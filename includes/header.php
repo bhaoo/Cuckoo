@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 $primaryColor = $this->options->primaryColor;
@@ -24,14 +24,14 @@ $accentColor = $this->options->accentColor;
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
   <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->title(); ?></title>
   <link rel="shortcut icon" href="<?php favicon() ?>" /> 
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/mdui.min.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/iconfont.min.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/tocbot.min.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/cuckoo.min.css'); ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/nprogress.min.css'); ?>">
-  <link rel="stylesheet" href="<?php staticFiles('assets/css/atom-one-dark.min.css'); ?>">
-  <script src="<?php staticFiles('assets/js/nprogress.min.js') ?>"></script>
-  <script src="<?php staticFiles('assets/js/tocbot.min.js') ?>"></script>
+  <link rel="stylesheet" href="<?php staticFiles('css/mdui.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/iconfont.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/tocbot.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/cuckoo.min.css'); ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/nprogress.min.css'); ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/atom-one-dark.min.css'); ?>">
+  <script src="<?php staticFiles('js/nprogress.min.js') ?>"></script>
+  <script src="<?php staticFiles('js/tocbot.min.js') ?>"></script>
   <?php fontFamily();$this->header('commentReply='); bgUrl(); ?>
 </head>
 

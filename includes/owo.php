@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.0
+ * @version 1.0.4
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
@@ -23,17 +23,17 @@ class Smile {
  }
  
  public static function tieba($icon, $img) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-tieba mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/tieba/'.$img, 1).'"></img></div></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-tieba mdui-card mdui-btn"><img src="'.staticFiles('images/OwO/tieba/'.$img, 1).'"></img></div></a>';
   return $output;
  }
  
  public static function huaji($icon, $img) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-hj mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/huaji/'.$img, 1).'"></div></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-hj mdui-card mdui-btn"><img src="'.staticFiles('images/OwO/huaji/'.$img, 1).'"></div></a>';
   return $output;
  }
  
  public static function qwq($icon, $img) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-qwq mdui-card mdui-btn"><img src="'.staticFiles('assets/images/OwO/qwq/'.$img, 1).'"></div></a>';
+  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-qwq mdui-card mdui-btn"><img src="'.staticFiles('images/OwO/qwq/'.$img, 1).'"></div></a>';
   return $output;
  }
  
@@ -43,7 +43,7 @@ class Smile {
  }
 
  public static function getOwO() {
-  $getJson =file_get_contents(staticFiles('assets/json/owo.json', 1));
+  $getJson =file_get_contents(staticFiles('json/owo.json', 1));
   $owoArray = json_decode($getJson, true);
   $owoName = array_keys($owoArray);
   for ($i=0; $i<count($owoName); $i++) {
@@ -84,7 +84,7 @@ class Smile {
  }
  
  public static function getTitle() {
-  $getJson =file_get_contents(staticFiles('assets/json/owo.json', 1));
+  $getJson =file_get_contents(staticFiles('json/owo.json', 1));
   $owoArray = json_decode($getJson, true);
   $owoName = array_keys($owoArray);
   for ($i=0; $i<count($owoName); $i++) {

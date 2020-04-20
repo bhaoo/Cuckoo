@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 require_once(__DIR__ ."/settingConfig.php");
@@ -72,6 +72,7 @@ function themeConfig($form) {
       $config->select('staticFiles', '静态文件源', '推荐选择 “JsDelivr源”',
       ['local'    =>   '本地',
        'jsdelivr' =>   'JsDelivr',
+       '9jojo'    =>   '9JOJO',
        'cdn'      =>   '自定义 CDN'
       ],
       'jsdelivr'
@@ -108,6 +109,8 @@ function themeConfig($form) {
        },{
          "type":"6"
        }]').
+      $config->textarea('textareaBG', '评论框侧边图', '输入图片地址即可，默认为藤原书记哦！').
+      $config->textarea('brightTime', '定时开/关暗色模式', '填写格式(24H)：开启时间,关闭时间,输出信息 默认为空即为不开启 例: 22,6,深色模式开启').
       $config->textarea('otherPjax', 'PJAX回调', '在这里可以自行添加PJAX回调内容,引号需用“单引号”').
       $config->input('tagCloud', '标签云', '请根据自己所需填写展示数量，输入“0”则不显示标签云', '0').
       $config->textarea('articleCopy', '文章许可协议', '可根据自己所需修改为其他协议',
