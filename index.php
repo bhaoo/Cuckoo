@@ -8,7 +8,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 1.0.3
+ * @version 1.0.4
  * @link https://dwd.moe
  * @date 2020-02-02
  */
