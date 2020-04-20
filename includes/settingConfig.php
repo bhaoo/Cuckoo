@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -32,11 +32,11 @@ class Cuckoo_Setting
 
   public function themePanel()
   {
-    echo '<link rel="stylesheet" href="' . staticFiles('assets/css/mdui.min.css', 1) . '" />';
-    echo '<script src="' . staticFiles('assets/js/mdui.min.js', 1) . '"></script>' .
-      '<link rel="stylesheet" href="' . staticFiles('assets/css/setting.min.css', 1) . '" />' .
-      '<script src="' . staticFiles('assets/js/jquery.min.js', 1) . '"></script>' .
-      '<script src="' . staticFiles('assets/js/setting.min.js', 1) . '"></script>';
+    echo '<link rel="stylesheet" href="' . staticFiles('css/mdui.min.css', 1) . '" />';
+    echo '<script src="' . staticFiles('js/mdui.min.js', 1) . '"></script>' .
+      '<link rel="stylesheet" href="' . staticFiles('css/setting.min.css', 1) . '" />' .
+      '<script src="' . staticFiles('js/jquery.min.js', 1) . '"></script>' .
+      '<script src="' . staticFiles('js/setting.min.js', 1) . '"></script>';
 
 
     $string = '<div class="backgroud"></div>

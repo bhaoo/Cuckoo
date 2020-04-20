@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "1.0.3");
+define("THEME_VERSION", "1.0.4");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -48,7 +48,7 @@ function themeInit($archive){
     $qq = str_replace('@qq.com','',$email);
     $sjtx = 'mm';
     if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4) {
-      $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+      $avatar = '//q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
     }else{
       $avatar = $host.$hash.'?d='.$sjtx;
     }
@@ -59,23 +59,17 @@ function themeInit($archive){
 
 /* 个人头像 */
 function logo(){
-  $setting = Helper::options()->logoUrl;
-  if(empty($setting)){
-    staticFiles('assets/images/head.png');
-  }else{
-    echo $setting;
-  }
+  echo (Helper::options()->logoUrl) ?  Helper::options()->logoUrl : staticFiles('images/head.png',1);
 }
 
 /* 判断是否为好丽友 */
 function get_comment_prefix($mail){
   $db = Typecho_Db::get();
   $prefix = $db->getPrefix();
-  $result = $db->fetchAll($db->query("SHOW TABLES LIKE '".$prefix."links'"));
-  if('1' == count($result)){
+  if(array_key_exists('Links', Typecho_Plugin::export()['activated'])){
     $number = $db->fetchAll($db->query("SELECT user FROM ".$prefix."links WHERE user = '$mail'"));
     if($number){
-      ?><img src="<?php staticFiles('assets/images/grade/friend.png'); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
+      ?><img src="<?php staticFiles('images/grade/friend.png'); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
     }
   }
 }
@@ -113,9 +107,11 @@ function staticFiles($content, $type = 0){
   $setting = Helper::options()->staticFiles;
   $setting_cdn = Helper::options()->staticCdn;
   if($setting == 'local') {
-    $output = Helper::options()->themeUrl.'/'.$content;
+    $output = Helper::options()->themeUrl.'/assets/'.$content;
   }elseif($setting == 'jsdelivr') {
-    $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/'.$content;
+    $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+  }elseif($setting == '9jojo') {
+    $output = '//cdn.9jojo.cn/Cuckoo/'.THEME_VERSION.'/'.$content;
   }elseif($setting == 'cdn') {
     $output = $setting_cdn.'/'.$content;
   }
@@ -130,11 +126,12 @@ function staticFiles($content, $type = 0){
 function bgUrl(){
   $setting = Helper::options()->bgUrl;
   $setting_phone = Helper::options()->bgphoneUrl;
-  ?><style>.comment-textarea{background-image: url("<?php staticFiles('assets/images/qh.png'); ?>");}
-  .page-img{background-image: url("<?php staticFiles('assets/images/loading.gif'); ?>");}
-  .article-pic{background-image: url("<?php staticFiles('assets/images/loading.gif'); ?>");}</style><?php
+  $textareaBG = (Helper::options()->textareaBG) ?  Helper::options()->textareaBG : staticFiles('images/qh.png',1);
+  ?><style>.comment-textarea{background-image: url("<?php echo $textareaBG ?>");}
+  .page-img{background-image: url("<?php staticFiles('images/loading.gif'); ?>");}
+  .article-pic{background-image: url("<?php staticFiles('images/loading.gif'); ?>");}</style><?php
   if(empty($setting) && empty($setting_phone)){
-    ?><style>.background{background-image: url("<?php staticFiles('assets/images/bg.png'); ?>");}</style><?php
+    ?><style>.background{background-image: url("<?php staticFiles('images/bg.png'); ?>");}</style><?php
   }else{
     if(empty($setting_phone)){
       echo "<style>.background{background-image: url('$setting');}@media(max-width: 900px){.background{background-image: url('$setting');}}</style>";
@@ -156,7 +153,6 @@ function parseContent($content){
   $content = preg_replace($pattern_1, $text_1, $content);
   $content = preg_replace($pattern_2, $text_2, $content);
   $content = preg_replace($pattern_3, $text_3, $content);
-
   $pattern_4 = '/\[pl.*?title="(.*?)".*?summary="(.*?)".*?\](.*?)\[\/pl\]/s';
   $text_4 = '<div class="mdui-panel" mdui-panel>
                <div class="mdui-panel-item">
@@ -169,6 +165,9 @@ function parseContent($content){
                </div>
              </div>';
   $content = preg_replace($pattern_4, $text_4, $content);
+  $pattern_5 = '/\[bili.*?av="(.*?)".*?bv="(.*?)".*?\]/s';
+  $text_5 = '<div class="bili-div"><iframe src="//player.bilibili.com/player.html?aid=${1}&bvid=${2}&high_quality=1" class="bili-player" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></div>';
+  $content = preg_replace($pattern_5, $text_5, $content);
   return $content;
 }
 
@@ -240,13 +239,12 @@ function getTheme() {
   return $themeName;
 }
 
-function otherPjax(){
-  $setting = Helper::options()->otherPjax;
-  $setting_baidu = Helper::options()->statisticsBaidu;
-  if(!empty($setting_baidu)){
-    echo "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search]);};";
-  }
-  echo $setting;
+function otherJs(){
+  $pjax = (Helper::options()->otherPjax) ? "$(document).on('pjax:complete',function(){".Helper::options()->otherPjax."});" : '';
+  $baidu = (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
+  $brightTime = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
+  if(!empty($brightTime)){$brightTime_msg = "var nowHour=new Date().getHours();if(nowHour>".$brightTime[0]." || nowHour<".$brightTime[1]."){darkContent('".$brightTime[2]."')}";}
+  if(!empty($baidu) || !empty($pjax) || !empty($brightTime)){echo "<script>".$baidu.$pjax.$brightTime_msg."</script>";}
 }
 
 /* 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。*/
@@ -310,7 +308,7 @@ function get_comment_avatar($moe=NULL){
   $email = strtolower($moe);
   $qq = str_replace('@qq.com','',$email);
   if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
-   $avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+   $avatar = '//q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
   }else{
    $avatar = $host.'/'.$hash.'?s=100';
   }
@@ -454,7 +452,7 @@ function getBrowser($agent) {
 function favicon(){
   $setting = Helper::options()->favicon;
   if(empty($setting)){
-    staticFiles('assets/images/favicon.ico');
+    staticFiles('images/favicon.ico');
   }else{
     echo $setting;
   }
@@ -470,6 +468,14 @@ function themeOptions($name) {
   }
 
   return ($name === NULL) ? $themeOptions : (isset($themeOptions[$name]) ? $themeOptions[$name] : NULL);
+}
+
+function readingTime($cid){
+  $db=Typecho_Db::get ();
+  $arr=$db->fetchRow($db->select('table.contents.text')->from('table.contents')->where('table.contents.cid=?',$cid)->order('table.contents.cid',Typecho_Db::SORT_ASC)->limit(1));
+  $text = preg_replace("/[^\x{4e00}-\x{9fa5}]/u", "", $arr['text']);
+  $text_word = mb_strlen($text,'utf-8');
+  echo '约 '.ceil($text_word / 400).' 分钟';
 }
 
 function otherMenu(){
