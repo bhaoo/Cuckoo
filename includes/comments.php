@@ -12,7 +12,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.4
+ * @version 1.0.5
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -51,7 +51,10 @@ function threadedComments($comments, $options)
     </div>
     <div class="mdui-card-header-title mdui-typo comment-author"><?php $comments->author(); ?><?php getBrowser($comments->agent);
                                                                                               getOs($comments->agent); ?></div>
-    <div class="mdui-card-header-subtitle"><?php $comments->date('Y-m-d H:i'); ?></div>
+    <div class="mdui-card-header-subtitle"><?php $comments->date('Y-m-d H:i'); ?><?php if ('waiting' == $comments->status) { ?>
+     <br>
+     <div class="mdui-text-color-red-400 comment-waiting" style="font-weight:bold;">您的评论正在等待审核</div>
+    <?php } ?></div>
     <div class="mdui-card-menu">
       <?php $comments->reply('<button class="mdui-btn mdui-btn-dense mdui-ripple comment-reply mdui-text-color-theme-accent">回复</button>'); ?>
     </div>
@@ -112,7 +115,7 @@ if ($this->allow('comment')) :
   <div id="comment-list" class="mdui-card page-card">
     <div class="mdui-card-content">
       <div class="comment-count">
-        <h3>全部评论 <?php $this->commentsNum(_t('(暂无评论)'), _t('(共 1 条评论)'), _t('(共 %d 条评论)')); ?></h3>
+        <h3>全部评论 (<?php $this->commentsNum(_t('<span>暂无评论</span>'), _t('共 <span>1</span> 条评论'), _t('共 <span>%d</span> 条评论')); ?>)</h3>
       </div>
       <?php
       if ($comments->have()) :

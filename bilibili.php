@@ -5,10 +5,10 @@
  * @package custom
  * @author Seirin
  * @link https://qwq.best/
- * @version 1.0.3
+ * @version 1.0.5
  */
 
-
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $bilibiliUser = $this->options->BilibiliUid;
 $cacheTime = $this->options->CacheTime;
 $amout = $this->options->Amout;
