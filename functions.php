@@ -226,11 +226,12 @@ function randPic(){
 }
 
 function otherJs(){
-  if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs){
+  if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs || !Helper::options()->describe){
     $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
     $string = '<script>';
     $string .= (Helper::options()->statisticsBaidu) ? "var _hmt = _hmt || [];(function() {var hm = document.createElement('script');hm.src = 'https://hm.baidu.com/hm.js?". Helper::options()->statisticsBaidu ."';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);})();" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "qrcode(true);" : '';
+    $string .= (!Helper::options()->describe) ? "$.getJSON('https://v1.hitokoto.cn/?encode=json&select=%23hitokoto', function (json) { $('#hitokoto').html(json.hitokoto)});" : '';
     $string .= ($brightTime_arr) ? "var nowHour=new Date().getHours();if(nowHour>".$brightTime_arr[0]." || nowHour<".$brightTime_arr[1]."){darkContent('".$brightTime_arr[2]."')};" : '';
     $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
     $string .= '</script>';
@@ -250,10 +251,11 @@ function getTheme() {
 }
 
 function otherPjax(){
-  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax){
+  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax || !Helper::options()->describe){
     $string = "<script>$(document).on('pjax:end',function(){";
     $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.article-page').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
+    $string .= (!Helper::options()->describe) ? "$.getJSON('https://v1.hitokoto.cn/?encode=json&select=%23hitokoto', function (json) { $('#hitokoto').html(json.hitokoto)});" : '';
     $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
     $string .= "});</script>"; 
     echo $string;
