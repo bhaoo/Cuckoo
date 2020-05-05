@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.4
+ * @version 1.0.5
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,7 +19,7 @@ require_once("includes/setting.php");
 require_once("includes/owo.php");
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "1.0.4");
+define("THEME_VERSION", "1.0.5");
 
 function themeFields($layout) { 
   /* 文章封面设置  */
@@ -60,6 +60,10 @@ function themeInit($archive){
 /* 个人头像 */
 function logo(){
   echo (Helper::options()->logoUrl) ?  Helper::options()->logoUrl : staticFiles('images/head.png',1);
+}
+
+function otherCss(){
+  echo (Helper::options()->otherCss) ?  '<style>'.Helper::options()->otherCss.'</style>' : '';
 }
 
 /* 判断是否为好丽友 */
@@ -147,7 +151,7 @@ function parseContent($content){
   $pattern_1 = '/<img(.*?)src="(.*?)"(.*?)>/s';
   $pattern_2 = '/<a\b([^>]+?)\bhref="((?!'.addcslashes(Helper::options()->index, '/._-+=#?&').'|\#).*?)"([^>]*?)>/i';
   $pattern_3 = '/<table>(.*?)<\/table>/s';
-  $text_1 = '<img${1}src="${2}" class="article-page-img">';
+  $text_1 = '<a data-fancybox="images" class="fancybox" href="${2}"><img${1}src="${2}" class="article-page-img"></a>';
   $text_2 = '<a\1href="\2"\3 target="_blank">';
   $text_3 = '<div class="mdui-table-fluid"><table class="mdui-table">${1}</table></div>';
   $content = preg_replace($pattern_1, $text_1, $content);
@@ -221,10 +225,16 @@ function randPic(){
   print_r($output);
 }
 
-function statisticsBaidu(){
-  $setting = Helper::options()->statisticsBaidu;
-  if(!empty($setting)){
-    echo '<script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?'.$setting.'";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script>';
+function otherJs(){
+  if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs){
+    $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
+    $string = '<script>';
+    $string .= (Helper::options()->statisticsBaidu) ? "var _hmt = _hmt || [];(function() {var hm = document.createElement('script');hm.src = 'https://hm.baidu.com/hm.js?". Helper::options()->statisticsBaidu ."';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);})();" : '';
+    $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "qrcode(true);" : '';
+    $string .= ($brightTime_arr) ? "var nowHour=new Date().getHours();if(nowHour>".$brightTime_arr[0]." || nowHour<".$brightTime_arr[1]."){darkContent('".$brightTime_arr[2]."')};" : '';
+    $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
+    $string .= '</script>';
+    echo $string;
   }
 }
 
@@ -239,12 +249,15 @@ function getTheme() {
   return $themeName;
 }
 
-function otherJs(){
-  $pjax = (Helper::options()->otherPjax) ? "$(document).on('pjax:complete',function(){".Helper::options()->otherPjax."});" : '';
-  $baidu = (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
-  $brightTime = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
-  if(!empty($brightTime)){$brightTime_msg = "var nowHour=new Date().getHours();if(nowHour>".$brightTime[0]." || nowHour<".$brightTime[1]."){darkContent('".$brightTime[2]."')}";}
-  if(!empty($baidu) || !empty($pjax) || !empty($brightTime)){echo "<script>".$baidu.$pjax.$brightTime_msg."</script>";}
+function otherPjax(){
+  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax){
+    $string = "<script>$(document).on('pjax:end',function(){";
+    $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
+    $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.article-page').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
+    $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
+    $string .= "});</script>"; 
+    echo $string;
+  }
 }
 
 /* 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。*/

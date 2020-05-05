@@ -12,9 +12,10 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.4
+ * @version 1.0.5
  */
 
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('includes/header.php'); ?>
 <div class="container">
   <?php $this->need('includes/sidebar.php'); ?>
@@ -45,7 +46,7 @@ $this->need('includes/header.php'); ?>
       <?php $modified = intval((time() - $this->modified) / 86400);
             $created = intval((time() - $this->created) / 86400);
             if($modified > 30){echo "<div class='warning'><blockquote>请注意，本文编写于 $created 天前，最后修改于 $modified 天前，其中某些信息可能已经过时。</blockquote></div>";}
-            echo parseContent(parseBiaoQing($this->content)); ?>
+            echo parseBiaoQing(parseContent($this->content)); ?>
         <div class="article-copy">
           <?php echo $this->options->articleCopy ?>
         </div>

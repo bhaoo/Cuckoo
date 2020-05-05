@@ -8,11 +8,12 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 1.0.4
+ * @version 1.0.5
  * @link https://dwd.moe
  * @date 2020-02-02
  */
 
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('includes/header.php');
 $sticky = $this->options->sticky;
 if ($sticky && $this->is('index') || $this->is('front')) {

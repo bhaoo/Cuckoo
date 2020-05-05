@@ -11,9 +11,10 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.4
+ * @version 1.0.5
  */
 
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 require_once(__DIR__ ."/settingConfig.php");
 
 function themeConfig($form) {
@@ -109,7 +110,10 @@ function themeConfig($form) {
        },{
          "type":"6"
        }]').
+      $config->checkbox('qrcode', '跨设备阅读', '默认开启，将会在文章&页面导航栏中显示按钮', ['open' => '默认开启，将会在文章&页面导航栏中显示按钮'], ['open']).
       $config->textarea('textareaBG', '评论框侧边图', '输入图片地址即可，默认为藤原书记哦！').
+      $config->textarea('otherCss', '更多CSS', '输入你所想要添加的CS即可哦！').
+      $config->textarea('otherJs', '更多JS', '输入你所想要添加的JS即可哦！').
       $config->textarea('brightTime', '定时开/关暗色模式', '填写格式(24H)：开启时间,关闭时间,输出信息 默认为空即为不开启 例: 22,6,深色模式开启').
       $config->textarea('otherPjax', 'PJAX回调', '在这里可以自行添加PJAX回调内容,引号需用“单引号”').
       $config->input('tagCloud', '标签云', '请根据自己所需填写展示数量，输入“0”则不显示标签云', '0').
@@ -139,7 +143,7 @@ function themeBackup(){
   $sjdq=$db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:'.getTheme()));
   $ysj = $sjdq['value'];
   if(isset($_POST['type'])){ 
-    if($_POST["type"]=="备份模板数据"){
+    if($_POST["type"]=="备份数据"){
       if($db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'))){
         $update = $db->update('table.options')->rows(array('value'=>$ysj))->where('name = ?', 'theme:CuckooBackup');
         $updateRows= $db->query($update);
@@ -154,7 +158,7 @@ function themeBackup(){
         }
       }
     }
-    if($_POST["type"]=="还原模板数据"){
+    if($_POST["type"]=="还原数据"){
       if($db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'))){
         $sjdub=$db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'));
         $bsj = $sjdub['value'];
@@ -169,7 +173,7 @@ function themeBackup(){
               </script>';
       }
     }
-    if($_POST["type"] == "删除备份数据"){
+    if($_POST["type"] == "删除备份"){
       if($db->fetchRow($db->select()->from ('table.options')->where ('name = ?', 'theme:CuckooBackup'))){
         $delete = $db->delete('table.options')->where ('name = ?', 'theme:CuckooBackup');
         $deletedRows = $db->query($delete);
