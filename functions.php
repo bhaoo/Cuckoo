@@ -172,6 +172,8 @@ function parseBiaoQing($content){
    'parseHuajibiaoqingCallback', $content);
   $content = preg_replace_callback('/\:\s*(qwq\d{1,2})\s*\:/is',
    'parseqwqbiaoqingCallback', $content);
+  $content = preg_replace_callback('/\:\s*(AmashiroNatsukiEars\d{1,2})\s*\:/is',
+   'parseqwqbiaoqingCallback', $content);
   return $content;
  }
 function parsePaopaoBiaoqingCallback($match){
@@ -182,6 +184,9 @@ function parseHuajibiaoqingCallback($match){
  }
 function parseqwqbiaoqingCallback($match){
   return '<img class="emoji-img-qwq" src="'.staticFiles('/assets/images/OwO/qwq/'.$match[1].'.png').'">';
+ }
+function parseAmashiroNatsukiEarsbiaoqingCallback($match){
+  return '<img class="emoji-img-qwq" src="'.staticFiles('/assets/images/OwO/AmashiroNatsukiEars/'.$match[1].'.png').'">';
  }
 function commentsReply($comment) {
   $db = Typecho_Db::get();
