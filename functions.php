@@ -168,20 +168,20 @@ function parsePicture($content){
 function parseBiaoQing($content){
   $content = preg_replace_callback('/\:\s*(a|bishi|bugaoxing|guai|haha|han|hehe|heixian|huaji|huanxin|jingku|jingya|landeli|lei|mianqiang|nidongde|pen|shuijiao|suanshuang|taikaixin|tushe|wabi|weiqu|what|what|wuzuixiao|xiaoguai|xiaohonglian|xiaoniao|xiaoyan|xili|yamaidei|yinxian|yiwen|zhenbang|aixin|xinsui|bianbian|caihong|damuzhi|dangao|dengpao|honglingjin|lazhu|liwu|meigui|OK|shafa|shouzhi|taiyang|xingxingyueliang|yaowan|yinyue)\s*\:/is',
    'parsePaopaoBiaoqingCallback', $content);
-  $content = preg_replace_callback('/\:\s*(huaji1|huaji2|huaji3|huaji4|huaji5|huaji6|huaji7|huaji8|huaji9|huaji10|huaji11|huaji12|huaji13|huaji14|huaji15|huaji16|huaji17|huaji18|huaji19|huaji20|huaji21|huaji22|huaji23|huaji24|huaji25|huaji26|huaji27)\s*\:/is',
+  $content = preg_replace_callback('/\:\s*(huaji\d{1,2})\s*\:/is',
    'parseHuajibiaoqingCallback', $content);
-  $content = preg_replace_callback('/\:\s*(qwq1|qwq2|qwq3|qwq4|qwq5|qwq6|qwq7|qwq8|qwq9|qwq10|qwq11|qwq12|qwq13|qwq14|qwq15|qwq16|qwq17|qwq18|qwq19|qwq20|qwq21|qwq22|qwq23|qwq24|qwq25|qwq26)\s*\:/is',
+  $content = preg_replace_callback('/\:\s*(qwq\d{1,2})\s*\:/is',
    'parseqwqbiaoqingCallback', $content);
   return $content;
  }
 function parsePaopaoBiaoqingCallback($match){
-  return '<img class="emoji-img-tieba" src="'.Helper::options()->themeUrl.'/assets/images/OwO/tieba/'.$match[1].'.png">';
+  return '<img class="emoji-img-tieba" src="'.staticFiles('/assets/images/OwO/tieba/'.$match[1].'.png').'">';
  }
 function parseHuajibiaoqingCallback($match){
-  return '<img class="emoji-img-hj" src="'.Helper::options()->themeUrl.'/assets/images/OwO/huaji/'.$match[1].'.gif">';
+  return '<img class="emoji-img-hj" src="'.staticFiles('/assets/images/OwO/huaji/'.$match[1].'.gif').'">';
  }
 function parseqwqbiaoqingCallback($match){
-  return '<img class="emoji-img-qwq" src="'.Helper::options()->themeUrl.'/assets/images/OwO/qwq/'.$match[1].'.png">';
+  return '<img class="emoji-img-qwq" src="'.staticFiles('/assets/images/OwO/qwq/'.$match[1].'.png').'">';
  }
 function commentsReply($comment) {
   $db = Typecho_Db::get();
