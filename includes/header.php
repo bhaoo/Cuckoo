@@ -37,7 +37,7 @@ $accentColor = $this->options->accentColor;
   <?php fontFamily();$this->header('commentReply='); bgUrl(); otherCss();?>
 </head>
 
-<body class="mdui-theme-primary-<?php echo $primaryColor; ?> mdui-theme-accent-<?php echo $accentColor; ?>" id="body">
+<body class="mdui-theme-primary-<?php echo $primaryColor; ?> mdui-theme-accent-<?php echo $accentColor; ?> mdui-theme-layout-auto" id="body">
   <div class="background"></div>
   <div class="mdui-appbar mdui-shadow-0 mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar">
