@@ -267,7 +267,7 @@ function Footer(){
   $setting = Helper::options()->Footer;
   $setting_beian = Helper::options()->beian;
   if(!empty($setting_beian)){
-    $setting_beian = '｜<a href="//www.beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
+    $setting_beian = '｜<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>';
   }
   if(!empty($setting)){ 
     $setting = '<p>'.$setting.'</p>';
