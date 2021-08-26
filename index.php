@@ -1,24 +1,23 @@
 <?php
-
 /**
  * 「Cuckoo」—— 做一只“布咕鸟”
- * 作者：<a href="https://dwd.moe">Bhao</a>
  * 主题文档：<a href="https://cuckoo.owo.show">https://cuckoo.owo.show</a>
  * 项目地址：<a href="https://github.com/bhaoo/cuckoo">https://github.com/bhaoo/cuckoo</a>
+ * 感谢 娃子wazi 提供图片授权！
  *
  * @package Cuckoo
  * @author Bhao
- * @version 1.0.5
+ * @version 2.0.0
  * @link https://dwd.moe
  * @date 2020-02-02
  */
 
-if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-$this->need('includes/header.php');
+if(!defined('__TYPECHO_ROOT_DIR__')) exit;
+$this -> need('includes/header.php');
 $sticky = $this->options->sticky;
 if ($sticky && $this->is('index') || $this->is('front')) {
   $sticky_cids = explode(',', strtr($sticky, ' ', ','));
-  $sticky_html = "<span id='sticky'>[置顶] </span>";
+  $sticky_html = "<span class='mdui-text-color-theme' id='sticky'>[置顶] </span>";
   $db = Typecho_Db::get();
   $pageSize = $this->options->pageSize;
   $select1 = $this->select()->where('type = ?', 'post');
@@ -45,51 +44,64 @@ if ($sticky && $this->is('index') || $this->is('front')) {
   $this->setTotal($this->getTotal() - count($sticky_cids));
 }
 ?>
-<div class="container">
-  <?php $this->need('includes/sidebar.php'); ?>
-  <div class="left">
-    <?php if ($this->have()) :
-      while ($this->next()) :
-        if ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
-          <div class="mdui-card page-card mdui-shadow-10 page">
-            <div class="mdui-card-media">
-              <div class="page-img" data-original="<?php $wzimg = $this->fields->wzimg;if (!empty($wzimg)) { echo $wzimg;} else {echo randPic();} ?>"></div>
-            </div>
-            <div class="mdui-card-primary page-primary">
-              <div class="mdui-card-primary-title"><a href="<?php $this->permalink() ?>"><?php $this->sticky();$this->title(); ?></a></div>
-              <div class="mdui-card-primary-subtitle"><?php $this->date(); ?>｜<?php $this->commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
-            </div>
-            <div class="mdui-card-content page-content"><?php $this->excerpt(70, ' ...'); ?></div>
-            <div class="mdui-card-actions">
-              <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right mdui-text-color-theme">点击查看</button></a>
-            </div>
-          </div>
-        <?php
-        } elseif ($this->fields->articleType == "daily") { ?>
-          <div class="mdui-card page-card mdui-shadow-10 page">
-            <div class="mdui-card-primary">
-              <div class="daily-icon"><i class="mdui-icon material-icons">insert_comment</i></div>
-              <div class="mdui-card-primary-title daily-title"><a href="<?php $this->permalink() ?>"><?php $this->sticky();$this->title(); ?></a></div>
-              <div class="mdui-card-primary-subtitle daily-subtitle"><?php $this->date(); ?>｜<?php $this->commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
-            </div>
-            <div class="mdui-card-actions daily-button">
-              <a href="<?php $this->permalink() ?>"><button class="mdui-btn mdui-float-right mdui-text-color-theme">点击查看</button></a>
+<div class="index-container">
+  <div class="mdui-col-md-8">
+    <div class="article">
+<?php if ($this->have()) :
+  while ($this->next()) :
+    if ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
+      <a class="post" href="<?php $this -> permalink() ?>">
+        <div class="mdui-card index-card mdui-hoverable">
+          <div class="mdui-card-media index-img-media">
+            <div class="index-img" data-bg="<?php $wzimg = $this->fields->wzimg;if (!empty($wzimg)) {echo $wzimg;} else {echo randPic();} ?>"></div>
+            <div class="index-card-filter"></div>
+            <div class="mdui-card-media-covered">
+              <div class="mdui-card-primary index-primary">
+                <div class="mdui-card-primary-title"><?php $this->sticky();$this -> title(); ?></div>
+                <div class="mdui-card-primary-subtitle index-info"><?php $this -> date(); ?>
+                  ｜<?php $this -> commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
+                <div class="mdui-card-primary-subtitle index-subtitle"><?php $this -> excerpt(); ?></div>
+              </div>
             </div>
           </div>
+        </div>
+      </a>
+    <?php } elseif ($this->fields->articleType == "daily") { ?>
+      <div class="mdui-card index-card-daily mdui-hoverable post">
+        <div class="index-icon mdui-shadow-3">
+          <div></div>
+          <i class="mdui-icon material-icons">message</i>
+        </div>
+        <div class="mdui-card-primary">
+          <div class="mdui-card-primary-subtitle"><?php $this->sticky(); $this -> date('Y-m-d H:i:s'); ?></div>
+        </div>
+        <div class="mdui-card-content mdui-typo"><?php parseContent(parseBiaoQing($this->content)); ?></div>
+      </div>
       <?php
-        }
-      endwhile;
-      ?>
-      <div class="changePage">
-        <?php $this->pageLink('下一页', 'next'); ?>
-      </div>
-<?php else : ?>
-    <div class="mdui-card page-card mdui-shadow-10">
-      <div class="archive-title">
-        <p>暂无文章</p>
-      </div>
+    }
+    endwhile; ?>
     </div>
-<?php endif; ?>
+    <?php $this->pageLink('下一页', 'next'); ?>
+    <div class="changePage changePage-end">
+      <span class="infinite-scroll-request">加载中...</span>
+      <span class="infinite-scroll-last">到底了啦</span>
+    </div>
+    <?php if($this->getTotal() > 1){ ?>
+      <div class="changePage changePage-load">加载更多</div>
+    <?php }else{ ?>
+      <div class="changePage">到底了啦</div>
+    <?php } ?>
+    <?php else : ?>
+  <div class="mdui-card page-card mdui-shadow-10">
+    <div class="archive-title">
+      <p>暂无文章</p>
+    </div>
   </div>
+<?php endif;
+if ($this->_currentPage < ceil($this->getTotal() / $this->parameter->pageSize)) { ?>
+  <div class="checkLast"></div>
+<?php } ?>
+  </div>
+  <?php $this -> need('includes/sidebar.php'); ?>
 </div>
-<?php $this->need('includes/footer.php'); ?>
+<?php $this -> need('includes/footer.php'); ?>

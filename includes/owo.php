@@ -11,103 +11,107 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 1.0.5
+ * @version 2.0.0
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 class Smile {
 
- public static function owo($icon, $text) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.htmlspecialchars($text).'\');"><span class="emoji-text mdui-btn mdui-card mdui-shadow-2">'.$icon.'</span></a>';
-  return $output;
- }
- 
- public static function tieba($icon, $img) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-tieba mdui-card mdui-btn"><img src="'.staticFiles('images/OwO/tieba/'.$img, 1).'"></img></div></a>';
-  return $output;
- }
- 
- public static function huaji($icon, $img) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-hj mdui-card mdui-btn"><img src="'.staticFiles('images/OwO/huaji/'.$img, 1).'"></div></a>';
-  return $output;
- }
- 
- public static function qwq($icon, $img) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><div class="emoji-qwq mdui-card mdui-btn"><img src="'.staticFiles('images/OwO/qwq/'.$img, 1).'"></div></a>';
-  return $output;
- }
- 
- public static function emoji($icon, $text) {
-  $output = '<a no-go href="javascript:Smilies.grin(\''.$icon.'\');"><span class="emoji-emoji mdui-btn mdui-card mdui-shadow-2" mdui-dialog-close>'.$text.'</span></a>';
-  return $output;
- }
-
- public static function getOwO() {
-  $getJson =file_get_contents(staticFiles('json/owo.json', 1));
-  $owoArray = json_decode($getJson, true);
-  $owoName = array_keys($owoArray);
-  for ($i=0; $i<count($owoName); $i++) {
-   $smileName = $owoName[$i];
-   $smileType = $owoArray[$smileName]['type'];
-   if ($smileType == 'tieba') {
-    echo '<div id="'.$owoName[$i].'" class="mdui-p-a-2">';
-    for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
-     echo self::tieba($owoArray[$smileName]['content'][$to]['icon'], $owoArray[$smileName]['content'][$to]['img']);
+  public static function getTitle() {
+    $getJson =file_get_contents(__DIR__ .'/owo.json');
+    $owoArray = json_decode($getJson, true);
+    $owoName = array_keys($owoArray);
+    for ($i=0; $i<count($owoName); $i++) {
+      echo '<a href="#'.$owoName[$i].'" class="mdui-ripple" no-pgo>'.$owoName[$i].'</a>';
     }
-	echo '</div>';
-   }elseif ($smileType == 'owo') {
-    echo '<div id="'.$owoName[$i].'" class="mdui-p-a-2">';
-	for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
-     echo self::owo($owoArray[$smileName]['content'][$to]['icon'], $owoArray[$smileName]['content'][$to]['text']);
-    }
-	echo '</div>';
-   }elseif ($smileType == 'huaji') {
-    echo '<div id="'.$owoName[$i].'" class="mdui-p-a-2">';
-	for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
-     echo self::huaji($owoArray[$smileName]['content'][$to]['icon'], $owoArray[$smileName]['content'][$to]['img']);
-    }
-	echo '</div>';
-   }elseif ($smileType == 'qwq') {
-    echo '<div id="'.$owoName[$i].'" class="mdui-p-a-2">';
-	for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
-     echo self::qwq($owoArray[$smileName]['content'][$to]['icon'], $owoArray[$smileName]['content'][$to]['img']);
-    }
-	echo '</div>';
-   }elseif ($smileType == 'emoji') {
-    echo '<div id="'.$owoName[$i].'" class="mdui-p-a-2">';
-	for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
-     echo self::emoji($owoArray[$smileName]['content'][$to]['icon'], $owoArray[$smileName]['content'][$to]['text']);
-    }
-	echo '</div>';
-   }
   }
- }
- 
- public static function getTitle() {
-  $getJson =file_get_contents(staticFiles('json/owo.json', 1));
-  $owoArray = json_decode($getJson, true);
-  $owoName = array_keys($owoArray);
-  for ($i=0; $i<count($owoName); $i++) {
-   echo '<a href="#'.$owoName[$i].'" class="mdui-ripple" no-pgo>'.$owoName[$i].'</a>';
-  }
- }
- 
- public static function randIcon() {
-  $randNum = rand(0,10);
-  $iconName = array('tag_faces',
-   'face',
-   'favorite',
-   'insert_emoticon',
-   'mood',
-   'mood_bad',
-   'sentiment_satisfied',
-   'sentiment_very_dissatisfied',
-   'sentiment_very_satisfied',
-   'sentiment_dissatisfied',
-   'sentiment_neutral');
-   $output = $iconName[$randNum];
-  return $output;
- }
 
+  /**
+   * 获取表情包列表
+   */
+  public static function getOwOList() {
+    //打开文件
+    $owoFile = file_get_contents(__DIR__ .'/owo.json');
+    //判断是否有表情文件
+    if(!file_exists(__DIR__ .'/owo.json')) return false;
+    //判断是否标准 JSON
+    if (!is_array(json_decode($owoFile, true))) return false;
+    $owoJson = json_decode($owoFile, true);
+    $owo = [];
+    //键名
+    $owoNames = array_keys($owoJson);
+    for($owoNum=0; $owoNum<count($owoJson); $owoNum++) {
+      $owoName = $owoNames[$owoNum];
+
+      //如果是图片
+      if ($owoJson[$owoName]['type'] == 'picture') {
+        $owo[] = [
+          'id' => $owoName,
+          'name' => $owoJson[$owoName]['title'],
+          'css' => $owoJson[$owoName]['css'],
+          'type' => $owoJson[$owoName]['type'],
+          'dir' => staticFiles('images/OwO/'.$owoName.'/', 1),
+          'content' => $owoJson[$owoName]['content']
+        ];
+      }
+
+      //如果是文字/Emoji
+      if ($owoJson[$owoName]['type'] == 'text' || $owoJson[$owoName]['type'] == 'emoji') {
+        $owo[] = [
+          'id' => $owoName,
+          'name' => $owoJson[$owoName]['title'],
+          'type' => $owoJson[$owoName]['type'],
+          'content' => $owoJson[$owoName]['content']
+        ];
+      }
+
+      //如果是外部图片
+      if ($owoJson[$owoName]['type'] == 'external') {
+        $owo[] = [
+          'id' => $owoName,
+          'name' => $owoJson[$owoName]['title'],
+          'css' => $owoJson[$owoName]['css'],
+          'type' => 'picture',
+          'dir' => ($owoJson[$owoName]['url']) ?: false,
+          'content' => $owoJson[$owoName]['content']
+        ];
+      }
+    }
+
+    return $owo;
+  }
+
+  public static function getOwO() {
+    $owoArray = self::getOwOList();
+    $owoName = array_keys($owoArray);
+    for ($i=0; $i<count($owoName); $i++) {
+      $smileName = $owoName[$i];
+      $smileId = $owoArray[$smileName]['id'];
+      $smileType = $owoArray[$smileName]['type'];
+      if ($smileType == 'text') {
+        echo '<div id="'.$smileId.'" class="mdui-p-a-2">';
+        for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
+          $text = $owoArray[$smileName]['content'][$to]['text'];
+          echo '<a no-go href="javascript:Smilies.grin(\''.htmlspecialchars($text).'\');"><span class="emoji-text mdui-btn mdui-card mdui-shadow-2">'.$text.'</span></a>';
+        }
+        echo '</div>';
+      }elseif ($smileType == 'emoji') {
+        echo '<div id="'.$smileId.'" class="mdui-p-a-2">';
+        for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
+          $text = $owoArray[$smileName]['content'][$to]['text'];
+          echo '<a no-go href="javascript:Smilies.grin(\''.htmlspecialchars($text).'\');"><span class="emoji-emoji mdui-btn mdui-card mdui-shadow-2">'.$text.'</span></a>';
+        }
+        echo '</div>';
+      }elseif ($smileType == 'picture') {
+        echo '<div id="'.$smileId.'" class="mdui-p-a-2">';
+        for ($to=0; $to<count($owoArray[$smileName]['content']); $to++) {
+          $data = $owoArray[$smileName]['content'][$to]['data'];
+          $file = $owoArray[$smileName]['content'][$to]['file'];
+          echo '<a no-go href="javascript:Smilies.grin(\''.$data.'\');"><div class="emoji-bq mdui-card mdui-btn"><img src="'.$owoArray[$smileName]['dir'].$file.'"/></div></a>';
+        }
+        echo '</div>';
+      }
+    }
+  }
 }
