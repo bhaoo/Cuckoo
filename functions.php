@@ -412,8 +412,8 @@ function Footer(){
 // 友链插件
 function Links($type = 0) {
   if(array_key_exists("Links", Typecho_Plugin::export()['activated'])){
-    $shuffle = Helper::options()->linksshuffle;
     if($type == 0) {
+      // 友链页
       $Links = Links_Plugin::output("
       <a target='_blank' class='links-url' href='{url}'>
         <div class='mdui-col-sm-6'>
@@ -424,7 +424,13 @@ function Links($type = 0) {
           </div>
         </div>
       </a>");
+      for($i = 0; $i < count($Links); $i++){
+        echo $Links[$i];
+      }
     }elseif($type == 1) {
+      // 侧边栏
+      $shuffle = Helper::options()->linksshuffle;
+      $output_count = Helper::options()->linksIndexNum;
       $Links = Links_Plugin::output("
       <div class='mdui-col'>
         <a target='_blank' href='{url}'>
@@ -433,12 +439,15 @@ function Links($type = 0) {
           </li>
         </a>
       </div>");
-    }
-    if($shuffle && in_array('open', $shuffle)){
-      shuffle($Links);
-    }
-    for($i = 0; $i < count($Links); $i++){
-      echo $Links[$i];
+      if($shuffle && in_array('open', $shuffle)){
+        shuffle($Links);
+      }
+      if($output_count >= count($Links)){
+        $output_count = count($Links);
+      }
+      for($i = 0; $i < $output_count; $i++){
+        echo $Links[$i];
+      }
     }
   }
 }
