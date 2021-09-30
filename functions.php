@@ -392,10 +392,12 @@ function Footer(){
   if($gabeian){
     preg_match_all("/\d+/", $gabeian,$num);
     $num = $num[0][0];
+    $content .= (Helper::options()->gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
   }
   if($moebei){
     preg_match_all("/\d+/", $moebei,$num2);
     $num2 = $num2[0][0];
+    $content .= (Helper::options()->moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
   }
   if(($beian && $gabeian) | ($beian && $moebei) | ($gabeian && $moebei) | ($beian && $gabeian && $moebei)){
     $divide = '<span class="footer-divide">｜</span>';
@@ -403,9 +405,7 @@ function Footer(){
   }else{
     $divide = '｜';
   }
-  $content .= (Helper::options()->moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
   $content .= (Helper::options()->beian) ? $divide.'<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>' : '';
-  $content .= (Helper::options()->gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
   echo $footer.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
 }
 
