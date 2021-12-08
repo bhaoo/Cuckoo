@@ -437,7 +437,7 @@ function Links($type = 0) {
     if($shuffle && in_array('open', $shuffle)){
       shuffle($Links);
     }
-    for($i = 0; $i < count($Links); $i++){
+    for($i = 0; $i < count(array($Links)); $i++){
       echo $Links[$i];
     }
   }
