@@ -438,14 +438,11 @@ function Links($type = 0) {
     if($shuffle && in_array('open', $shuffle)){
       shuffle($Links);
     }
-    if ($link_limit < count($Links)){
-        for($i = 0; $i < $link_limit; $i++){
+    if ($link_limit > count($Links)){
+        $link_limit = count($Links);
+    }
+    for($i = 0; $i < $link_limit; $i++){
         echo $Links[$i];
-      }
-    }else{
-        for($i = 0; $i < count($Links); $i++){
-        echo $Links[$i];
-      }
     }
   }
 }
