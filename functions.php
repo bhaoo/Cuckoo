@@ -425,6 +425,7 @@ function Links($type = 0) {
         </div>
       </a>");
     }elseif($type == 1) {
+      $link_limit = Helper::options()->linksIndexNum;
       $Links = Links_Plugin::output("
       <div class='mdui-col'>
         <a target='_blank' href='{url}'>
@@ -437,8 +438,14 @@ function Links($type = 0) {
     if($shuffle && in_array('open', $shuffle)){
       shuffle($Links);
     }
-    for($i = 0; $i < count(array($Links)); $i++){
-      echo $Links[$i];
+    if ($link_limit < count($Links)){
+        for($i = 0; $i < $link_limit; $i++){
+        echo $Links[$i];
+      }
+    }else{
+        for($i = 0; $i < count($Links); $i++){
+        echo $Links[$i];
+      }
     }
   }
 }
