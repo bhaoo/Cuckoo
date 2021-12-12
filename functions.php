@@ -385,6 +385,7 @@ function otherMenu(){
 
 /* 拒绝【删除】或【修改】版权，若删除或修改将不会提供主题相关服务。*/
 function Footer(){
+  $content = '';
   $footer = Helper::options()->Footer;
   $gabeian = Helper::options()->gabeian;
   $moebei = Helper::options()->moebei;
@@ -397,15 +398,15 @@ function Footer(){
     preg_match_all("/\d+/", $moebei,$num2);
     $num2 = $num2[0][0];
   }
-  if(($beian && $gabeian) | ($beian && $moebei) | ($gabeian && $moebei) | ($beian && $gabeian && $moebei)){
+  if(($beian && $gabeian) || ($beian && $moebei) || ($gabeian && $moebei) || ($beian && $gabeian && $moebei)){
     $divide = '<span class="footer-divide">｜</span>';
-    $content = '<br><br>';
+    $content .= '<br><br>';
   }else{
     $divide = '｜';
   }
-  $content .= (Helper::options()->moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
-  $content .= (Helper::options()->beian) ? $divide.'<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>' : '';
-  $content .= (Helper::options()->gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
+  $content .= ($moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
+  $content .= ($beian) ? $divide.'<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>' : '';
+  $content .= ($gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
   echo $footer.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
 }
 
