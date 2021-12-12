@@ -413,6 +413,7 @@ function Footer(){
 function Links($type = 0) {
   if(array_key_exists("Links", Typecho_Plugin::export()['activated'])){
     $shuffle = Helper::options()->linksshuffle;
+    $link_limit = Helper::options()->linksIndexNum;
     if($type == 0) {
       $Links = Links_Plugin::output("
       <a target='_blank' class='links-url' href='{url}'>
@@ -437,7 +438,8 @@ function Links($type = 0) {
     if($shuffle && in_array('open', $shuffle)){
       shuffle($Links);
     }
-    for($i = 0; $i < count($Links); $i++){
+    $link_limit = (!$type || $link_limit > count($Links)) ? count($Links) : $link_limit;
+    for($i = 0; $i < $link_limit; $i++){
       echo $Links[$i];
     }
   }
