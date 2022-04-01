@@ -76,7 +76,7 @@ class Cuckoo_Setting {
     return $string;
   }
 
-  public function textarea($name, $display = NULL, $description = NULL, $default = NULL, $rows = NULL) {
+  public function textarea($name, $display = NULL, $description = NULL, $default = "", $rows = NULL) {
     $string = "";
     $rows = ($rows) ? ' rows="' . $rows . '" ' : NULL;
     $userOption = themeOptions($name);
