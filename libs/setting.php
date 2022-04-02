@@ -47,8 +47,7 @@ class Cuckoo_Setting {
     $this->form->addInput($$name);
     return $string;
   }
-
-  public function select($name, $display = NULL, $description = NULL, $options, $default = NULL, $desType = NULL) {
+  public function select($name, $options, $display = NULL, $description = NULL, $default = NULL, $desType = NULL) {
     $string = '';
     if ($desType === true) {
       $description = $description . '<br/>';
@@ -88,7 +87,7 @@ class Cuckoo_Setting {
     return $string;
   }
 
-  public function checkbox($name, $display = NULL, $description = NULL, $options, $default = NULL) {
+  public function checkbox($name, $options, $display = NULL, $description = NULL, $default = NULL) {
     $string = "";
     $description = ($description) ? '<div class="mdui-textfield-helper">' . $description . '</div>' : NULL;
     $userOptions = themeOptions($name);
