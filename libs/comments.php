@@ -186,7 +186,7 @@ class Cuckoo_Comments_Archive extends Widget_Abstract_Comments
    * @access protected
    * @return string
    */
-  protected function ___permalink()
+  protected function ___permalink() : string
   {
 
     if ($this->options->commentsPageBreak) {
@@ -230,7 +230,7 @@ class Cuckoo_Comments_Archive extends Widget_Abstract_Comments
    * @access protected
    * @return void
    */
-  protected function ___parentContent()
+  protected function ___parentContent() : ?array
   {
     return $this->parameter->parentContent;
   }
@@ -353,7 +353,7 @@ class Cuckoo_Comments_Archive extends Widget_Abstract_Comments
    * @param array $value 每行的值
    * @return array
    */
-  public function push(array $value)
+  public function push(array $value) : array
   {
     $value = $this->filter($value);
 
@@ -495,7 +495,7 @@ class Cuckoo_Comments_Archive extends Widget_Abstract_Comments
    * @access public
    * @return void
    */
-  public function alt()
+  public function alt(...$args)
   {
     $args = func_get_args();
     $num = func_num_args();
