@@ -106,45 +106,45 @@ function themeConfig($form) {
         $config->input('webTitle', '网站名称', '在这里填入网站名称就会在标题和顶部显示啦!。', 'Cuckoo').
         $config->input('describe', '个人描述', '在这里填写个人描述，以在侧边栏显示(若空则自动填充 一言)').
         $config->textarea('drawerContact', '联系方式', '在此填写您的联系方式，最多仅能展示6个。').
-        $config->select('primaryColor', '主题主色', '默认为 Pink',
-        ['red'        => 'Red',
-        'pink'        => 'Pink',
-        'purple'      => 'Purple',
-        'deep-purple' => 'Deep Purple',
-        'indigo'      => 'Indigo',
-        'blue'        => 'Blue',
-        'light-blue'  => 'Light Blue',
-        'cyan'        => 'Cyan',
-        'teal'        => 'Teal',
-        'green'       => 'Green',
-        'light-green' => 'Light Green',
-        'lime'        => 'Lime',
-        'yellow'      => 'Yellow',
-        'amber'       => 'Amber',
-        'orange'      => 'Orange',
-        'deep-orange' => 'Deep Orange',
-        'brown'       => 'Brown',
-        'grey'        => 'Grey',
-        'blue-grey'   => 'Blue Grey'
-        ], 'pink').
-        $config->select('accentColor', '主题强调色', '默认为 Pink',
-        ['red'        => 'Red',
-        'pink'        => 'Pink',
-        'purple'      => 'Purple',
-        'deep-purple' => 'Deep Purple',
-        'indigo'      => 'Indigo',
-        'blue'        => 'Blue',
-        'light-blue'  => 'Light Blue',
-        'cyan'        => 'Cyan',
-        'teal'        => 'Teal',
-        'green'       => 'Green',
-        'light-green' => 'Light Green',
-        'lime'        => 'Lime',
-        'yellow'      => 'Yellow',
-        'amber'       => 'Amber',
-        'orange'      => 'Orange',
-        'deep-orange' => 'Deep Orange'
-        ], 'pink').
+        $config->select('primaryColor',
+          ['red'        => 'Red',
+            'pink'        => 'Pink',
+            'purple'      => 'Purple',
+            'deep-purple' => 'Deep Purple',
+            'indigo'      => 'Indigo',
+            'blue'        => 'Blue',
+            'light-blue'  => 'Light Blue',
+            'cyan'        => 'Cyan',
+            'teal'        => 'Teal',
+            'green'       => 'Green',
+            'light-green' => 'Light Green',
+            'lime'        => 'Lime',
+            'yellow'      => 'Yellow',
+            'amber'       => 'Amber',
+            'orange'      => 'Orange',
+            'deep-orange' => 'Deep Orange',
+            'brown'       => 'Brown',
+            'grey'        => 'Grey',
+            'blue-grey'   => 'Blue Grey'
+          ], '主题主色', '默认为 Pink', 'pink').
+        $config->select('accentColor',
+          ['red'        => 'Red',
+            'pink'        => 'Pink',
+            'purple'      => 'Purple',
+            'deep-purple' => 'Deep Purple',
+            'indigo'      => 'Indigo',
+            'blue'        => 'Blue',
+            'light-blue'  => 'Light Blue',
+            'cyan'        => 'Cyan',
+            'teal'        => 'Teal',
+            'green'       => 'Green',
+            'light-green' => 'Light Green',
+            'lime'        => 'Lime',
+            'yellow'      => 'Yellow',
+            'amber'       => 'Amber',
+            'orange'      => 'Orange',
+            'deep-orange' => 'Deep Orange'
+          ],'主题强调色', '默认为 Pink', 'pink').
         $config->input('favicon', '网站图标', '在这里填入一个图片 URL 地址, 以加上一个 Favicon图标，没有则不填。').
         $config->input('logoUrl', 'LOGO', '在这里填入一个图片 URL 地址, 以加上一个 LOGO, 此LOGO也展示在侧边栏中。').
         $config->input('beian', '备案号', '无需输入a标签，只需输入备案号即可。').
@@ -160,28 +160,28 @@ function themeConfig($form) {
     <div id="menu">
       <div class="setting-title">更多设置</div>
       <div class="setting-content">
-        <?php echo $config->select('staticFiles', '静态文件源', '推荐选择 “JsDelivr源”',
-          ['local'    =>   '本地',
-            'jsdelivr' =>   'JsDelivr',
-            'cdn'      =>   '自定义 CDN'
-          ], 'local').
+        <?php echo $config->select('staticFiles',
+            ['local'    =>   '本地',
+              'jsdelivr' =>   'JsDelivr',
+              'cdn'      =>   '自定义 CDN'
+            ], '静态文件源', '推荐选择 “JsDelivr源”', 'local').
         $config->input('staticCdn', '自定义静态文件CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取静态文件(需在上方选择自定义CDN)').
-        $config->select('randimg', '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”',
+        $config->select('randimg',
           ['api.ohmyga.cn' =>   'OMGのAPI',
-           'local'         =>   '本地',
-           'cdn'           =>   '自定义 CDN',
-           '9jojo'         =>   '9JOJO'
-          ],'9jojo').
+            'local'         =>   '本地',
+            'cdn'           =>   '自定义 CDN',
+            '9jojo'         =>   '9JOJO'
+          ], '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”', '9jojo').
         $config->input('randimgCdn', '自定义随机文章图CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义CDN)').
-        $config->select('gravatar', 'Gravatar头像源', '在这里可以设置Gravatar头像源',
+        $config->select('gravatar',
           ['geekzu' => '极客族',
            'qiniu'  => '七牛',
            'cdn'    => '自定义 CDN'
-          ],'geekzu').
+          ], 'Gravatar头像源', '在这里可以设置Gravatar头像源','geekzu').
         $config->input('gravatarCdn', '自定义Gravatar头像源CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义CDN)').
         $config->input('sticky', '置顶文章', '置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔。').
         $config->input('statisticsBaidu', '百度统计', '仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"').
-        $config->checkbox('qrcode', '跨设备阅读', '默认开启，将会在文章&页面导航栏中显示按钮', ['open' => '默认开启，将会在文章&页面导航栏中显示按钮'], ['open']).
+        $config->checkbox('qrcode', ['open' => '默认开启，将会在文章&页面导航栏中显示按钮'], '跨设备阅读', '默认开启，将会在文章&页面导航栏中显示按钮', ['open']).
         $config->input('tagCloud', '标签云', '请根据自己所需填写展示数量，输入“0”则不显示标签云', '0').
         $config->textarea('brightTime', '定时开/关暗色模式', '填写格式(24H)：开启时间,关闭时间,输出信息 默认为空即为不开启 例: 22,6,深色模式开启').
         $config->textarea('Footer', '底部信息', '在这里填写的信息将在底部显示哦～').
@@ -227,7 +227,7 @@ function themeConfig($form) {
       <div class="setting-title">插件扩展</div>
       <?php $config->plugin('Links', '友链插件',
       $config->input('linksIndexNum', '主页友链展示个数', '在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个', 0).
-      $config->checkbox('linksshuffle', '是否打乱顺序展示', '默认开启，开启将会打乱顺序展示', ['open' => '默认开启，开启将会打乱顺序展示'], ['open'])).
+      $config->checkbox('linksshuffle', ['open' => '默认开启，开启将会打乱顺序展示'], '是否打乱顺序展示', '默认开启，开启将会打乱顺序展示', ['open'])).
       $config->page('Bilibili 追番', '需创建独立页面才会展示哦',
       $config->input('BilibiliUid', 'B站UID', '请认真填写好，记得检查别填错啦！').
       $config->input('CacheTime', '缓存时间', '单位为“秒”，不会填写可留空，默认为一天。').
