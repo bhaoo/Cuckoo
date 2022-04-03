@@ -8,18 +8,18 @@
   .setting-card-img{background-image: url("<?php staticFiles('images/yousa.png'); ?>");}
 </style>
 
-<body class="mdui-theme-primary-<?php echo Helper::options()->primaryColor; ?> mdui-theme-accent-<?php echo Helper::options()->accentColor; ?>">
+<body class="mdui-theme-primary-<?php echo Helper::options()->primaryColor; ?> mdui-theme-accent-<?php echo Helper::options()->accentColor; ?> mdui-drawer-body-left">
 <div class="background"><div class="index-filter"></div></div>
-<div class="mdui-appbar mdui-shadow-0 mdui-appbar-fixed">
+<div class="mdui-appbar mdui-appbar-fixed mdui-drawer-full-height mdui-appbar-inset mdui-shadow-0">
   <div class="mdui-toolbar">
-    <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '.drawer', swipe: 'true', overlay: 'false'}">
+    <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '.drawer', swipe: 'true'}">
       <i class="mdui-icon material-icons">menu</i>
     </a>
     <a class="mdui-typo-title">Cuckoo</a>
     <div class="mdui-toolbar-spacer"></div>
   </div>
 </div>
-<div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height drawer">
+<div class="mdui-drawer drawer">
   <div class="drawer-img"><img class="mdui-img-circle" src="<?php setting("logoUrl", "images/logo.jpg"); ?>" /></div>
   <div class="drawer-contact">
     <button onclick="brightness()" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
