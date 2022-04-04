@@ -27,10 +27,12 @@ $accentColor = $this->options->accentColor;
   <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->webTitle(); ?></title>
   <link rel="shortcut icon" href="<?php setting("favicon", "images/favicon.ico"); ?>" />
   <link rel="stylesheet" href="<?php staticFiles('css/mdui.min.css') ?>">
-  <link rel="stylesheet" href="<?php staticFiles('css/cuckoo.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/atom-one-dark.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/iconfont.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/tocbot.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/fancybox.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/cuckoo.min.css') ?>">
+  <script src="<?php staticFiles('js/tocbot.min.js') ?>"></script>
   <script src="<?php staticFiles('js/nprogress.min.js') ?>"></script>
   <?php fontFamily(); $this->header('antiSpam=&commentReply='); bgUrl(); otherCss();?>
 </head>
@@ -56,6 +58,7 @@ $accentColor = $this->options->accentColor;
       <button class="mdui-btn mdui-btn-icon qrcode" mdui-menu="{target: '#qrcode'}" mdui-tooltip="{content: '跨设备阅读'}"><i class="mdui-icon material-icons">devices</i></button>
       <div class="mdui-menu" id="qrcode" style="width: 170px;height: 170px;transform-origin: 100% 0px; position: fixed; text-align:center;"><div style='margin-top: 63px;' class="mdui-spinner mdui-spinner-colorful"></div></div>
       <button onclick="brightness()" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
+      <button onclick="tocBotton()" id="tocBotton" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">bookmark</i></button>
     </div>
   </div>
   <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height drawer">

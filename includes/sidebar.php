@@ -81,5 +81,14 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
     </ul>
   </div>
   <?php } ?>
+  <?php if ($this->is('single') && $this->fields->catalog == "true" && !$this->hidden) { ?>
+  <div class="mdui-card mdui-hoverable sidebar-module" id="toc">
+    <ul class="mdui-list">
+      <div class="sidebar-module-title">文章目录</div>
+      <li class="mdui-divider"></li>
+      <div class="toc"></div>
+    </ul>
+  </div>
+  <?php } ?>
 </div>
 <span class="mdui-text-color-theme"></span>
