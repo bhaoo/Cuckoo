@@ -11,8 +11,7 @@
  *
  * @author Bhao
  * @link https://dwd.moe/
- * @version 2.0.0
- * @date 2021-07-10
+ * @version 2.0.1
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
