@@ -32,7 +32,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
     $order .= " when $cid then $i";
     $select2->where('table.contents.cid != ?', $cid);
   }
-  if ($order) $select1->order(null, "(case cid$order end)");
+  if ($order) $select1->order("", "(case cid$order end)");
   if ($this->_currentPage == 1) foreach ($db->fetchAll($select1) as $sticky_post) {
     $sticky_post['sticky'] = $sticky_html;
     $this->push($sticky_post);
