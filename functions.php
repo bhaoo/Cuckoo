@@ -187,7 +187,7 @@ function randPic(){
   }elseif ($setting == 'cdn'){
     $output = preg_replace('{rand}', $rand, $setting_cdn);
   }elseif ($setting == '9jojo'){
-    $output = 'https://api.9jojo.cn/acgpic/?rand='.$rand;
+    $output = 'https://api.baka.fun/acgpic/?rand='.$rand;
   }
   print_r($output);
 }
