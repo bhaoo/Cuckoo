@@ -36,4 +36,4 @@
 
 ---
 
-Copyright &copy; 2020 [Bhao](https://dwd.moe/), under GPL-3.0 License.
+Copyright &copy; 2020-2022 [Bhao](https://dwd.moe/), under GPL-3.0 License.
