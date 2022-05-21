@@ -162,6 +162,8 @@ function staticFiles($content, $type = 0) {
     $output = Helper::options()->themeUrl.'/assets/'.$content;
   }elseif($setting == 'jsdelivr') {
     $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+  }elseif($setting == 'statically') {
+    $output = 'https://cdn.statically.io/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
   }elseif($setting == 'cdn') {
     $output = Helper::options()->staticCdn.'/'.$content;
   }
