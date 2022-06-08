@@ -1,0 +1,52 @@
+name: Cuckoo-Dev-Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  php:
+    name: PHP ${{ matrix.php }} Test
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.2', '7.3', '7.4', '8.0', '8.1']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - name: Syntax Check
+        run: |
+          find . -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
+  build:
+    name: Cuckoo Dev Build
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci') && github.event_name != 'pull_request'"
+    needs:
+      - php
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build
+        run: |
+          mkdir build
+          cp -r LICENSE README.md archive.php bangumi.php functions.php links.php page.php post.php screenshot.jpg index.php 404.php libs/ includes/ assets/ build
+          cd build && zip -q -r Cuckoo-Dev.zip * && mv Cuckoo-Dev.zip ../ && cd -
+      - name: Update Files
+        uses: WebFreak001/deploy-nightly@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/bhaoo/Cuckoo/releases/68902543/assets{?name,label}
+          release_id: 68902543
+          asset_path: ./Cuckoo-Dev.zip
+          asset_name: Cuckoo-Dev.zip
+          asset_content_type: application/zip
+          max_releases: 1
