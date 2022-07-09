@@ -160,9 +160,13 @@ function themeConfig($form) {
       <div class="setting-title">更多设置</div>
       <div class="setting-content">
         <?php echo $config->select('staticFiles',
-            ['local'    =>   '本地',
-              'jsdelivr' =>   'JsDelivr',
-              'cdn'      =>   '自定义 CDN'
+            ['local'       => '本地',
+              'jsdelivr'   => 'JsDelivr',
+              'cdnjs'      => 'cdnjs',
+              'staticfile' => 'Staticfile',
+              'bootcdn'    => 'Bootcdn',
+              'baomitu'    => 'Baomitu',
+              'cdn'        => '自定义 CDN'
             ], '静态文件源', '推荐选择 “JsDelivr源”', 'local').
         $config->input('staticCdn', '自定义静态文件CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取静态文件(需在上方选择自定义CDN)').
         $config->select('randimg',

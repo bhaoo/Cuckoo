@@ -156,14 +156,35 @@ function get_comment_prefix($mail){
 }
 
 // 静态文件源
-function staticFiles($content, $type = 0) {
-  $setting = Helper::options()->staticFiles;
-  if($setting == 'local') {
-    $output = Helper::options()->themeUrl.'/assets/'.$content;
-  }elseif($setting == 'jsdelivr') {
-    $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
-  }elseif($setting == 'cdn') {
-    $output = Helper::options()->staticCdn.'/'.$content;
+function staticFiles($content, $type = 0, $isOWO = 0) {
+  if(!$isOWO){
+    $setting = Helper::options()->staticFiles;
+  }else{
+    $setting = 'jsdelivr';
+  }
+  switch($setting){
+    case 'jsdelivr':
+      $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'cdn':
+      $output = Helper::options()->staticCdn.'/'.$content;
+      break;
+    case 'cdnjs':
+      $output = 'https://cdnjs.cloudflare.com/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
+      break;
+    case 'staticfile':
+      $output = 'https://cdn.staticfile.org/Cuckoo/'.THEME_VERSION.'/'.$content;
+      break;
+    case 'bootcdn':
+      $output = 'https://cdn.bootcdn.net/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
+      break;
+    case 'baomitu':
+      $output = 'https://lib.baomitu.com/Cuckoo/'.THEME_VERSION.'/'.$content;
+      break;
+    case 'local':
+    default:
+      $output = Helper::options()->themeUrl.'/assets/'.$content;
+      break;
   }
   if($type == 0){
     print_r($output);
