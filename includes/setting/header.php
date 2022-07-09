@@ -48,27 +48,27 @@
     </a>
     <div class="mdui-divider"></div>
     <div mdui-tab>
-      <a href="#message" mdui-drawer-close>
+      <a href="#message">
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">message</i>
           <div class="mdui-list-item-content">基础信息</div>
         </li>
       </a>
-      <a href="#basic" mdui-drawer-close>
+      <a href="#basic">
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
           <div class="mdui-list-item-content">基础设置</div>
         </li>
       </a>
-      <a href="#menu" mdui-drawer-close>
+      <a href="#menu">
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
           <div class="mdui-list-item-content">更多设置</div>
         </li>
       </a>
-      <a href="#advanced" mdui-drawer-close>
+      <a href="#advanced">
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
           <div class="mdui-list-item-content">高级设置</div>
         </li>
       </a>
-      <a href="#plugins" mdui-drawer-close>
+      <a href="#plugins">
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">dns</i>
           <div class="mdui-list-item-content">插件扩展</div>
         </li>
