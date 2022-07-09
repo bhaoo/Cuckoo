@@ -17,7 +17,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "2.0.1");
+define("THEME_VERSION", "Dev");
 
 require_once("includes/setting.php");
 require_once("includes/owo.php");
