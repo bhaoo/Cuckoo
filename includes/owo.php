@@ -51,7 +51,7 @@ class Smile {
           'name' => $owoJson[$owoName]['title'],
           'css' => $owoJson[$owoName]['css'],
           'type' => $owoJson[$owoName]['type'],
-          'dir' => staticFiles('images/OwO/'.$owoName.'/', 1),
+          'dir' => staticFiles('images/OwO/'.$owoName.'/', 1, 1),
           'content' => $owoJson[$owoName]['content']
         ];
       }
