@@ -150,14 +150,14 @@ function get_comment_prefix($mail){
   if(array_key_exists('Links', Typecho_Plugin::export()['activated'])){
     $number = $db->fetchAll($db->query("SELECT user FROM ".$prefix."links WHERE user = '$mail'"));
     if($number){
-      ?><img src="<?php staticFiles('images/grade/friend.png'); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
+      ?><img src="<?php staticFiles('images/grade/friend.png', 0, 1); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
     }
   }
 }
 
 // 静态文件源
-function staticFiles($content, $type = 0, $isOWO = 0) {
-  if(!$isOWO){
+function staticFiles($content, $type = 0, $isExternal = 0) {
+  if(!$isExternal){
     $setting = Helper::options()->staticFiles;
   }else{
     $setting = 'jsdelivr';
