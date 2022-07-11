@@ -286,7 +286,7 @@ function otherJs(){
     $string .= ($brightTime_arr) ? "var nowHour=new Date().getHours();if(nowHour>".$brightTime_arr[0]." || nowHour<".$brightTime_arr[1]."){darkContent('".$brightTime_arr[2]."')};" : '';
     $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
     $string .= '</script>';
-    $string .= (!Helper::options()->describe) ? "<script src='https://v1.hitokoto.cn/?encode=js&select=%23hitokoto' defer></script>" : '';
+    $string .= (!Helper::options()->describe) ? "<script>Hitokoto();</script>" : '';
     echo $string;
   }
 }
@@ -297,6 +297,7 @@ function otherPjax(){
     $string = "<script>$(document).on('pjax:complete',function(){";
     $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
+    $string .= (!Helper::options()->describe) ? "Hitokoto();" : '';
     $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
     $string .= "});</script>";
     echo $string;
