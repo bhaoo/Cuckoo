@@ -68,7 +68,7 @@ $accentColor = $this->options->accentColor;
     </div>
     <div class="mdui-divider"></div>
     <ul class="mdui-list drawer-list" mdui-collapse="{accordion: true}">
-      <a href="<?php Helper::options()->siteUrl() ?>">
+      <a href="<?php Helper::options()->siteUrl() ?>" mdui-drawer-close>
         <li class="mdui-list-item mdui-ripple"><i class="mdui-list-item-icon mdui-icon material-icons">home</i>
           <div class="mdui-list-item-content">首页</div>
         </li>
