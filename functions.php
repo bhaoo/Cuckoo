@@ -164,7 +164,7 @@ function staticFiles($content, $type = 0, $isOWO = 0) {
   }
   switch($setting){
     case 'jsdelivr':
-      $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      $output = 'https://gcore.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
       break;
     case 'cdn':
       $output = Helper::options()->staticCdn.'/'.$content;
