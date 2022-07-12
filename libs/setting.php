@@ -110,8 +110,10 @@ class Cuckoo_Setting {
     $plugins = Typecho_Plugin::export();
     $plugins = $plugins['activated'];
     $desc = ($description) ? '<div class="mdui-panel-item-summary">'.$description.'</div>' : '';
-    if(array_key_exists($name, $plugins)){
-      echo '<div class="mdui-panel" mdui-panel>
+    if(!array_key_exists($name, $plugins)){
+      $content = '检测到您还未安装“' . $name . '”插件，请安装该插件，否则将无法正常运行其功能';
+    }
+    echo '<div class="mdui-panel" mdui-panel>
               <div class="mdui-panel-item">
                 <div class="mdui-panel-item-header">
                   <div class="mdui-panel-item-title">'.$name.'</div>'.$desc.'
@@ -122,9 +124,6 @@ class Cuckoo_Setting {
                 </div>
               </div>
             </div>';
-    }else {
-      echo '<div class="setting-content message">检测到您还未安装“' . $name . '”插件，请安装该插件，否则将无法正常运行其功能</div>';
-    }
   }
 
   public function page($name, $description = NULL, $content = NULL) {
