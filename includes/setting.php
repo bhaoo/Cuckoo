@@ -188,6 +188,7 @@ function themeConfig($form) {
         $config->input('tagCloud', '标签云', '请根据自己所需填写展示数量，输入“0”则不显示标签云', '0').
         $config->textarea('brightTime', '定时开/关暗色模式', '填写格式(24H)：开启时间,关闭时间,输出信息 默认为空即为不开启 例: 22,6,深色模式开启').
         $config->textarea('Footer', '底部信息', '在这里填写的信息将在底部显示哦～').
+        $config->textarea('copy', '站点版权', '可用变量 | {site}: 站点链接 | {name}: 基础设置-昵称 | {year}: 当前年份', '&copy; {year} <a href="{site}">{name}</a>').
         $config->input('globalFontWeight', '全局字体粗细', '用于设置全局字体粗细，无需填写全局字体也可以进行设置')
         ?>
       </div>
