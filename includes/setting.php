@@ -217,7 +217,7 @@ function themeConfig($form) {
             "type":"6"
           }]').
         $config->textarea('drawerBottom', '抽屉底部功能', '可以在此往抽屉底部添加按钮，最多仅能展示6个。').
-        $config->textarea('otherCss', '更多CSS', '输入你所想要添加的CS即可哦！').
+        $config->textarea('otherCss', '更多CSS', '输入你所想要添加的CSS即可哦！').
         $config->textarea('otherJs', '更多JS', '输入你所想要添加的JS即可哦！').
         $config->textarea('otherPjax', 'PJAX回调', '在这里可以自行添加PJAX回调内容,引号需用“单引号”').
         $config->input('fontUrl', '字体CSS链接', '填写即启用了自定义字体功能，不填写仅能使用部分字体').
