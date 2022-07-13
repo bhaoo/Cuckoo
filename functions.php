@@ -414,6 +414,10 @@ function Footer(){
   $gabeian = Helper::options()->gabeian;
   $moebei = Helper::options()->moebei;
   $beian = Helper::options()->beian;
+  $copy = Helper::options()->copy;
+  $copy = preg_replace('/{site}/', Helper::options()->siteUrl, $copy);
+  $copy = preg_replace('/{name}/', Helper::options()->title, $copy);
+  $copy = preg_replace('/{year}/', date('Y'), $copy);
   if($gabeian){
     preg_match_all("/\d+/", $gabeian,$num);
     $num = $num[0][0];
@@ -431,7 +435,7 @@ function Footer(){
   $content .= ($moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
   $content .= ($beian) ? $divide.'<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>' : '';
   $content .= ($gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
-  echo $footer.'<p>&copy; '.date("Y").' <a href="'.Helper::options()->siteUrl.'">'.Helper::options()->title.'</a>'.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
+  echo $footer.'<p>'.$copy.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
 }
 
 // 友链插件
