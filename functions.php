@@ -310,12 +310,13 @@ function bgUrl(){
   $setting_phone = Helper::options()->bgphoneUrl;
   $setting_bgf = Helper::options()->bgFilter;
   $textareaBG = (Helper::options()->textareaBG) ?  Helper::options()->textareaBG : staticFiles('images/textarea.png',1);
+  $loadingUrl = (Helper::options()->loadingUrl) ?  Helper::options()->loadingUrl : staticFiles('images/loading.gif', 1);
   if($setting_bgf > 0){
     echo "<style>.index-filter{backdrop-filter: blur(".$setting_bgf."px);}</style>";
   }else{
     echo "<style>.index-filter{display: none}</style>";
   }
-  ?><style>.comment-textarea{background-image: url("<?php echo $textareaBG ?>");}.index-img{background-image: url("<?php staticFiles('images/loading.gif'); ?>")}</style><?php
+  ?><style>.comment-textarea{background-image: url("<?php echo $textareaBG ?>");}.index-img{background-image: url("<?php echo $loadingUrl ?>")}</style><?php
   if(empty($setting) && empty($setting_phone)){
     ?><style>.background{background-image: url("<?php staticFiles('images/bg.jpg'); ?>");}</style><?php
   }else{
