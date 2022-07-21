@@ -157,10 +157,13 @@ function get_comment_prefix($mail){
 
 // 静态文件源
 function staticFiles($content, $type = 0, $isExternal = 0) {
-  if(!$isExternal){
-    $setting = Helper::options()->staticFiles;
-  }else{
-    $setting = 'jsdelivr';
+  $setting = Helper::options()->staticFiles;
+  if($isExternal){
+    if($setting == 'local' || $setting == 'cdn'){
+      $setting = Helper::options()->staticFiles;
+    }else{
+      $setting = 'jsdelivr';
+    }
   }
   switch($setting){
     case 'jsdelivr':
