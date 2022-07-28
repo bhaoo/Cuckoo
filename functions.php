@@ -229,9 +229,15 @@ function readingTime($cid){
 function get_post_view($archive){
   $cid = $archive->cid;
   $db = Typecho_Db::get();
+  $type = explode('_', $db->getAdapterName());
+  $type = array_pop($type);
   $prefix = $db->getPrefix();
   if(!array_key_exists('views', $db->fetchRow($db->select()->from('table.contents')))){
-    $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
+    if ('Pgsql' == $type) {
+      $db->query('ALTER TABLE "' . $prefix . 'contents" ADD "views" bigint DEFAULT 0;');
+    } else {
+      $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
+    }
     echo 0;
     return;
   }
