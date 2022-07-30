@@ -146,9 +146,14 @@ function parseBiaoQing($content) {
 // 判断是否为好丽友
 function get_comment_prefix($mail){
   $db = Typecho_Db::get();
+  $type = explode('_', $db->getAdapterName());
+  $type = array_pop($type);
   $prefix = $db->getPrefix();
   if(array_key_exists('Links', Typecho_Plugin::export()['activated'])){
-    $number = $db->fetchAll($db->query("SELECT user FROM ".$prefix."links WHERE user = '$mail'"));
+    if ($type == 'Pgsql')
+      $number = $db->fetchAll($db->query("SELECT \"user\" FROM ".$prefix."links WHERE \"user\" = '$mail'"));
+    else
+      $number = $db->fetchAll($db->query("SELECT user FROM ".$prefix."links WHERE user = '$mail'"));
     if($number){
       ?><img src="<?php staticFiles('images/grade/friend.png', 0, 1); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
     }
@@ -233,11 +238,10 @@ function get_post_view($archive){
   $type = array_pop($type);
   $prefix = $db->getPrefix();
   if(!array_key_exists('views', $db->fetchRow($db->select()->from('table.contents')))){
-    if ('Pgsql' == $type) {
+    if ($type == 'Pgsql')
       $db->query('ALTER TABLE "' . $prefix . 'contents" ADD "views" bigint DEFAULT 0;');
-    } else {
+    else
       $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
-    }
     echo 0;
     return;
   }
