@@ -21,7 +21,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
   $db = Typecho_Db::get();
   $pageSize = $this->options->pageSize;
   $select1 = $this->select()->where('type = ?', 'post');
-  $select2 = $this->select()->where('type = ? && status = ? && created < ?', 'post', 'publish', time());
+  $select2 = $this->select()->where('type = ? AND status = ? AND created < ?', 'post', 'publish', time());
   $this->row = [];
   $this->stack = [];
   $this->length = 0;
@@ -38,7 +38,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
     $this->push($sticky_post);
   }
   $uid = $this->user->uid;
-  if ($uid) $select2->orWhere('authorId = ? && status = ?', $uid, 'private');
+  if ($uid) $select2->orWhere('authorId = ? AND status = ?', $uid, 'private');
   $sticky_posts = $db->fetchAll($select2->order('table.contents.created', Typecho_Db::SORT_DESC)->page($this->_currentPage, $this->parameter->pageSize));
   foreach ($sticky_posts as $sticky_post) $this->push($sticky_post);
   $this->setTotal($this->getTotal() - count($sticky_cids));
