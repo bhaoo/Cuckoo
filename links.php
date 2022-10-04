@@ -14,6 +14,9 @@ $this->need('includes/header.php'); ?>
   <div class="mdui-col-md-8 page-content">
     <?php Links() ?>
     <div class="mdui-col-sm-12">
+      <div class="mdui-card post-content mdui-typo">
+          <?php parseContent($this->content); ?>
+      </div>
       <?php $this->need('includes/comments.php'); ?>
     </div>
   </div>
