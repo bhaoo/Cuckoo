@@ -16,6 +16,9 @@
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
+if (!Helper::options()->showComments)
+  return;
+
 //$this->comments()->to($comments);
 require_once __DIR__ . "/../libs/comments.php";
 $parameter = array(
