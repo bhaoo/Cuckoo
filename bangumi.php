@@ -136,7 +136,7 @@ function updateDate($userID, $cacheTime, $amout, $hideMedia, $token) {
 
 $this->need('includes/header.php'); ?>
 <div class="index-container">
-  <div class="mdui-col-md-8 page-content">
+  <div class=<?php echo postContainerClassName() . "page-content"; ?>>
     <div class="bangumi-page mdui-typo">
       <div class="mdui-card bangumi-panel-loading mdui-shadow-10" id="panel-loading">
         <p style="margin:0;">正在加载噢，请稍等qwq~</p>

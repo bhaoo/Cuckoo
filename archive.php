@@ -18,7 +18,7 @@ if(!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this -> need('includes/header.php');
 ?>
   <div class="index-container">
-    <div class="mdui-col-md-8">
+    <div class=<?php echo postContainerClassName(); ?>>
       <?php if ($this->have()) : ?>
       <div class="mdui-card archive-card mdui-hoverable">
         <div class="archive-title">

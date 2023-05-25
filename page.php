@@ -17,7 +17,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('includes/header.php'); ?>
 <div class="index-container">
-  <div class="mdui-col-md-8">
+  <div class=<?php echo postContainerClassName(); ?>>
     <div class="mdui-card post-card">
       <div class="mdui-card-media post-card-media">
         <div class="index-img" data-bg="<?php $wzimg = $this->fields->wzimg;if (!empty($wzimg)) {echo $wzimg;} else {echo randPic();} ?>"></div>

@@ -11,7 +11,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('includes/header.php'); ?>
 <div class="index-container">
-  <div class="mdui-col-md-8 page-content">
+  <div class=<?php echo postContainerClassName() . "page-content"; ?>>
     <?php Links() ?>
     <div class="mdui-col-sm-12">
       <div class="mdui-card post-content mdui-typo">

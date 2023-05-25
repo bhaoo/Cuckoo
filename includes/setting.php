@@ -149,6 +149,7 @@ function themeConfig($form) {
         $config->input('beian', '备案号', '无需输入a标签，只需输入备案号即可。').
         $config->input('gabeian', '公安联网备案号', '无需输入a标签，只需输入备案号即可。').
         $config->input('moebei', '萌国ICP备案', '无需输入a标签，只需输入备案号即可。').
+        $config->checkbox('showSidebar', ['open' => '默认开启，将会在页面显示侧边栏'], '显示侧边栏', '默认开启，将会在页面显示侧边栏', ['open']).
         $config->input('sidebarBg', '侧边栏背景图', '在这里填入一个图片 URL 地址, 以加上一个 侧边栏背景图。').
         $config->input('bgUrl', '背景图片(电脑)', '在这里填入一个图片 URL 地址, 以设置博客电脑背景图片').
         $config->input('bgphoneUrl', '背景图片(手机)', '在这里填入一个图片 URL 地址, 以设置博客手机背景图片').

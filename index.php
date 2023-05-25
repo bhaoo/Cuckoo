@@ -45,7 +45,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
 }
 ?>
 <div class="index-container">
-  <div class="mdui-col-md-8">
+  <div class=<?php echo postContainerClassName(); ?>>
     <div class="article">
 <?php if ($this->have()) :
   while ($this->next()) :

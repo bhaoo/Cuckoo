@@ -17,6 +17,8 @@
 
 if(!defined('__TYPECHO_ROOT_DIR__'))
   exit;
+if (!Helper::options()->showSidebar)
+  return;
 ?>
 <div class="mdui-col-md-4">
   <div class="mdui-card mdui-hoverable sidebar-info">

@@ -621,3 +621,7 @@ function getOs($agent) {
   }
   echo '<i class="iconfont '.$icon.' comment-ua" mdui-tooltip="{content: \''.$name.'\'}"></i>';
 }
+
+function postContainerClassName(){
+  return Helper::options()->showSidebar ? "mdui-col-md-8" : "mdui-container-fluid";
+}
