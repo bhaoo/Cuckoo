@@ -154,7 +154,8 @@ function themeConfig($form) {
         $config->input('bgphoneUrl', '背景图片(手机)', '在这里填入一个图片 URL 地址, 以设置博客手机背景图片').
         $config->input('bgFilter', '背景图片高斯模糊', '选择"0"即为关闭高斯模糊哦！若网站动画较卡可设置为"0"', '0').
         $config->input('loadingUrl', '首页文章Loading图', '默认则为千花哦！').
-        $config->textarea('textareaBG', '评论框侧边图', '输入图片地址即可，默认为泠鸢yousa哦！') ?>
+        $config->textarea('textareaBG', '评论框侧边图', '输入图片地址即可，默认为泠鸢yousa哦！').
+        $config->checkbox('showComments', ['open' => '默认开启，将会在文章中显示评论'], '显示评论模块', '默认开启，将会在文章中显示评论', ['open']) ?>
       </div>
     </div>
     <div id="menu">
