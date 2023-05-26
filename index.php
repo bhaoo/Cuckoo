@@ -7,7 +7,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version 2.0.1
+ * @version 2.0.2
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -21,7 +21,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
   $db = Typecho_Db::get();
   $pageSize = $this->options->pageSize;
   $select1 = $this->select()->where('type = ?', 'post');
-  $select2 = $this->select()->where('type = ? AND status = ? AND created < ?', 'post', 'publish', time());
+  $select2 = $this->select()->where('type = ? && status = ? && created < ?', 'post', 'publish', time());
   $this->row = [];
   $this->stack = [];
   $this->length = 0;
@@ -38,7 +38,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
     $this->push($sticky_post);
   }
   $uid = $this->user->uid;
-  if ($uid) $select2->orWhere('authorId = ? AND status = ?', $uid, 'private');
+  if ($uid) $select2->orWhere('authorId = ? && status = ?', $uid, 'private');
   $sticky_posts = $db->fetchAll($select2->order('table.contents.created', Typecho_Db::SORT_DESC)->page($this->_currentPage, $this->parameter->pageSize));
   foreach ($sticky_posts as $sticky_post) $this->push($sticky_post);
   $this->setTotal($this->getTotal() - count($sticky_cids));
@@ -59,7 +59,10 @@ if ($sticky && $this->is('index') || $this->is('front')) {
               <div class="mdui-card-primary index-primary">
                 <div class="mdui-card-primary-title"><?php $this->sticky();$this -> title(); ?></div>
                 <div class="mdui-card-primary-subtitle index-info"><?php $this -> date(); ?>
-                  ｜<?php $this -> commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
+                  <?php if ($this->options->showComments) {
+                    echo '｜'; $this -> commentsNum('0 条评论', '1 条评论', '%d 条评论');
+                  } ?>
+                </div>
                 <div class="mdui-card-primary-subtitle index-subtitle"><?php $this -> excerpt(); ?></div>
               </div>
             </div>

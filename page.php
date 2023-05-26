@@ -32,7 +32,7 @@ $this->need('includes/header.php'); ?>
         <?php parseContent($this->content); ?>
       </div>
     </div>
-    <?php $this->need('includes/comments.php'); ?>
+    <?php if ($this->options->showComments) $this->need('includes/comments.php'); ?>
   </div>
   <?php $this -> need('includes/sidebar.php'); ?>
 </div>
