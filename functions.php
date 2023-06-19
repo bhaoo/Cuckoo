@@ -211,7 +211,7 @@ function randPic(){
   }elseif ($setting == 'local') {
     $openfile = glob(Helper::options()->themeFile("Cuckoo", "random/*"), GLOB_BRACE);
     $img = array_rand($openfile);
-    preg_match('/\/random\/\S*\.(jpg|png|gif)/', $openfile[$img], $out);
+    preg_match('/\/random\/\S*\.(jpg|png|gif|webp)/', $openfile[$img], $out);
     $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
   }elseif ($setting == 'cdn'){
     $output = preg_replace('{rand}', $rand, $setting_cdn);
@@ -448,7 +448,7 @@ function Footer(){
   }
   $content .= ($moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
   $content .= ($beian) ? $divide.'<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>' : '';
-  $content .= ($gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
+  $content .= ($gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'" height="20" width="20" alt="公安备案"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
   echo $footer.'<p>'.$copy.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
 }
 
