@@ -64,6 +64,8 @@ function contact(){
         $website = "mailto:";
       }elseif($key == "netease-music"){
         $website = "//music.163.com/#/user/home?id=";
+      }elseif($key == "zhihu") {
+        $website = "//www.zhihu.com/people/";
       }
       print_r('<a target ="_blank" href="'.$website.$value.'"><button class="mdui-btn mdui-btn-icon mdui-ripple"><i class="iconfont icon-'.$key.'"></i></button></a>');
     }
