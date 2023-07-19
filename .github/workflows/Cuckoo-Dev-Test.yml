@@ -2,7 +2,7 @@ name: Cuckoo-Dev-Test
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "Develop" ]
   pull_request:
     branches: [ "master" ]
 
