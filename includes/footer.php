@@ -32,7 +32,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 <script src="<?php staticFiles('js/pjax.min.js') ?>"></script>
 <script src="<?php staticFiles('js/cuckoo.min.js') ?>"></script>
 <script src="<?php staticFiles('js/comments.min.js') ?>"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.highlightAll();</script>
 <?php otherJs();$this->footer();otherPjax(); ?>
 </body>
 </html>
