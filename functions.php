@@ -66,6 +66,10 @@ function contact(){
         $website = "//music.163.com/#/user/home?id=";
       }elseif($key == "zhihu") {
         $website = "//www.zhihu.com/people/";
+      }elseif($key == "tencent-kg") {
+        $website = "//static-play.kg.qq.com/node/personal_v2?uid=";
+      }elseif($key == "douyin") {
+        $website = "//v.douyin.com/";
       }
       print_r('<a target ="_blank" href="'.$website.$value.'"><button class="mdui-btn mdui-btn-icon mdui-ripple"><i class="iconfont icon-'.$key.'"></i></button></a>');
     }
