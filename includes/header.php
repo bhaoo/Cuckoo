@@ -53,6 +53,7 @@ $accentColor = $this->options->accentColor;
   <link rel="stylesheet" href="<?php staticFiles('css/iconfont.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/tocbot.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/fancybox.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/katex.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/cuckoo.min.css') ?>">
   <script src="<?php staticFiles('js/tocbot.min.js') ?>"></script>
   <script src="<?php staticFiles('js/nprogress.min.js') ?>"></script>

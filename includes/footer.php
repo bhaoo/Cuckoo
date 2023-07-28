@@ -24,6 +24,8 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 </footer>
 <script src="<?php staticFiles('js/mdui.min.js') ?>"></script>
 <script src="<?php staticFiles('js/highlight.min.js') ?>"></script>
+<script src="<?php staticFiles('js/katex.min.js') ?>"></script>
+<script src="<?php staticFiles('js/katex-auto-render.min.js') ?>"></script>
 <script src="<?php staticFiles('js/lazyload.min.js') ?>"></script>
 <script src="<?php staticFiles('js/fancybox.umd.min.js') ?>"></script>
 <script src="<?php staticFiles('js/qrcode.min.js') ?>"></script>

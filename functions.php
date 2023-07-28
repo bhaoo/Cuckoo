@@ -295,7 +295,7 @@ function otherCss(){
   echo (Helper::options()->otherCss) ?  '<style>'.Helper::options()->otherCss.'</style>' : '';
 }
 
-// 更多JS、百度统计、跨设备阅读
+// 更多JS、百度统计、跨设备阅读、Katex
 function otherJs(){
   if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs || !Helper::options()->describe){
     $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
@@ -303,6 +303,7 @@ function otherJs(){
     $string .= (Helper::options()->statisticsBaidu) ? "var _hmt = _hmt || [];(function() {var hm = document.createElement('script');hm.src = 'https://hm.baidu.com/hm.js?". Helper::options()->statisticsBaidu ."';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);})();" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "qrcode(true);" : '';
     $string .= ($brightTime_arr) ? "var nowHour=new Date().getHours();if(nowHour>".$brightTime_arr[0]." || nowHour<".$brightTime_arr[1]."){darkContent('".$brightTime_arr[2]."')};" : '';
+    $string .= (Helper::options()->katexOption) ? 'renderMath=function(className){renderMathInElement(className,'. Helper::options()->katexOption .')};if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
     $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
     $string .= '</script>';
     $string .= (!Helper::options()->describe) ? "<script>Hitokoto();</script>" : '';
@@ -317,6 +318,7 @@ function otherPjax(){
     $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
     $string .= (!Helper::options()->describe) ? "Hitokoto();" : '';
+    $string .= (Helper::options()->katexOption) ? 'if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
     $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
     $string .= "});</script>";
     echo $string;

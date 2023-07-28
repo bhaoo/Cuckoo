@@ -219,6 +219,13 @@ function themeConfig($form) {
           },{
             "type":"6"
           }]').
+        $config->textarea('katexOption', 'Katex 选项配置', '在这里可以自定义 Katex 选项配置，可以看看这里哦！<a href="https://katex.org/docs/autorender.html">Katex Auto-render Extension</a>',
+        "{
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ]
+        }").
         $config->textarea('drawerBottom', '抽屉底部功能', '可以在此往抽屉底部添加按钮，最多仅能展示6个。').
         $config->textarea('otherCss', '更多CSS', '输入你所想要添加的CSS即可哦！').
         $config->textarea('otherJs', '更多JS', '输入你所想要添加的JS即可哦！').
