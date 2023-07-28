@@ -19,6 +19,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $primaryColor = $this->options->primaryColor;
 $accentColor = $this->options->accentColor;
 ?>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
