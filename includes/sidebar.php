@@ -70,7 +70,7 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
       </div>
     </ul>
   </div>
-  <?php } if ($this->options->linksIndexNum != "0") { ?>
+  <?php } if (array_key_exists("Links", Typecho_Plugin::export()['activated']) && $this->options->linksIndexNum != "0") { ?>
   <div class="mdui-card mdui-hoverable sidebar-module">
     <ul class="mdui-list">
       <div class="sidebar-module-title">友情链接</div>

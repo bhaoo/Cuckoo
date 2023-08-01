@@ -239,7 +239,7 @@ function themeConfig($form) {
     <div id="plugins">
       <div class="setting-title">插件扩展</div>
       <?php $config->plugin('Links', '友链插件',
-      $config->input('linksIndexNum', '主页友链展示个数', '在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个', 0).
+      $config->input('linksIndexNum', '主页友链展示个数', '在这里填写主页友链最多展示个数，默认为 0（则不显示），推荐设置为 10 个', '0').
       $config->checkbox('linksshuffle', ['open' => '默认开启，开启将会打乱顺序展示'], '是否打乱顺序展示', '默认开启，开启将会打乱顺序展示', ['open'])).
       $config->page('Bilibili 追番', '需创建独立页面才会展示哦',
       $config->input('BilibiliUid', 'B站UID', '请认真填写好，记得检查别填错啦！').
