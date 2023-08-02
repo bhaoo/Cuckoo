@@ -30,6 +30,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 <script src="<?php staticFiles('js/fancybox.umd.min.js') ?>"></script>
 <script src="<?php staticFiles('js/qrcode.min.js') ?>"></script>
 <script src="<?php staticFiles('js/clipboard.min.js') ?>"></script>
+<script src="<?php staticFiles('js/smoothscroll.min.js') ?>"></script>
 <script src="<?php staticFiles('js/infinite-scroll.pkgd.min.js') ?>"></script>
 <script src="<?php staticFiles('js/pjax.min.js') ?>"></script>
 <script src="<?php staticFiles('js/cuckoo.min.js') ?>"></script>
