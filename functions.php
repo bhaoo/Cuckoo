@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 2.0.1
+ * @version 2.0.3
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -24,12 +24,14 @@ require_once("includes/owo.php");
 
 // 文章自定义设置
 function themeFields($layout) {
-  $articleType = new Typecho_Widget_Helper_Form_Element_Select('articleType',array('article' => '文章', 'daily' => '日常'), 'article', _t('文章类型'));
+  $articleType = new Typecho_Widget_Helper_Form_Element_Select('articleType',array('article' => '文章', 'daily' => '日常', 'normal' => '无封面'), 'article', _t('文章类型'));
   $layout->addItem($articleType);
   $wzimg = new Typecho_Widget_Helper_Form_Element_Text('wzimg', NULL, NULL, _t('文章/独立页面封面图'), _t('如果不填将显示随机封面图'));
   $layout->addItem($wzimg);
   $catalog = new Typecho_Widget_Helper_Form_Element_Select('catalog',array('false' => '关闭', 'true' => '启用'), 'false', _t('文章目录'), _t('默认关闭，启用则显示“文章目录”'));
   $layout->addItem($catalog);
+  $remark = new Typecho_Widget_Helper_Form_Element_Text('remark', NULL, NULL, _t('吐槽'), _t('仅文章类型为 无封面 时有效'));
+  $layout->addItem($remark);
 }
 
 // Typecho 设置
@@ -66,6 +68,10 @@ function contact(){
         $website = "//music.163.com/#/user/home?id=";
       }elseif($key == "zhihu") {
         $website = "//www.zhihu.com/people/";
+      }elseif($key == "tencent-kg") {
+        $website = "//static-play.kg.qq.com/node/personal_v2?uid=";
+      }elseif($key == "douyin") {
+        $website = "//v.douyin.com/";
       }
       print_r('<a target ="_blank" href="'.$website.$value.'"><button class="mdui-btn mdui-btn-icon mdui-ripple"><i class="iconfont icon-'.$key.'"></i></button></a>');
     }
@@ -291,7 +297,7 @@ function otherCss(){
   echo (Helper::options()->otherCss) ?  '<style>'.Helper::options()->otherCss.'</style>' : '';
 }
 
-// 更多JS、百度统计、跨设备阅读
+// 更多JS、百度统计、跨设备阅读、Katex
 function otherJs(){
   if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs || !Helper::options()->describe){
     $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
@@ -299,6 +305,7 @@ function otherJs(){
     $string .= (Helper::options()->statisticsBaidu) ? "var _hmt = _hmt || [];(function() {var hm = document.createElement('script');hm.src = 'https://hm.baidu.com/hm.js?". Helper::options()->statisticsBaidu ."';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);})();" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "qrcode(true);" : '';
     $string .= ($brightTime_arr) ? "var nowHour=new Date().getHours();if(nowHour>".$brightTime_arr[0]." || nowHour<".$brightTime_arr[1]."){darkContent('".$brightTime_arr[2]."')};" : '';
+    $string .= (Helper::options()->katexOption) ? 'renderMath=function(className){renderMathInElement(className,'. Helper::options()->katexOption .')};if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
     $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
     $string .= '</script>';
     $string .= (!Helper::options()->describe) ? "<script>Hitokoto();</script>" : '';
@@ -313,6 +320,7 @@ function otherPjax(){
     $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
     $string .= (!Helper::options()->describe) ? "Hitokoto();" : '';
+    $string .= (Helper::options()->katexOption) ? 'if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
     $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
     $string .= "});</script>";
     echo $string;
@@ -464,7 +472,7 @@ function Links($type = 0) {
       <a target='_blank' class='links-url' href='{url}'>
         <div class='mdui-col-sm-6'>
           <div class='links-card mdui-shadow-10'>
-            <div class='links-img'><img class='mdui-img-circle' src='{image}'/></div>
+            <div class='links-img'><img class='mdui-img-circle' src='{image}' loading='lazy'/></div>
             <div class='links-name links-text'>{name}</div>
             <div class='links-describe links-text'>{description}</div>
           </div>

@@ -1,1 +1,5 @@
 .idea/
+assets/css/*
+assets/js/*
+!assets/css/*.min.css
+!assets/js/*.min.js

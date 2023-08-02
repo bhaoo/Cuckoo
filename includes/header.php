@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 2.0.1
+ * @version 2.0.3
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -19,6 +19,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $primaryColor = $this->options->primaryColor;
 $accentColor = $this->options->accentColor;
 ?>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -52,6 +53,7 @@ $accentColor = $this->options->accentColor;
   <link rel="stylesheet" href="<?php staticFiles('css/iconfont.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/tocbot.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/fancybox.min.css') ?>">
+  <link rel="stylesheet" href="<?php staticFiles('css/katex.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/cuckoo.min.css') ?>">
   <script src="<?php staticFiles('js/tocbot.min.js') ?>"></script>
   <script src="<?php staticFiles('js/nprogress.min.js') ?>"></script>

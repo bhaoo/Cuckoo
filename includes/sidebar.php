@@ -31,7 +31,7 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
       <div class="sidebar-info-desc"><?php setting("describe", "<span id='hitokoto'>:D 获取中...</span>", 1); ?></div>
     </div>
   </div>
-
+  <?php if ($this->options->showComments) { ?>
   <div class="mdui-card mdui-hoverable sidebar-module">
     <ul class="mdui-list">
       <div class="sidebar-module-title">最新回复</div>
@@ -49,7 +49,7 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
       endwhile; ?>
     </ul>
   </div>
-  <?php if ($this->options->tagCloud != "0") { ?>
+  <?php } if ($this->options->tagCloud != "0") { ?>
   <div class="mdui-card mdui-hoverable sidebar-module">
     <ul class="mdui-list">
       <div class="sidebar-module-title">标签云</div>
@@ -70,7 +70,7 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
       </div>
     </ul>
   </div>
-  <?php } if ($this->options->linksIndexNum != "0") { ?>
+  <?php } if (array_key_exists("Links", Typecho_Plugin::export()['activated']) && $this->options->linksIndexNum != "0") { ?>
   <div class="mdui-card mdui-hoverable sidebar-module">
     <ul class="mdui-list">
       <div class="sidebar-module-title">友情链接</div>
