@@ -472,7 +472,7 @@ function Links($type = 0) {
       <a target='_blank' class='links-url' href='{url}'>
         <div class='mdui-col-sm-6'>
           <div class='links-card mdui-shadow-10'>
-            <div class='links-img'><img class='mdui-img-circle' src='{image}'/></div>
+            <div class='links-img'><img class='mdui-img-circle' src='{image}' loading='lazy'/></div>
             <div class='links-name links-text'>{name}</div>
             <div class='links-describe links-text'>{description}</div>
           </div>
