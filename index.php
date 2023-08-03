@@ -7,7 +7,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version Dev 2023.8.2
+ * @version Dev 2023.8.3
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -68,6 +68,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
             </div>
           </div>
         </div>
+        +00
       </a>
     <?php } elseif ($this->fields->articleType == "daily") { ?>
       <div class="mdui-card index-card-daily mdui-hoverable post">

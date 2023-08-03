@@ -19,8 +19,10 @@ $this->need('includes/header.php'); ?>
 <div class="index-container">
   <div class="mdui-col-md-8">
     <div class="mdui-card post-card">
-      <div class="mdui-card-media post-card-media">
-        <div class="index-img" data-bg="<?php $wzimg = $this->fields->wzimg;if (!empty($wzimg)) {echo $wzimg;} else {echo randPic();} ?>"></div>
+      <div class="mdui-card-media post-card-media<?php if ($this->fields->articleType == "normal") echo ' post-card-media-normal';?>">
+        <?php if($this->fields->articleType != "normal") { ?>
+          <div class="index-img" data-bg="<?php $wzimg = $this->fields->wzimg;if (!empty($wzimg)) {echo $wzimg;} else {echo randPic();} ?>"></div>
+        <?php } ?>
         <div class="mdui-card-media-covered">
           <div class="mdui-card-primary">
             <div class="mdui-card-primary-title"><?php $this->title() ?></div>
