@@ -11,6 +11,10 @@
 
 获取主题的方法：前往 [Releases](https://github.com/bhaoo/Cuckoo/releases) 或者 下方QQ群 下载主题
 
+### 开发版
+
+如需下载开发版可以前往 [这里](https://github.com/bhaoo/Cuckoo/releases/tag/Dev) 进行下载哦！
+
 ## 特点
 
 - 全站PJAX+评论AJAX
@@ -36,4 +40,4 @@
 
 ---
 
-Copyright &copy; 2020-2022 [Bhao](https://dwd.moe/), under GPL-3.0 License.
+Copyright &copy; 2020-2023 [Bhao](https://dwd.moe/), under GPL-3.0 License.
