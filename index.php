@@ -68,7 +68,6 @@ if ($sticky && $this->is('index') || $this->is('front')) {
             </div>
           </div>
         </div>
-        +00
       </a>
     <?php } elseif ($this->fields->articleType == "daily") { ?>
       <div class="mdui-card index-card-daily mdui-hoverable post">
