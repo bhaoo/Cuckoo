@@ -222,7 +222,7 @@ function randPic(){
     preg_match('/\/random\/\S*\.(jpg|png|gif|webp)/', $openfile[$img], $out);
     $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
   }elseif ($setting == 'cdn'){
-    $output = preg_replace('{rand}', $rand, $setting_cdn);
+    $output = preg_replace('/{rand}/', $rand, $setting_cdn);
   }elseif ($setting == '9jojo'){
     $output = 'https://api.baka.fun/acgpic/?rand='.$rand;
   }
