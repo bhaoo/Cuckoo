@@ -179,10 +179,11 @@ function themeConfig($form) {
           ], '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”', '9jojo').
         $config->input('randimgCdn', '自定义随机文章图CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义CDN)').
         $config->select('gravatar',
-          ['geekzu' => '极客族',
+          ['cravatar' => 'Cravatar',
+           'geekzu' => '极客族',
            'qiniu'  => '七牛',
            'cdn'    => '自定义 CDN'
-          ], 'Gravatar头像源', '在这里可以设置Gravatar头像源','geekzu').
+          ], 'Gravatar头像源', '在这里可以设置Gravatar头像源(Cravatar 支持 QQ头像)','cravatar').
         $config->input('gravatarCdn', '自定义Gravatar头像源CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义CDN)').
         $config->input('sticky', '置顶文章', '置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔。').
         $config->input('statisticsBaidu', '百度统计', '仅需要输入"https://hm.baidu.com/hm.js?xxxxxx"中的"xxxxxx部分即可"').

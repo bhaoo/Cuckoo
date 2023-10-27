@@ -278,17 +278,13 @@ function get_comment_avatar($moe = NULL){
     $host = 'https://sdn.geekzu.org/avatar/';
   }elseif($gravatar == 'qiniu'){
     $host = 'https://dn-qiniu-avatar.qbox.me/avatar';
+  }elseif($gravatar == 'cravatar'){
+      $host = 'https://cravatar.cn/avatar';
   }elseif($gravatar == 'cdn'){
     $host = Helper::options()->gravatarCdn;
   }
   $hash = md5(strtolower($moe));
-  $email = strtolower($moe);
-  $qq = str_replace('@qq.com','',$email);
-  if(strstr($email,"qq.com") && is_numeric($qq) && strlen($qq) < 11 && strlen($qq) > 4){
-    $avatar = '//q1.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
-  }else{
-    $avatar = $host.'/'.$hash.'?s=100';
-  }
+  $avatar = $host.'/'.$hash.'?s=100';
   echo $avatar;
 }
 
