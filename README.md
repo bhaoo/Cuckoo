@@ -33,7 +33,7 @@
 
 ## 最后
 
-1. 欢迎各位加入 [主题交流群](//shang.qq.com/wpa/qunwpa?idkey=ceaeca22d995870dc4e5d35ee0b98542c337c99f0955b648917dc18957818bb4)
+1. 欢迎各位加入 [主题交流群](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=s2GpijC6kAYicysKIUoV87cckdzRDova&authKey=XNFrI33rkha8i9vNTIMLCzqN9fCphaARFlptIb9cKB0PhwdC6fWIDn90MVi8JrfX&noverify=0&group_code=943195145)
 2. 主题文档：[https://cuckoo.owo.show/](https://cuckoo.owo.show/) （请注意区分 2.x 和 1.x）
 3. 提问前请先阅读 “主题文档” 先哦！
 4. 如果喜欢这个主题，欢迎各位点个 Star ！
