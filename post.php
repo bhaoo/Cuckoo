@@ -15,6 +15,9 @@
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+if (@$_SERVER['HTTP_X_PJAX'] == true) {
+    Typecho_Response::getInstance()->setStatus(200);
+}
 $this->need('includes/header.php'); ?>
 <div class="index-container">
   <div class="mdui-col-md-8">
