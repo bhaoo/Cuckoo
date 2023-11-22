@@ -97,7 +97,7 @@ function themeConfig($form) {
       </div>
     </div>
   </div>
-  <form class="mdui-typo" action="<?php echo $config->security->getIndex('/action/themes-edit?config') ?>" method="post" enctype="application/x-www-form-urlencoded" style="display: block!important">
+  <form id="cuckoo-form" class="mdui-typo" action="<?php echo $config->security->getIndex('/action/themes-edit?config') ?>" method="post" enctype="application/x-www-form-urlencoded" style="display: block!important">
     <div id="basic">
       <div class="setting-title">基础设置</div>
       <div class="setting-content">
