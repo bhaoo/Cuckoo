@@ -291,6 +291,7 @@ function get_comment_avatar($moe = NULL){
 // 更多CSS
 function otherCss(){
   echo (Helper::options()->otherCss) ?  '<style>'.Helper::options()->otherCss.'</style>' : '';
+  echo (Helper::options()->otherHeader) ?? '';
 }
 
 // 更多JS、百度统计、跨设备阅读、Katex
@@ -305,6 +306,7 @@ function otherJs(){
     $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
     $string .= '</script>';
     $string .= (!Helper::options()->describe) ? "<script>Hitokoto();</script>" : '';
+    $string .= (Helper::options()->otherFooter) ?? '';
     echo $string;
   }
 }
