@@ -43,8 +43,8 @@ $accentColor = $this->options->accentColor;
     <meta property="og:description" content="<?php $this->excerpt(); ?>"/>
     <meta property="article:published_time" content="<?php $this->date('c'); ?>"/>
     <meta property="article:published_first" content="<?php $this->options->title() ?>, <?php $this->permalink() ?>" />
-    <meta name="keywords"  content="<?php $k=$this->fields->keyword;if(empty($k)){echo $this->keywords();}else{ echo $k;};?>">
-    <meta name="description" content="<?php $d=$this->fields->description;if(empty($d) || !$this->is('single')){if($this->getDescription()){echo $this->getDescription();}}else{ echo $d;};?>" />
+    <meta name="keywords" content="<?=$this->keywords()?>">
+    <meta name="description" content="<?=$this->getDescription()?>" />
   <?php endif;?>
   <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->webTitle(); ?></title>
   <link rel="shortcut icon" href="<?php setting("favicon", "images/favicon.ico"); ?>" />
