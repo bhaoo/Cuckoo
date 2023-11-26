@@ -7,11 +7,11 @@
  * |  |_)  | |  |  |  |  /  _____  \  |  `--'  |
  * |______/  |__|  |__| /__/     \__\  \______/
  *
- * Functions
+ * Comments
  *
  * @author Bhao
  * @link https://dwd.moe/
- * @version 2.0.0
+ * @date 2023-11-26
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;

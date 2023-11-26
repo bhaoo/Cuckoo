@@ -1,3 +1,21 @@
+<?php
+/**
+ * .______    __    __       ___        ______
+ * |   _  \  |  |  |  |     /   \      /  __  \
+ * |  |_)  | |  |__|  |    /  ^  \    |  |  |  |
+ * |   _  <  |   __   |   /  /_\  \   |  |  |  |
+ * |  |_)  | |  |  |  |  /  _____  \  |  `--'  |
+ * |______/  |__|  |__| /__/     \__\  \______/
+ *
+ * Setting Header
+ *
+ * @author Bhao
+ * @link https://dwd.moe/
+ * @date 2023-11-26
+ */
+
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+?>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
