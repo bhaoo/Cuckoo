@@ -4,9 +4,8 @@
  *
  * @package custom
  * @author Seirin, Bhao
- * @link https://qwq.best/, https://dwd.moe/
- * @version 2.0.0
- * @date 2021-07-09
+ * @link https://owomoe.net/, https://dwd.moe/
+ * @date 2023-07-19
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
