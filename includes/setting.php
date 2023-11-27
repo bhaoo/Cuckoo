@@ -11,7 +11,7 @@
  *
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2023-11-22
+ * @date 2023-11-27
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
