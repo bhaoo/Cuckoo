@@ -11,13 +11,13 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2023-11-27
+ * @date 2023-12-04
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "2.1.0-RC.0");
+define("THEME_VERSION", "Dev");
 
 require_once("includes/setting.php");
 require_once("includes/owo.php");
@@ -449,14 +449,11 @@ function Footer(){
     $num2 = $num2[0][0];
   }
   if(($beian && $gabeian) || ($beian && $moebei) || ($gabeian && $moebei) || ($beian && $gabeian && $moebei)){
-    $divide = '<span class="footer-divide">｜</span>';
     $content .= '<br><br>';
-  }else{
-    $divide = '｜';
   }
-  $content .= ($moebei) ? $divide.'<a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'号</a>' : '';
-  $content .= ($beian) ? $divide.'<a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a>' : '';
-  $content .= ($gabeian) ?  $divide.'<img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'" height="20" width="20" alt="公安备案"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a>' : '';
+  $content .= ($moebei) ? '<span><a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'</a>号</span>' : '';
+  $content .= ($beian) ? '<span><a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a></span>' : '';
+  $content .= ($gabeian) ? '<span><img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'" height="20" width="20" alt="公安备案"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a></span>' : '';
   echo $footer.'<p>'.$copy.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
 }
 
