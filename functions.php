@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2023-12-04
+ * @date 2023-12-05
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -450,6 +450,8 @@ function Footer(){
   }
   if(($beian && $gabeian) || ($beian && $moebei) || ($gabeian && $moebei) || ($beian && $gabeian && $moebei)){
     $content .= '<br><br>';
+  } elseif ($beian || $gabeian || $moebei) {
+    $content .= '｜';
   }
   $content .= ($moebei) ? '<span><a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'</a>号</span>' : '';
   $content .= ($beian) ? '<span><a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a></span>' : '';
