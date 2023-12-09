@@ -3,7 +3,7 @@ name: Cuckoo-Dev-Test
 on:
   push:
     branches:
-      - 'feature/**'
+      - 'develop'
   pull_request:
     branches: [ "develop" ]
 
