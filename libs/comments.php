@@ -121,7 +121,7 @@ class Cuckoo_Comments_Archive extends Widget_Abstract_Comments
         <img class="mdui-img-circle" src="<?php get_comment_avatar($this->mail); ?>" loading="lazy" />
         <?php get_comment_prefix($this->mail);
         if ($this->authorId == $this->ownerId) { ?>
-          <img src="<?php staticFiles('images/grade/author.png', 0, 1) ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}" />
+          <img src="<?php staticFiles('images/author.png') ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}" />
         <?php } ?>
       </div>
       <div class="mdui-card-header-title mdui-typo">

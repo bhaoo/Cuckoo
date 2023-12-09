@@ -163,7 +163,7 @@ function get_comment_prefix($mail){
     else
       $number = $db->fetchAll($db->query("SELECT user FROM ".$prefix."links WHERE user = '$mail'"));
     if($number){
-      ?><img src="<?php staticFiles('images/grade/friend.png', 0, 1); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
+      ?><img src="<?php staticFiles('images/friend.png'); ?>" class="comment-prefix" mdui-tooltip="{content: '好朋友'}"/><?php
     }
   }
 }
