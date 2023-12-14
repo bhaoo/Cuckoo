@@ -11,7 +11,7 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @version 2.0.3
+ * @date 2023-12-09
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -43,8 +43,8 @@ $accentColor = $this->options->accentColor;
     <meta property="og:description" content="<?php $this->excerpt(); ?>"/>
     <meta property="article:published_time" content="<?php $this->date('c'); ?>"/>
     <meta property="article:published_first" content="<?php $this->options->title() ?>, <?php $this->permalink() ?>" />
-    <meta name="keywords"  content="<?php $k=$this->fields->keyword;if(empty($k)){echo $this->keywords();}else{ echo $k;};?>">
-    <meta name="description" content="<?php $d=$this->fields->description;if(empty($d) || !$this->is('single')){if($this->getDescription()){echo $this->getDescription();}}else{ echo $d;};?>" />
+    <meta name="keywords" content="<?=$this->keywords()?>">
+    <meta name="description" content="<?=$this->getDescription()?>" />
   <?php endif;?>
   <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->webTitle(); ?></title>
   <link rel="shortcut icon" href="<?php setting("favicon", "images/favicon.ico"); ?>" />
@@ -79,7 +79,7 @@ $accentColor = $this->options->accentColor;
         <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
       </div>
       <button class="mdui-btn mdui-btn-icon qrcode" mdui-menu="{target: '#qrcode'}" mdui-tooltip="{content: '跨设备阅读'}"><i class="mdui-icon material-icons">devices</i></button>
-      <div class="mdui-menu" id="qrcode" style="width: 170px;height: 170px;transform-origin: 100% 0px; position: fixed; text-align:center;"><div style='margin-top: 63px;' class="mdui-spinner mdui-spinner-colorful"></div></div>
+      <div class="mdui-menu" id="qrcode" style="overflow-y: hidden;width: 170px;height: 170px;transform-origin: 100% 0px; position: fixed; text-align:center;"><div style='margin-top: 63px;' class="mdui-spinner mdui-spinner-colorful"></div></div>
       <button onclick="brightness()" id="brightness" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">brightness_5</i></button>
       <button onclick="tocBotton()" id="tocBotton" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">bookmark</i></button>
     </div>

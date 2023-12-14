@@ -7,7 +7,7 @@
  *
  * @package Cuckoo
  * @author Bhao
- * @version Dev 2023.8.3
+ * @version 2.1.0-RC.1
  * @link https://dwd.moe
  * @date 2020-02-02
  */
@@ -85,7 +85,11 @@ if ($sticky && $this->is('index') || $this->is('front')) {
         <div class="mdui-card index-card-normal mdui-hoverable">
           <div class="mdui-card-primary index-primary-normal">
             <div class="mdui-card-primary-title"><?php $this->sticky();$this->title(); ?></div>
-            <div class="mdui-card-primary-subtitle"><?php $this->date(); ?>｜<?php $this->commentsNum('0 条评论', '1 条评论', '%d 条评论'); ?></div>
+            <div class="mdui-card-primary-subtitle"><?php $this->date(); ?>
+              <?php if ($this->options->showComments) {
+                echo '｜'; $this -> commentsNum('0 条评论', '1 条评论', '%d 条评论');
+              } ?>
+            </div>
             <?php if (strlen($this->fields->remark)) {
               echo '<div class="mdui-chip mdui-color-theme index-chip-normal"><span class="mdui-chip-title">'.$this->fields->remark.'</span></div>';
             } ?>

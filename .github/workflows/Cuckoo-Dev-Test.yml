@@ -3,7 +3,7 @@ name: Cuckoo-Dev-Test
 on:
   push:
     branches:
-      - 'feature/**'
+      - 'develop'
   pull_request:
     branches: [ "develop" ]
 
@@ -29,7 +29,7 @@ jobs:
   build:
     name: Cuckoo Dev Build
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci') && github.event_name == 'pull_request'"
+    if: "!contains(github.event.head_commit.message, 'skip ci') && github.event_name != 'pull_request'"
     needs:
       - php
     steps:
