@@ -61,4 +61,4 @@
 
 ---
 
-Copyright &copy; 2020-2023 [Bhao](https://dwd.moe/), under GPL-3.0 License.
+Copyright &copy; 2020-2024 [Bhao](https://dwd.moe/), under GPL-3.0 License.
