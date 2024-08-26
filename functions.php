@@ -453,7 +453,7 @@ function Footer(){
   } elseif ($beian || $gabeian || $moebei) {
     $content .= '｜';
   }
-  $content .= ($moebei) ? '<span><a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'</a>号</span>' : '';
+  $content .= ($moebei) ? '<span><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">萌ICP备'.$num2.'号</a></span>' : '';
   $content .= ($beian) ? '<span><a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a></span>' : '';
   $content .= ($gabeian) ? '<span><img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'" height="20" width="20" alt="公安备案"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a></span>' : '';
   echo $footer.'<p>'.$copy.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';
