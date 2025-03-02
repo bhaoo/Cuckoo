@@ -164,9 +164,12 @@ function themeConfig($form) {
         <?php echo $config->select('staticFiles',
             ['local'       => '本地',
               'jsdelivr'   => 'JsDelivr',
+              'fastly'   => 'Fastly',
+              'gcore'   => 'Gcore',
+              'jsdmirror'   => 'JsdMirror',
               'cdnjs'      => 'cdnjs',
-              'staticfile' => 'Staticfile',
-              'bootcdn'    => 'Bootcdn',
+              'snrat' => 'snrat',
+              'zstatic'    => 'zstatic',
               'baomitu'    => 'Baomitu',
               'cdn'        => '自定义 CDN'
             ], '静态文件源', '推荐选择 “JsDelivr源”', 'local').
