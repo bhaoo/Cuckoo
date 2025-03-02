@@ -180,7 +180,16 @@ function staticFiles($content, $type = 0, $isExternal = 0) {
   }
   switch($setting){
     case 'jsdelivr':
+      $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'fastly':
+      $output = 'https://fastly.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'gcore':
       $output = 'https://gcore.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'jsdmirror':
+      $output = 'https://cdn.jsdmirror.com/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
       break;
     case 'cdn':
       $output = Helper::options()->staticCdn.'/'.$content;
@@ -188,11 +197,11 @@ function staticFiles($content, $type = 0, $isExternal = 0) {
     case 'cdnjs':
       $output = 'https://cdnjs.cloudflare.com/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
       break;
-    case 'staticfile':
-      $output = 'https://cdn.staticfile.org/Cuckoo/'.THEME_VERSION.'/'.$content;
+    case 'snrat':
+      $output = 'https://cdnjs.snrat.com/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
       break;
-    case 'bootcdn':
-      $output = 'https://cdn.bootcdn.net/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
+    case 'zstatic':
+      $output = 'https://s4.zstatic.net/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
       break;
     case 'baomitu':
       $output = 'https://lib.baomitu.com/Cuckoo/'.THEME_VERSION.'/'.$content;
