@@ -226,10 +226,18 @@ function randPic(){
   if ($setting == 'api.ohmyga.cn') {
     $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
   }elseif ($setting == 'local') {
-    $openfile = glob(Helper::options()->themeFile("Cuckoo", "random/*"), GLOB_BRACE);
-    $img = array_rand($openfile);
-    preg_match('/\/random\/\S*\.(jpg|png|gif|webp)/', $openfile[$img], $out);
-    $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $dirPath = getcwd() . "/usr/themes/Cuckoo/random/";
+    $files = scandir($dirPath);
+    $images = array_filter($files, function ($file) use ($dirPath, $allowedExtensions) {
+      $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+      return in_array($extension, $allowedExtensions) && is_file($dirPath . $file);
+    });
+    if (!empty($images)) {
+      $output = Helper::options()->siteUrl.'usr/themes/Cuckoo/random/'.$images[array_rand($images)];
+    } else {
+      $output = "Error, please check /random.";
+    }
   }elseif ($setting == 'cdn'){
     $output = preg_replace('/{rand}/', $rand, $setting_cdn);
   }elseif ($setting == '9jojo'){
