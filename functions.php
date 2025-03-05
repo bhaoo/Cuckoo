@@ -311,6 +311,7 @@ function otherCss(){
 
 // 更多JS、百度统计、跨设备阅读、Katex
 function otherJs(){
+  $string = "";
   if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs || !Helper::options()->describe){
     $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
     $string = '<script>';
@@ -322,18 +323,51 @@ function otherJs(){
     $string .= '</script>';
     $string .= (!Helper::options()->describe) ? "<script>Hitokoto();</script>" : '';
     $string .= (Helper::options()->otherFooter) ?? '';
-    echo $string;
   }
+  if(Helper::options()->mermaidStatus && in_array('open', Helper::options()->mermaidStatus)){
+    $staticFiles = Helper::options()->staticFiles;
+    $string .= '<script src="';
+    switch($staticFiles){
+      case 'jsdelivr':
+        $string .= '//cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'fastly':
+        $string .= '//fastly.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'jsdmirror':
+        $string .= '//cdn.jsdmirror.com/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'cdnjs':
+        $string .= '//cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js';
+        break;
+      case 'snrat':
+        $string .= '//cdnjs.snrat.com/ajax/libs/mermaid/11.4.0/mermaid.min.js';
+        break;
+      case 'gcore':
+        $string .= '//gcore.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'zstatic':
+      case 'cdn':
+      case 'baomitu':
+      case 'local':
+      default:
+        $string .= '//s4.zstatic.net/ajax/libs/mermaid/11.4.0/mermaid.min.js';
+        break;
+    }
+    $string .= '"></script>';
+  }
+  echo $string;
 }
 
 // 更多PJAX、百度统计、跨设备阅读
 function otherPjax(){
-  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax){
+  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax || (Helper::options()->mermaidStatus && in_array('open', Helper::options()->mermaidStatus))){
     $string = "<script>$(document).on('pjax:complete',function(){";
     $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
     $string .= (!Helper::options()->describe) ? "Hitokoto();" : '';
     $string .= (Helper::options()->katexOption) ? 'if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
+    $string .= (Helper::options()->mermaidStatus && in_array('open', Helper::options()->mermaidStatus)) ? "mermaid.init(undefined, '.mermaid');" : '';
     $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
     $string .= "});</script>";
     echo $string;

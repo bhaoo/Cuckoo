@@ -252,7 +252,10 @@ function themeConfig($form) {
       $config->input('CacheTime', '缓存时间', '单位为“秒”，不会填写可留空，默认为一天。').
       $config->input('Amout', '展示数量', '需要展示的番剧数量，默认为 10 个').
       $config->textarea('HideMedia', '隐藏番剧', '输入番剧id，多个id用英文逗号隔开，就可以隐藏你所不想展示的番剧啦！').
-      $config->input('Sessdata', 'Sessdate（选填）', '如需获取观看进度需填写 Sessdata，详细请看文档说明'))
+      $config->input('Sessdata', 'Sessdate（选填）', '如需获取观看进度需填写 Sessdata，详细请看文档说明')).
+      $config->page('Mermaid', '一个开源的、基于JavaScript的绘图库',
+        $config->checkbox('mermaidStatus', ['open' => '开启'], '总开关', '默认关闭，开启以支持 Mermaid', ['close'])
+        )
       ?>
     </div>
     <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme"><i class="mdui-icon material-icons">save</i></button>
