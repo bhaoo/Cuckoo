@@ -175,12 +175,12 @@ function themeConfig($form) {
             ], '静态文件源', '推荐选择 “JsDelivr源”', 'local').
         $config->input('staticCdn', '自定义静态文件CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取静态文件(需在上方选择自定义CDN)').
         $config->select('randimg',
-          ['api.ohmyga.cn' =>   'OMGのAPI',
-            'local'         =>   '本地',
-            'cdn'           =>   '自定义 CDN',
-            '9jojo'         =>   '9JOJO'
-          ], '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”', '9jojo').
-        $config->input('randimgCdn', '自定义随机文章图CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义CDN)').
+          [
+            'local'   => '本地',
+            'custom'  => '自定义',
+            'dmoe.cc' => 'dmoe.cc'
+          ], '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”', 'dmoe.cc').
+        $config->input('randimgCdn', '自定义随机文章图源', '在这里填写你自己的图源(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义)，若出现完全重复可以在结尾加上 ?rand={rand}').
         $config->select('gravatar',
           ['cravatar' => 'Cravatar',
            'geekzu' => '极客族',

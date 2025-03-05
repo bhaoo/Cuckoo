@@ -223,9 +223,7 @@ function randPic(){
   $setting = Helper::options()->randimg;
   $setting_cdn = Helper::options()->randimgCdn;
   $rand = mt_rand(0,999);
-  if ($setting == 'api.ohmyga.cn') {
-    $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
-  }elseif ($setting == 'local') {
+  if ($setting == 'local') {
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     $dirPath = getcwd() . "/usr/themes/Cuckoo/random/";
     $files = scandir($dirPath);
@@ -238,10 +236,10 @@ function randPic(){
     } else {
       $output = "Error, please check /random.";
     }
-  }elseif ($setting == 'cdn'){
+  }elseif ($setting == 'custom'){
     $output = preg_replace('/{rand}/', $rand, $setting_cdn);
-  }elseif ($setting == '9jojo'){
-    $output = 'https://api.baka.fun/acgpic/?rand='.$rand;
+  }else if ($setting == 'dmoe.cc'){
+    $output = 'https://www.dmoe.cc/random.php?rand='.$rand;
   }
   print_r($output);
 }
