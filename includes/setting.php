@@ -231,6 +231,7 @@ function themeConfig($form) {
           ]
         }").
         $config->textarea('drawerBottom', '抽屉底部功能', '可以在此往抽屉底部添加按钮，最多仅能展示6个。').
+        $config->textarea('drawerFooter', '抽屉底部引用', '输入你所想要添加的内容即可添加至抽屉底部哦！如需推荐看看主题文档哦！').
         $config->textarea('otherHeader', '顶部引用', '输入你所想要添加的内容即可哦！').
         $config->textarea('otherFooter', '底部引用', '输入你所想要添加的内容即可哦！').
         $config->textarea('otherCss', '更多CSS', '输入你所想要添加的CSS即可哦！').

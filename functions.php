@@ -88,6 +88,7 @@ function drawerBottom(){
     }
     echo '</div>';
   }
+  echo (!empty(Helper::options()->drawerFooter)) ? Helper::options()->drawerFooter : '';
 }
 
 // 文章短代码
