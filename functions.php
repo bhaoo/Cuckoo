@@ -233,7 +233,11 @@ function randPic(){
       return in_array($extension, $allowedExtensions) && is_file($dirPath . $file);
     });
     if (!empty($images)) {
-      $output = Helper::options()->siteUrl.'usr/themes/Cuckoo/random/'.$images[array_rand($images)];
+      if (!empty($setting_cdn)) {
+        $output = $setting_cdn.'/'.$images[array_rand($images)];
+      } else {
+        $output = Helper::options()->siteUrl.'usr/themes/Cuckoo/random/'.$images[array_rand($images)];
+      }
     } else {
       $output = "Error, please check /random.";
     }
