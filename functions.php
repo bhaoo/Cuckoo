@@ -123,6 +123,12 @@ function parseContent($content) {
                            <div class="post-timeline-content">${2}</div>
                          </div>';
   $content = preg_replace($patt_timeline_item, $text_timeline_item, $content);
+  if (Helper::options()->isImageRewrite && in_array('open', Helper::options()->isImageRewrite)) {
+    $patt_img = '/<img(.*?)src="\.(.*?)"(.*?)>/s';
+    $imageURL = Helper::options()->imageRewriteUrl;
+    $text_image = '<img${1}src="'.$imageURL.'${2}"${3}>';
+    $content = preg_replace($patt_img, $text_image, $content);
+  }
   echo $content;
 }
 

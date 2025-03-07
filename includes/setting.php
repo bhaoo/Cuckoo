@@ -179,8 +179,10 @@ function themeConfig($form) {
             'local'   => '本地',
             'custom'  => '自定义',
             'dmoe.cc' => 'dmoe.cc'
-          ], '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”', 'dmoe.cc').
-        $config->input('randimgCdn', '自定义随机文章图源', '在这里填写你自己的图源(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义)，若出现完全重复可以在结尾加上 ?rand={rand}').
+          ], '随机文章封面图源', '在这里可以设置随机文章封面图源，仅当文章没有设置图片时引用。', 'dmoe.cc').
+        $config->input('randimgCdn', '自定义随机文章封面图源', '在这里填写你自己的图源(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义)，若出现完全重复可以在结尾加上 ?rand={rand}').
+        $config->checkbox('isImageRewrite', ['open' => '开启'], '文章图片覆写开关', '默认关闭，开启时将文章中的相对图片路径覆写为完整的URL路径（需填写 文章图片覆写 URL）', ['close']).
+        $config->input('imageRewriteUrl', '文章图片覆写 URL', '在这里填写 URL 以进行替换，URL 末尾无需带 "/"（具体请看主题文档）', '.').
         $config->select('gravatar',
           ['cravatar' => 'Cravatar',
            'weavatar' => 'WeAvatar',
