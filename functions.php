@@ -295,7 +295,9 @@ function get_comment_avatar($moe = NULL){
   }elseif($gravatar == 'qiniu'){
     $host = 'https://dn-qiniu-avatar.qbox.me/avatar';
   }elseif($gravatar == 'cravatar'){
-      $host = 'https://cravatar.cn/avatar';
+    $host = 'https://cravatar.cn/avatar';
+  }elseif($gravatar == 'weavatar'){
+    $host = 'https://weavatar.com/avatar';
   }elseif($gravatar == 'cdn'){
     $host = Helper::options()->gravatarCdn;
   }

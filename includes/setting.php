@@ -183,6 +183,7 @@ function themeConfig($form) {
         $config->input('randimgCdn', '自定义随机文章图源', '在这里填写你自己的图源(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义)，若出现完全重复可以在结尾加上 ?rand={rand}').
         $config->select('gravatar',
           ['cravatar' => 'Cravatar',
+           'weavatar' => 'WeAvatar',
            'geekzu' => '极客族',
            'qiniu'  => '七牛',
            'cdn'    => '自定义 CDN'
