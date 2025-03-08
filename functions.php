@@ -11,13 +11,13 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2024-01-02
+ * @date 2025-03-08
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "2.1.0");
+define("THEME_VERSION", "2.2.0");
 
 require_once("includes/setting.php");
 require_once("includes/owo.php");
