@@ -11,7 +11,7 @@
  *
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2023-11-26
+ * @date 2025-03-05
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -92,10 +92,11 @@ if ($this->allow('comment')) : ?>
       </form>
     </div>
   </div>
-  <div class="comment-title">全部评论</div>
+  <div class="comment-title" id="comments">全部评论</div>
   <div class="comments-container">
     <?php if ($comments->have()) {
       $comments->listComments();
+      $comments->pageNav('<span><</span>', '<span>></span>', 1, '...', 'wrapTag=div&wrapClass=comments-page-navigator&prevClass=prev&nextClass=next');
     } else { ?>
       <div class="mdui-card post-card">
         <div class="mdui-card-content">

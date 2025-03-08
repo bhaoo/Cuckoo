@@ -57,8 +57,8 @@
 1. 欢迎各位加入 [主题交流群](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=s2GpijC6kAYicysKIUoV87cckdzRDova&authKey=XNFrI33rkha8i9vNTIMLCzqN9fCphaARFlptIb9cKB0PhwdC6fWIDn90MVi8JrfX&noverify=0&group_code=943195145)
 2. 主题文档：[https://cuckoo.owo.show/](https://cuckoo.owo.show/)
 3. 如有问题可以发 [Issue](https://github.com/bhaoo/Cuckoo/issues) 或进群提问，提问前请先阅读 “主题文档” 先哦！
-4. 如果喜欢这个主题，欢迎各位点个 Star ，也欢迎 [投喂](https://afdian.net/@bhaoo) 布好哦！
+4. 如果喜欢这个主题，欢迎各位点个 Star ，也欢迎 [投喂](https://afdian.com/@bhaoo) 布好哦！
 
 ---
 
-Copyright &copy; 2020-2024 [Bhao](https://dwd.moe/), under GPL-3.0 License.
+Copyright &copy; 2020-2025 [Bhao](https://dwd.moe/), under GPL-3.0 License.

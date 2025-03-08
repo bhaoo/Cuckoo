@@ -11,13 +11,13 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2024-01-02
+ * @date 2025-03-08
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "2.1.0");
+define("THEME_VERSION", "2.2.0");
 
 require_once("includes/setting.php");
 require_once("includes/owo.php");
@@ -88,6 +88,7 @@ function drawerBottom(){
     }
     echo '</div>';
   }
+  echo (!empty(Helper::options()->drawerFooter)) ? Helper::options()->drawerFooter : '';
 }
 
 // 文章短代码
@@ -122,6 +123,12 @@ function parseContent($content) {
                            <div class="post-timeline-content">${2}</div>
                          </div>';
   $content = preg_replace($patt_timeline_item, $text_timeline_item, $content);
+  if (Helper::options()->isImageRewrite && in_array('open', Helper::options()->isImageRewrite)) {
+    $patt_img = '/<img(.*?)src="\.(.*?)"(.*?)>/s';
+    $imageURL = Helper::options()->imageRewriteUrl;
+    $text_image = '<img${1}src="'.$imageURL.'${2}"${3}>';
+    $content = preg_replace($patt_img, $text_image, $content);
+  }
   echo $content;
 }
 
@@ -180,7 +187,16 @@ function staticFiles($content, $type = 0, $isExternal = 0) {
   }
   switch($setting){
     case 'jsdelivr':
+      $output = 'https://cdn.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'fastly':
+      $output = 'https://fastly.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'gcore':
       $output = 'https://gcore.jsdelivr.net/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
+      break;
+    case 'jsdmirror':
+      $output = 'https://cdn.jsdmirror.com/gh/Bhaoo/Cuckoo@'.THEME_VERSION.'/assets/'.$content;
       break;
     case 'cdn':
       $output = Helper::options()->staticCdn.'/'.$content;
@@ -188,11 +204,11 @@ function staticFiles($content, $type = 0, $isExternal = 0) {
     case 'cdnjs':
       $output = 'https://cdnjs.cloudflare.com/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
       break;
-    case 'staticfile':
-      $output = 'https://cdn.staticfile.org/Cuckoo/'.THEME_VERSION.'/'.$content;
+    case 'snrat':
+      $output = 'https://cdnjs.snrat.com/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
       break;
-    case 'bootcdn':
-      $output = 'https://cdn.bootcdn.net/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
+    case 'zstatic':
+      $output = 'https://s4.zstatic.net/ajax/libs/Cuckoo/'.THEME_VERSION.'/'.$content;
       break;
     case 'baomitu':
       $output = 'https://lib.baomitu.com/Cuckoo/'.THEME_VERSION.'/'.$content;
@@ -214,17 +230,27 @@ function randPic(){
   $setting = Helper::options()->randimg;
   $setting_cdn = Helper::options()->randimgCdn;
   $rand = mt_rand(0,999);
-  if ($setting == 'api.ohmyga.cn') {
-    $output = 'https://api.ohmyga.cn/wallpaper/?rand='.$rand;
-  }elseif ($setting == 'local') {
-    $openfile = glob(Helper::options()->themeFile("Cuckoo", "random/*"), GLOB_BRACE);
-    $img = array_rand($openfile);
-    preg_match('/\/random\/\S*\.(jpg|png|gif|webp)/', $openfile[$img], $out);
-    $output = Helper::options()->siteUrl.'usr/themes/Cuckoo'.$out[0];
-  }elseif ($setting == 'cdn'){
+  if ($setting == 'local') {
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $dirPath = getcwd() . "/usr/themes/Cuckoo/random/";
+    $files = scandir($dirPath);
+    $images = array_filter($files, function ($file) use ($dirPath, $allowedExtensions) {
+      $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+      return in_array($extension, $allowedExtensions) && is_file($dirPath . $file);
+    });
+    if (!empty($images)) {
+      if (!empty($setting_cdn)) {
+        $output = $setting_cdn.'/'.$images[array_rand($images)];
+      } else {
+        $output = Helper::options()->siteUrl.'usr/themes/Cuckoo/random/'.$images[array_rand($images)];
+      }
+    } else {
+      $output = "Error, please check /random.";
+    }
+  }elseif ($setting == 'custom'){
     $output = preg_replace('/{rand}/', $rand, $setting_cdn);
-  }elseif ($setting == '9jojo'){
-    $output = 'https://api.baka.fun/acgpic/?rand='.$rand;
+  }else if ($setting == 'dmoe.cc'){
+    $output = 'https://www.dmoe.cc/random.php?rand='.$rand;
   }
   print_r($output);
 }
@@ -279,7 +305,9 @@ function get_comment_avatar($moe = NULL){
   }elseif($gravatar == 'qiniu'){
     $host = 'https://dn-qiniu-avatar.qbox.me/avatar';
   }elseif($gravatar == 'cravatar'){
-      $host = 'https://cravatar.cn/avatar';
+    $host = 'https://cravatar.cn/avatar';
+  }elseif($gravatar == 'weavatar'){
+    $host = 'https://weavatar.com/avatar';
   }elseif($gravatar == 'cdn'){
     $host = Helper::options()->gravatarCdn;
   }
@@ -296,6 +324,7 @@ function otherCss(){
 
 // 更多JS、百度统计、跨设备阅读、Katex
 function otherJs(){
+  $string = "";
   if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs || !Helper::options()->describe){
     $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
     $string = '<script>';
@@ -307,18 +336,51 @@ function otherJs(){
     $string .= '</script>';
     $string .= (!Helper::options()->describe) ? "<script>Hitokoto();</script>" : '';
     $string .= (Helper::options()->otherFooter) ?? '';
-    echo $string;
   }
+  if(Helper::options()->mermaidStatus && in_array('open', Helper::options()->mermaidStatus)){
+    $staticFiles = Helper::options()->staticFiles;
+    $string .= '<script src="';
+    switch($staticFiles){
+      case 'jsdelivr':
+        $string .= '//cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'fastly':
+        $string .= '//fastly.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'jsdmirror':
+        $string .= '//cdn.jsdmirror.com/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'cdnjs':
+        $string .= '//cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js';
+        break;
+      case 'snrat':
+        $string .= '//cdnjs.snrat.com/ajax/libs/mermaid/11.4.0/mermaid.min.js';
+        break;
+      case 'gcore':
+        $string .= '//gcore.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js';
+        break;
+      case 'zstatic':
+      case 'cdn':
+      case 'baomitu':
+      case 'local':
+      default:
+        $string .= '//s4.zstatic.net/ajax/libs/mermaid/11.4.0/mermaid.min.js';
+        break;
+    }
+    $string .= '"></script>';
+  }
+  echo $string;
 }
 
 // 更多PJAX、百度统计、跨设备阅读
 function otherPjax(){
-  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax){
+  if(Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherPjax || (Helper::options()->mermaidStatus && in_array('open', Helper::options()->mermaidStatus))){
     $string = "<script>$(document).on('pjax:complete',function(){";
     $string .= (Helper::options()->statisticsBaidu) ? "if(typeof _hmt !== 'undefined'){ _hmt.push(['_trackPageview', location.pathname + location.search])};" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};" : '';
     $string .= (!Helper::options()->describe) ? "Hitokoto();" : '';
     $string .= (Helper::options()->katexOption) ? 'if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
+    $string .= (Helper::options()->mermaidStatus && in_array('open', Helper::options()->mermaidStatus)) ? "mermaid.init(undefined, '.mermaid');" : '';
     $string .= (Helper::options()->otherPjax) ? Helper::options()->otherPjax : '';
     $string .= "});</script>";
     echo $string;
@@ -453,7 +515,7 @@ function Footer(){
   } elseif ($beian || $gabeian || $moebei) {
     $content .= '｜';
   }
-  $content .= ($moebei) ? '<span><a href="https://icp.gov.moe" target="_blank">萌ICP备</a><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">'.$num2.'</a>号</span>' : '';
+  $content .= ($moebei) ? '<span><a href="https://icp.gov.moe/?keyword='.$num2.'" target="_blank">萌ICP备'.$num2.'号</a></span>' : '';
   $content .= ($beian) ? '<span><a href="//beian.miit.gov.cn">'.Helper::options()->beian.'</a></span>' : '';
   $content .= ($gabeian) ? '<span><img style="vertical-align:middle" src="'.staticFiles('images/beian.png', 1).'" height="20" width="20" alt="公安备案"> <a href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode='.$num.'">'.Helper::options()->gabeian.'</a></span>' : '';
   echo $footer.'<p>'.$copy.$content.'<br><br><span id="cuckoo-copy">Theme <a href="https://github.com/bhaoo/cuckoo" target="_blank">Cuckoo</a> by <a href="https://dwd.moe/" target="_blank">Bhao</a>｜Powered By <a href="http://www.typecho.org" target="_blank">Typecho</a></span></p>';

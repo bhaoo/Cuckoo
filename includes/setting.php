@@ -11,7 +11,7 @@
  *
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2023-11-27
+ * @date 2025-03-07
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -164,22 +164,28 @@ function themeConfig($form) {
         <?php echo $config->select('staticFiles',
             ['local'       => '本地',
               'jsdelivr'   => 'JsDelivr',
+              'fastly'   => 'Fastly',
+              'gcore'   => 'Gcore',
+              'jsdmirror'   => 'JsdMirror',
               'cdnjs'      => 'cdnjs',
-              'staticfile' => 'Staticfile',
-              'bootcdn'    => 'Bootcdn',
+              'snrat' => 'snrat',
+              'zstatic'    => 'zstatic',
               'baomitu'    => 'Baomitu',
               'cdn'        => '自定义 CDN'
             ], '静态文件源', '推荐选择 “JsDelivr源”', 'local').
         $config->input('staticCdn', '自定义静态文件CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取静态文件(需在上方选择自定义CDN)').
         $config->select('randimg',
-          ['api.ohmyga.cn' =>   'OMGのAPI',
-            'local'         =>   '本地',
-            'cdn'           =>   '自定义 CDN',
-            '9jojo'         =>   '9JOJO'
-          ], '随机文章图源', '在这里可以设置随机文章图源，仅当文章没有设置图片时引用。”', '9jojo').
-        $config->input('randimgCdn', '自定义随机文章图CDN', '在这里填写你自己的CDN(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义CDN)').
+          [
+            'local'   => '本地',
+            'custom'  => '自定义',
+            'dmoe.cc' => 'dmoe.cc'
+          ], '随机文章封面图源', '在这里可以设置随机文章封面图源，仅当文章没有设置图片时引用。', 'dmoe.cc').
+        $config->input('randimgCdn', '自定义随机文章封面图源', '在这里填写你自己的图源(如 api.xxx.xxx)，以获取随机图片(需在上方选择自定义)，若出现完全重复可以在结尾加上 ?rand={rand}').
+        $config->checkbox('isImageRewrite', ['open' => '开启'], '文章图片覆写开关', '默认关闭，开启时将文章中的相对图片路径覆写为完整的URL路径（需填写 文章图片覆写 URL）', ['close']).
+        $config->input('imageRewriteUrl', '文章图片覆写 URL', '在这里填写 URL 以进行替换，URL 末尾无需带 "/"（具体请看主题文档）', '.').
         $config->select('gravatar',
           ['cravatar' => 'Cravatar',
+           'weavatar' => 'WeAvatar',
            'geekzu' => '极客族',
            'qiniu'  => '七牛',
            'cdn'    => '自定义 CDN'
@@ -228,6 +234,7 @@ function themeConfig($form) {
           ]
         }").
         $config->textarea('drawerBottom', '抽屉底部功能', '可以在此往抽屉底部添加按钮，最多仅能展示6个。').
+        $config->textarea('drawerFooter', '抽屉底部引用', '输入你所想要添加的内容即可添加至抽屉底部哦！如需推荐看看主题文档哦！').
         $config->textarea('otherHeader', '顶部引用', '输入你所想要添加的内容即可哦！').
         $config->textarea('otherFooter', '底部引用', '输入你所想要添加的内容即可哦！').
         $config->textarea('otherCss', '更多CSS', '输入你所想要添加的CSS即可哦！').
@@ -249,7 +256,10 @@ function themeConfig($form) {
       $config->input('CacheTime', '缓存时间', '单位为“秒”，不会填写可留空，默认为一天。').
       $config->input('Amout', '展示数量', '需要展示的番剧数量，默认为 10 个').
       $config->textarea('HideMedia', '隐藏番剧', '输入番剧id，多个id用英文逗号隔开，就可以隐藏你所不想展示的番剧啦！').
-      $config->input('Sessdata', 'Sessdate（选填）', '如需获取观看进度需填写 Sessdata，详细请看文档说明'))
+      $config->input('Sessdata', 'Sessdate（选填）', '如需获取观看进度需填写 Sessdata，详细请看文档说明')).
+      $config->page('Mermaid', '一个开源的、基于JavaScript的绘图库',
+        $config->checkbox('mermaidStatus', ['open' => '开启'], '总开关', '默认关闭，开启以支持 Mermaid', ['close'])
+        )
       ?>
     </div>
     <button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme"><i class="mdui-icon material-icons">save</i></button>

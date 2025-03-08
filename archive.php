@@ -11,7 +11,7 @@
  *
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2023-07-19
+ * @date 2025-03-04
  */
 
 if(!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -64,6 +64,22 @@ $this -> need('includes/header.php');
               </div>
               <div class="mdui-card-content mdui-typo"><?php parseContent(parseBiaoQing($this->content)); ?></div>
             </div>
+          <?php } elseif ($this->fields->articleType == "normal") { ?>
+            <a class="post index-normal" href="<?php $this -> permalink() ?>">
+              <div class="mdui-card index-card-normal mdui-hoverable">
+                <div class="mdui-card-primary index-primary-normal">
+                  <div class="mdui-card-primary-title"><?php $this->sticky();$this->title(); ?></div>
+                  <div class="mdui-card-primary-subtitle"><?php $this->date(); ?>
+                    <?php if ($this->options->showComments) {
+                      echo '｜'; $this -> commentsNum('0 条评论', '1 条评论', '%d 条评论');
+                    } ?>
+                  </div>
+                  <?php if (strlen($this->fields->remark)) {
+                    echo '<div class="mdui-chip mdui-color-theme index-chip-normal"><span class="mdui-chip-title">'.$this->fields->remark.'</span></div>';
+                  } ?>
+                </div>
+              </div>
+            </a>
             <?php
           }
         endwhile; ?>

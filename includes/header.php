@@ -36,7 +36,7 @@ $accentColor = $this->options->accentColor;
   <?php endif;?>
   <?php if ($this->is('post') || $this->is('page') || $this->is('attachment')): ?>
     <meta property="og:url" content="<?php $this->permalink();?>"/>
-    <meta property="og:title" content="<?php $this->title();?> - <?php $this->options->title();?>"/>
+    <meta property="og:title" content="<?php $this->title();?> - <?php $this->options->webTitle();?>"/>
     <meta property="og:author" content="<?php $this->author();?>"/>
     <meta property="og:type" content="article"/>
     <meta property="og:image" content="<?php $wzimg = $this->fields->wzimg; echo empty($wzimg) ? randPic() : $wzimg; ?>"/>
