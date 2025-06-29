@@ -14,6 +14,7 @@
  * @date 2023-12-09
  */
 
+use Typecho\Config;
 use Widget\Comments\Archive;
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
@@ -38,7 +39,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @access private
    * @var integer
    */
-  private $_currentPage;
+  private int $currentPage;
 
   /**
    * 所有文章个数
@@ -46,7 +47,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @access private
    * @var integer
    */
-  private $_total = false;
+  private int $total = 0;
 
   /**
    * 子父级评论关系
@@ -54,15 +55,15 @@ class Cuckoo_Comments_Archive extends Archive {
    * @access private
    * @var array
    */
-  private $_threadedComments = array();
+  private array $threadedComments = [];
 
   /**
    * _singleCommentOptions
    *
-   * @var mixed
+   * @var Config|null
    * @access private
    */
-  private $_singleCommentOptions = NULL;
+  private ?Config $singleCommentOptions = NULL;
 
   /**
    *
@@ -86,7 +87,7 @@ class Cuckoo_Comments_Archive extends Archive {
    */
   private function threadedCommentsCallback()
   {
-    $singleCommentOptions = $this->_singleCommentOptions;
+    $singleCommentOptions = $this->singleCommentOptions;
     if (function_exists('threadedComments')) {
       return threadedComments($this, $singleCommentOptions);
     }
@@ -203,8 +204,8 @@ class Cuckoo_Comments_Archive extends Archive {
    */
   protected function ___children()
   {
-    return $this->options->commentsThreaded && !$this->isTopLevel && isset($this->_threadedComments[$this->coid])
-      ? $this->_threadedComments[$this->coid] : array();
+    return $this->options->commentsThreaded && !$this->isTopLevel && isset($this->threadedComments[$this->coid])
+      ? $this->threadedComments[$this->coid] : [];
   }
 
   /**
@@ -300,7 +301,7 @@ class Cuckoo_Comments_Archive extends Archive {
             ? count($this->_threadedComments[$parent]) + 1 : 1;
 
           /** 如果是子节点 */
-          $this->_threadedComments[$parent][$coid] = $comment;
+          $this->threadedComments[$parent][$coid] = $comment;
         } else {
           $outputComments[$coid] = $comment;
         }
@@ -312,24 +313,24 @@ class Cuckoo_Comments_Archive extends Archive {
     /** 评论排序 */
     if ('DESC' == $this->options->commentsOrder) {
       $this->stack = array_reverse($this->stack, true);
-      $this->_threadedComments = array_map('array_reverse', $this->_threadedComments);
+      $this->threadedComments = array_map('array_reverse', $this->threadedComments);
     }
 
     /** 评论总数 */
-    $this->_total = count($this->stack);
+    $this->total = count($this->stack);
 
     /** 对评论进行分页 */
     if ($this->options->commentsPageBreak) {
       if ('last' == $this->options->commentsPageDisplay && !$this->parameter->commentPage) {
-        $this->_currentPage = ceil($this->_total / $this->options->commentsPageSize);
+        $this->currentPage = ceil($this->total / $this->options->commentsPageSize);
       } else {
-        $this->_currentPage = $this->parameter->commentPage ? $this->parameter->commentPage : 1;
+        $this->currentPage = $this->parameter->commentPage ? $this->parameter->commentPage : 1;
       }
 
       /** 截取评论 */
       $this->stack = array_slice(
         $this->stack,
-        ($this->_currentPage - 1) * $this->options->commentsPageSize,
+        ($this->currentPage - 1) * $this->options->commentsPageSize,
         $this->options->commentsPageSize
       );
 
@@ -432,7 +433,7 @@ class Cuckoo_Comments_Archive extends Archive {
       $this->sequence++;
 
       //在子评论之前输出
-      echo $this->_singleCommentOptions->before;
+      echo $this->singleCommentOptions->before;
 
       foreach ($children as $child) {
         $this->row = $child;
@@ -441,7 +442,7 @@ class Cuckoo_Comments_Archive extends Archive {
       }
 
       //在子评论之后输出
-      echo $this->_singleCommentOptions->after;
+      echo $this->singleCommentOptions->after;
 
       $this->sequence--;
     }
@@ -457,8 +458,8 @@ class Cuckoo_Comments_Archive extends Archive {
   public function listComments($singleCommentOptions = NULL)
   {
     //初始化一些变量
-    $this->_singleCommentOptions = Typecho_Config::factory($singleCommentOptions);
-    $this->_singleCommentOptions->setDefault(array(
+    $this->singleCommentOptions = Config::factory($singleCommentOptions);
+    $this->singleCommentOptions->setDefault([
       'before'        =>  '',
       'after'         =>  '',
       'beforeAuthor'  =>  '',
@@ -471,17 +472,17 @@ class Cuckoo_Comments_Archive extends Archive {
       'avatarSize'    =>  32,
       'defaultAvatar' =>  NULL
     ));
-    $this->pluginHandle()->trigger($plugged)->listComments($this->_singleCommentOptions, $this);
+    self::pluginHandle()->trigger($plugged)->call('listComments', $this->singleCommentOptions, $this);
 
     if (!$plugged) {
       if ($this->have()) {
-        echo $this->_singleCommentOptions->before;
+        echo $this->singleCommentOptions->before;
 
         while ($this->next()) {
           $this->threadedCommentsCallback();
         }
 
-        echo $this->_singleCommentOptions->after;
+        echo $this->singleCommentOptions->after;
       }
     }
   }
