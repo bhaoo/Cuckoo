@@ -273,16 +273,14 @@ class Cuckoo_Comments_Archive extends Archive {
    * @param mixed ...$args
    * @return void
    */
-    $args = func_get_args();
-    if (!$args) {
   public function num(...$args) {
     if (empty($args)) {
       $args[] = '%d';
     }
 
-    $num = intval($this->_total);
+    $num = $this->total;
 
-    echo sprintf(isset($args[$num]) ? $args[$num] : array_pop($args), $num);
+    echo sprintf($args[$num] ?? array_pop($args), $num);
   }
 
   /**
