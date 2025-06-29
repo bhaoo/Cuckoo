@@ -295,11 +295,29 @@ class Cuckoo_Comments_Archive extends Archive {
       return;
     }
 
-    $commentsAuthor = Typecho_Cookie::get('__typecho_remember_author');
-    $commentsMail = Typecho_Cookie::get('__typecho_remember_mail');
-    $select = $this->select()->where('table.comments.cid = ?', $this->parameter->parentId)
-      ->where('table.comments.status = ? OR (table.comments.author = ? AND table.comments.mail = ? AND table.comments.status = ?)', 'approved', $commentsAuthor, $commentsMail, 'waiting');
-    $threadedSelect = NULL;
+    // Typecho 版本判断
+    if (self::isTypechoVersion()) {
+      $unapprovedCommentId = intval(Cookie::get('__typecho_unapproved_comment', 0));
+      $select = $this->select()->where('cid = ?', $this->parameter->parentId)
+        ->where(
+          'status = ? OR (coid = ? AND status <> ?)',
+          'approved',
+          $unapprovedCommentId,
+          'approved'
+        );
+    } else {
+      $commentsAuthor = Cookie::get('__typecho_remember_author');
+      $commentsMail = Cookie::get('__typecho_remember_mail');
+      $select = $this->select()->where('table.comments.cid = ?', $this->parameter->parentId)
+        ->where(
+          'table.comments.status = ? OR (table.comments.author = ?'
+          . ' AND table.comments.mail = ? AND table.comments.status = ?)',
+          'approved',
+          $commentsAuthor,
+          $commentsMail,
+          'waiting'
+        );
+    }
 
     if ($this->options->commentsShowCommentOnly) {
       $select->where('table.comments.type = ?', 'comment');
@@ -366,12 +384,11 @@ class Cuckoo_Comments_Archive extends Archive {
         ($this->currentPage - 1) * $this->options->commentsPageSize,
         $this->options->commentsPageSize
       );
-
-      /** 评论置位 */
-      $this->length = count($this->stack);
-      $this->row = $this->length > 0 ? current($this->stack) : array();
     }
 
+    /** 评论置位 */
+    $this->length = count($this->stack);
+    $this->row = $this->length > 0 ? current($this->stack) : [];
     reset($this->stack);
   }
 
