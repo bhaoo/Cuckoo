@@ -14,6 +14,7 @@
  * @date 2023-12-09
  */
 
+use Widget\Comments\Archive;
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 // 基本按照 Typecho 评论组件而来
@@ -36,8 +37,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * @copyright Copyright (c) 2008 Typecho team (http://www.typecho.org)
  * @license GNU General Public License 2.0
  */
-class Cuckoo_Comments_Archive extends Widget_Abstract_Comments
-{
+class Cuckoo_Comments_Archive extends Archive {
   /**
    * 当前页
    *
