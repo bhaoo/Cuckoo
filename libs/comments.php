@@ -15,7 +15,14 @@
  */
 
 use Typecho\Config;
+use Typecho\Cookie;
+use Typecho\Db;
+use Typecho\Router;
+use Typecho\Widget\Exception;
+use Typecho\Widget\Helper\PageNavigator\Box;
+use Utils\Helper;
 use Widget\Comments\Archive;
+
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 // 基本按照 Typecho 评论组件而来
@@ -100,12 +107,13 @@ class Cuckoo_Comments_Archive extends Archive {
    *
    * @access private
    * @return void
+   * @throws Db\Exception
    */
-  private function threadedCommentsCallback()
-  {
+  private function threadedCommentsCallback(): void {
     $singleCommentOptions = $this->singleCommentOptions;
     if (function_exists('threadedComments')) {
-      return threadedComments($this, $singleCommentOptions);
+      threadedComments($this, $singleCommentOptions);
+      return;
     }
 
     $commentClass = '';
@@ -115,18 +123,16 @@ class Cuckoo_Comments_Archive extends Archive {
       } else {
         $commentClass .= ' comment-by-user';
       }
-    }
-?>
-    <div id="<?php $this->theId(); ?>" class="<?php
-                                              if ($this->levels > 0) {
-                                                echo ' comment-child';
-                                                $this->levelsAlt(' comment-level-odd', ' comment-level-even');
-                                              } else {
-                                                echo ' comment-parent mdui-card comment-card';
-                                              }
-                                              $this->alt(' comment-odd', ' comment-even');
-                                              echo $commentClass;
-                                              ?>">
+    } ?>
+    <div id="<?php $this->theId(); ?>" class="
+      <?php if ($this->levels > 0) {
+        echo ' comment-child';
+        $this->levelsAlt(' comment-level-odd', ' comment-level-even');
+      } else {
+        echo ' comment-parent mdui-card comment-card';
+      }
+      $this->alt(' comment-odd', ' comment-even');
+      echo $commentClass; ?>">
       <div class="comment-image">
         <img class="mdui-img-circle" src="<?php get_comment_avatar($this->mail); ?>" loading="lazy" />
         <?php get_comment_prefix($this->mail);
@@ -154,7 +160,7 @@ class Cuckoo_Comments_Archive extends Archive {
       </div>
       <div class="comment-content mdui-typo">
         <?php $this->commentsReply();
-        echo preg_replace('#</?[p][^>]*>#', '', parseBiaoQing($this->content));; ?>
+        echo preg_replace('#</?[p][^>]*>#', '', parseBiaoQing($this->content)); ?>
       </div>
       <?php if ($this->children) { ?>
         <div class="comment-children" itemprop="discusses">
@@ -165,14 +171,19 @@ class Cuckoo_Comments_Archive extends Archive {
 <?php
   }
 
-  // 获取回复者名称
-  private function commentsReply()
-  {
-    $db = Typecho_Db::get();
+  /**
+   * 获取回复者名称
+   *
+   * @access private
+   * @return void
+   * @throws Db\Exception
+   */
+  private function commentsReply(): void {
+    $db = Db::get();
     $parentID = $db->fetchRow($db->select('parent')->from('table.comments')->where('coid = ?', $this->coid));
     $parentID = $parentID['parent'];
     if ($parentID == '0') {
-      return '';
+      return;
     } else {
       $author = $db->fetchRow($db->select()->from('table.comments')->where('coid = ?', $parentID));
       $link = 'href="#comment-' . $author['coid'] . '"';
@@ -197,8 +208,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @access protected
    * @return string
    */
-  protected function ___permalink() : string
-  {
+  protected function ___permalink() : string {
 
     if ($this->options->commentsPageBreak) {
       $pageRow = array('permalink' => $this->parentContent['pathinfo'], 'commentPage' => $this->_currentPage);
@@ -218,8 +228,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @access protected
    * @return array
    */
-  protected function ___children()
-  {
+  protected function ___children(): array {
     return $this->options->commentsThreaded && !$this->isTopLevel && isset($this->threadedComments[$this->coid])
       ? $this->threadedComments[$this->coid] : [];
   }
@@ -230,8 +239,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @access protected
    * @return boolean
    */
-  protected function ___isTopLevel()
-  {
+  protected function ___isTopLevel(): bool {
     return $this->levels > $this->options->commentsMaxNestingLevels - 2;
   }
 
@@ -253,10 +261,10 @@ class Cuckoo_Comments_Archive extends Archive {
    * @param mixed ...$args
    * @return void
    */
-  public function num()
-  {
     $args = func_get_args();
     if (!$args) {
+  public function num(...$args) {
+    if (empty($args)) {
       $args[] = '%d';
     }
 
@@ -272,8 +280,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @return void
    * @throws Db\Exception
    */
-  public function execute()
-  {
+  public function execute() {
     if (!$this->parameter->parentId) {
       return;
     }
@@ -292,7 +299,7 @@ class Cuckoo_Comments_Archive extends Archive {
     $this->db->fetchAll($select, array($this, 'push'));
 
     /** 需要输出的评论列表 */
-    $outputComments = array();
+    $outputComments = [];
 
     /** 如果开启评论回复 */
     if ($this->options->commentsThreaded) {
@@ -365,8 +372,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @param array $value 每行的值
    * @return array
    */
-  public function push(array $value) : array
-  {
+  public function push(array $value) : array {
     $value = $this->filter($value);
 
     /** 计算深度 */
@@ -395,18 +401,17 @@ class Cuckoo_Comments_Archive extends Archive {
    * @return void
    * @throws Exception
    */
-  public function pageNav($prev = '&laquo;', $next = '&raquo;', $splitPage = 3, $splitWord = '...', $template = '')
-  {
     if ($this->options->commentsPageBreak && $this->_total > $this->options->commentsPageSize) {
       $default = array(
         'wrapTag'       =>  'ol',
         'wrapClass'     =>  'page-navigator'
       );
+  public function pageNav(string $prev = '&laquo;', string $next = '&raquo;', int $splitPage = 3, string $splitWord = '...', $template = '') {
 
       if (is_string($template)) {
         parse_str($template, $config);
       } else {
-        $config = $template;
+        $config = $template ?: [];
       }
 
       $template = array_merge($default, $config);
@@ -440,8 +445,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @return void
    * @throws Db\Exception
    */
-  public function threadedComments()
-  {
+  public function threadedComments() {
     $children = $this->children;
     if ($children) {
       //缓存变量便于还原
@@ -467,9 +471,10 @@ class Cuckoo_Comments_Archive extends Archive {
   /**
    * 列出评论
    *
-   * @access private
+   * @access public
    * @param mixed $singleCommentOptions 单个评论自定义选项
    * @return void
+   * @throws Db\Exception
    */
   public function listComments($singleCommentOptions = NULL)
   {
@@ -542,13 +547,13 @@ class Cuckoo_Comments_Archive extends Archive {
    * @param string $word 回复链接文字
    * @return void
    */
-  public function reply($word = '')
-  {
+  public function reply(string $word = '') {
     if ($this->options->commentsThreaded && !$this->isTopLevel && $this->parameter->allowComment) {
       $word = empty($word) ? _t('回复') : $word;
       $this->pluginHandle()->trigger($plugged)->reply($word, $this);
 
       if (!$plugged) {
+        // TypechoComment 位于 comments.min.js
         echo '<a href="' . substr($this->permalink, 0, -strlen($this->theId) - 1) . '?replyTo=' . $this->coid .
           '#' . $this->parameter->respondId . '" rel="nofollow" onclick="return TypechoComment.reply(\'' .
           $this->theId . '\', ' . $this->coid . ');" no-pjax>' . $word . '</a>';
@@ -563,8 +568,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * @param string $word 取消回复链接文字
    * @return void
    */
-  public function cancelReply($word = '')
-  {
+  public function cancelReply(string $word = '') {
     if ($this->options->commentsThreaded) {
       $word = empty($word) ? _t('取消回复') : $word;
       $this->pluginHandle()->trigger($plugged)->cancelReply($word, $this);
@@ -573,6 +577,7 @@ class Cuckoo_Comments_Archive extends Archive {
         $replyId = $this->request->filter('int')->replyTo;
         echo '<a id="cancel-comment-reply-link" href="' . $this->parameter->parentContent['permalink'] . '#' . $this->parameter->respondId .
           '" rel="nofollow"' . ($replyId ? '' : ' style="display:none"') . ' onclick="return TypechoComment.cancelReply();">' . $word . '</a>';
+        // TypechoComment 位于 comments.min.jst
       }
     }
   }
@@ -582,8 +587,7 @@ class Cuckoo_Comments_Archive extends Archive {
    *
    * @access public
    */
-  public static function AntiSpam($comment)
-  {
+  public static function AntiSpam($comment) {
     echo '<!--<nocompress>-->';
     echo '<script>(function(){var a=document.addEventListener?{add:"addEventListener",focus:"focus",load:"DOMContentLoaded"}:{add:"attachEvent",focus:"onfocus",load:"onload"};var c,d,e,f,b=document.getElementById("' . $comment->respondId . '");null!=b&&(c=b.getElementsByTagName("form"),c.length>0&&(d=c[0],e=d.getElementsByTagName("textarea")[0],f=!1,null!=e&&"text"==e.name&&e[a.add](a.focus,function(){if(!f){var a=document.createElement("input");a.type="hidden",a.name="_",d.appendChild(a),f=!0,a.value=' . Typecho_Common::shuffleScriptVar($comment->security->getToken($comment->request->getRequestUrl())) . '}})))})();</script>';
     echo '<!--</nocompress>-->';
