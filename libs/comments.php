@@ -244,14 +244,8 @@ class Cuckoo_Comments_Archive extends Archive {
   }
 
   /**
-   * 重载内容获取
    *
-   * @access protected
-   * @return void
    */
-  protected function ___parentContent() : ?array
-  {
-    return $this->parameter->parentContent;
   }
 
   /**
