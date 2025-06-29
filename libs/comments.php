@@ -535,8 +535,9 @@ class Cuckoo_Comments_Archive extends Archive {
       'replyWord'     =>  _t('回复'),
       'commentStatus' =>  _t('您的评论正等待审核!'),
       'avatarSize'    =>  32,
-      'defaultAvatar' =>  NULL
-    ));
+      'defaultAvatar' =>  NULL,
+      'avatarHighRes' => false
+    ]);
     self::pluginHandle()->trigger($plugged)->call('listComments', $this->singleCommentOptions, $this);
 
     if (!$plugged) {
