@@ -563,7 +563,7 @@ class Cuckoo_Comments_Archive extends Archive {
   public function reply(string $word = '') {
     if ($this->options->commentsThreaded && !$this->isTopLevel && $this->parameter->allowComment) {
       $word = empty($word) ? _t('回复') : $word;
-      $this->pluginHandle()->trigger($plugged)->reply($word, $this);
+      self::pluginHandle()->trigger($plugged)->call('reply', $word, $this);
 
       if (!$plugged) {
         // TypechoComment 位于 comments.min.js
@@ -584,13 +584,13 @@ class Cuckoo_Comments_Archive extends Archive {
   public function cancelReply(string $word = '') {
     if ($this->options->commentsThreaded) {
       $word = empty($word) ? _t('取消回复') : $word;
-      $this->pluginHandle()->trigger($plugged)->cancelReply($word, $this);
+      self::pluginHandle()->trigger($plugged)->call('cancelReply', $word, $this);
 
       if (!$plugged) {
-        $replyId = $this->request->filter('int')->replyTo;
-        echo '<a id="cancel-comment-reply-link" href="' . $this->parameter->parentContent['permalink'] . '#' . $this->parameter->respondId .
-          '" rel="nofollow"' . ($replyId ? '' : ' style="display:none"') . ' onclick="return TypechoComment.cancelReply();">' . $word . '</a>';
+        $replyId = $this->request->filter('int')->get('replyTo');
         // TypechoComment 位于 comments.min.jst
+        echo '<a id="cancel-comment-reply-link" href="' . $this->parameter->parentContent->permalink . '#' . $this->parameter->respondId .
+          '" rel="nofollow"' . ($replyId ? '' : ' style="display:none"') . ' onclick="return TypechoComment.cancelReply();" >' . $word . '</a>';
       }
     }
   }
