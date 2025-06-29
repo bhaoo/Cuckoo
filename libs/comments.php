@@ -79,9 +79,20 @@ class Cuckoo_Comments_Archive extends Archive {
     ]);
   }
 
+  /**
+   * 判断 Typecho 版本号
    *
    * @access public
+   * @return bool 提取到的版本号是否大于或等于 1.3.0
    */
+  public static function isTypechoVersion(): bool {
+    $version = "1.0.0";
+
+    if (preg_match('/Typecho\s+([\d.]+)/i', Helper::options()->generator, $matches)) {
+      $version = $matches[1];
+    }
+
+    return (bool)version_compare($version, '1.3.0', '>=');
   }
 
   /**
