@@ -134,10 +134,10 @@ class Cuckoo_Comments_Archive extends Archive {
       $this->alt(' comment-odd', ' comment-even');
       echo $commentClass; ?>">
       <div class="comment-image">
-        <img class="mdui-img-circle" src="<?php get_comment_avatar($this->mail); ?>" loading="lazy" />
+        <img class="mdui-img-circle" src="<?php get_comment_avatar($this->mail); ?>" loading="lazy" alt="commenter-avatar" />
         <?php get_comment_prefix($this->mail);
         if ($this->authorId == $this->ownerId) { ?>
-          <img src="<?php staticFiles('images/author.png') ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}" />
+          <img src="<?php staticFiles('images/author.png') ?>" class="comment-prefix" mdui-tooltip="{content: '博主'}" alt="author-prefix" />
         <?php } ?>
       </div>
       <div class="mdui-card-header-title mdui-typo">
