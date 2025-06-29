@@ -428,12 +428,12 @@ class Cuckoo_Comments_Archive extends Archive {
    * @return void
    * @throws Exception
    */
-    if ($this->options->commentsPageBreak && $this->_total > $this->options->commentsPageSize) {
-      $default = array(
-        'wrapTag'       =>  'ol',
-        'wrapClass'     =>  'page-navigator'
-      );
   public function pageNav(string $prev = '&laquo;', string $next = '&raquo;', int $splitPage = 3, string $splitWord = '...', $template = '') {
+    if ($this->options->commentsPageBreak) {
+      $default = [
+        'wrapTag'   => 'ol',
+        'wrapClass' => 'page-navigator'
+      ];
 
       if (is_string($template)) {
         parse_str($template, $config);
@@ -443,25 +443,42 @@ class Cuckoo_Comments_Archive extends Archive {
 
       $template = array_merge($default, $config);
 
-      $pageRow = $this->parameter->parentContent;
-      $pageRow['permalink'] = $pageRow['pathinfo'];
+      // 进行 Typecho 版本判断
+      if (self::isTypechoVersion()) {
+        $pageRow = [
+          'permalink' => $this->parameter->parentContent->path,
+          'commentPage' => '{commentPage}'
+        ];
+      } else {
+        $pageRow = $this->parameter->parentContent;
+        $pageRow['permalink'] = $pageRow['pathinfo'];
+      }
+      $query = Router::url('comment_page', $pageRow, $this->options->index);
 
-      $query = Typecho_Router::url('comment_page', $pageRow, $this->options->index);
-
-      /** 使用盒状分页 */
-      $nav = new Typecho_Widget_Helper_PageNavigator_Box(
-        $this->_total,
-        $this->_currentPage,
+      self::pluginHandle()->trigger($hasNav)->call(
+        'pageNav',
+        $this->currentPage,
+        $this->total,
         $this->options->commentsPageSize,
+        $prev,
+        $next,
+        $splitPage,
+        $splitWord,
+        $template,
         $query
       );
-      $nav->setPageHolder('commentPage');
-      $nav->setAnchor('comments');
 
-      echo '<' . $template['wrapTag'] . (empty($template['wrapClass'])
-        ? '' : ' class="' . $template['wrapClass'] . '"') . '>';
-      $nav->render($prev, $next, $splitPage, $splitWord, $template);
-      echo '</' . $template['wrapTag'] . '>';
+      if (!$hasNav && $this->total > $this->options->commentsPageSize) {
+        /** 使用盒状分页 */
+        $nav = new Box($this->total, $this->currentPage, $this->options->commentsPageSize, $query);
+        $nav->setPageHolder('commentPage');
+        $nav->setAnchor('comments');
+
+        echo '<' . $template['wrapTag'] . (empty($template['wrapClass'])
+            ? '' : ' class="' . $template['wrapClass'] . '"') . '>';
+        $nav->render($prev, $next, $splitPage, $splitWord, $template);
+        echo '</' . $template['wrapTag'] . '>';
+      }
     }
   }
 
