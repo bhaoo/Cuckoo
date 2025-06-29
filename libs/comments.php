@@ -20,17 +20,11 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 // 基本按照 Typecho 评论组件而来
 
 /**
- * 评论归档
- *
- * @category typecho
- * @package Widget
- * @copyright Copyright (c) 2008 Typecho team (http://www.typecho.org)
- * @license GNU General Public License 2.0
- * @version $Id$
- */
-
-/**
  * 评论归档组件
+ *
+ * 由于不继承 \Widget\Base\Comments 会导致 1.3.0 和 1.2.0 版本的 ___parentContent 方法返回类型不一致 (1.3.0 返回 \Widget\Base\Contents，1.3.0 以下返回数组)
+ * 继承又会因为基本都要覆写 (因为有大量 protected 方法，若需调用子类 private 变量则需要进行覆写)
+ * 没办法了，为了兼容新老版本只能继承 + 覆写了口牙! (这样就能不管 ___parentContent 方法到底给我了啥)
  *
  * @category typecho
  * @package Widget
@@ -71,7 +65,6 @@ class Cuckoo_Comments_Archive extends Archive {
   private $_singleCommentOptions = NULL;
 
   /**
-   * 构造函数,初始化组件
    *
    * @access public
    * @param mixed $request request对象
@@ -182,6 +175,7 @@ class Cuckoo_Comments_Archive extends Archive {
 
   /**
    * 获取当前评论链接
+   * (Typecho 1.3.0 已移除该方法)
    *
    * @access protected
    * @return string
@@ -239,7 +233,7 @@ class Cuckoo_Comments_Archive extends Archive {
    * 输出文章评论数
    *
    * @access public
-   * @param string $string 评论数格式化数据
+   * @param mixed ...$args
    * @return void
    */
   public function num()
@@ -259,6 +253,7 @@ class Cuckoo_Comments_Archive extends Archive {
    *
    * @access public
    * @return void
+   * @throws Db\Exception
    */
   public function execute()
   {
@@ -375,12 +370,13 @@ class Cuckoo_Comments_Archive extends Archive {
    * 输出分页
    *
    * @access public
-   * @param string $prev 上一页文字
-   * @param string $next 下一页文字
-   * @param int $splitPage 分割范围
-   * @param string $splitWord 分割字符
-   * @param string $template 展现配置信息
+   * @param string       $prev      上一页文字
+   * @param string       $next      下一页文字
+   * @param int          $splitPage 分割范围
+   * @param string       $splitWord 分割字符
+   * @param string|array $template  展现配置信息
    * @return void
+   * @throws Exception
    */
   public function pageNav($prev = '&laquo;', $next = '&raquo;', $splitPage = 3, $splitWord = '...', $template = '')
   {
@@ -423,8 +419,9 @@ class Cuckoo_Comments_Archive extends Archive {
   /**
    * 递归输出评论
    *
-   * @access protected
+   * @access public
    * @return void
+   * @throws Db\Exception
    */
   public function threadedComments()
   {
