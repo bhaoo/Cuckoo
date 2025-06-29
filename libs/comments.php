@@ -244,8 +244,13 @@ class Cuckoo_Comments_Archive extends Archive {
   }
 
   /**
+   * 重载评论页码获取
+   * Typecho v1.2.1 无该方法
    *
+   * @return int
    */
+  protected function ___commentPage(): int {
+    return $this->currentPage;
   }
 
   /**
