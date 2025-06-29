@@ -20,9 +20,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 require_once __DIR__ . "/../libs/comments.php";
 $parameter = array(
   'parentId'      => $this->hidden ? 0 : $this->cid,
-  'parentContent' => $this->row,
+  'parentContent' => (Cuckoo_Comments_Archive::isTypechoVersion()) ? $this : $this->row,
   'respondId'     => $this->respondId,
-  'commentPage'   => $this->request->filter('int')->commentPage,
+  'commentPage'   => (Cuckoo_Comments_Archive::isTypechoVersion()) ? $this->parameter->commentPage : $this->request->filter('int')->commentPage,
   'allowComment'  => $this->allow('comment')
 );
 $this->widget('Cuckoo_Comments_Archive', $parameter)->to($comments);
