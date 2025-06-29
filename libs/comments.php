@@ -554,38 +554,6 @@ class Cuckoo_Comments_Archive extends Archive {
   }
 
   /**
-   * 重载alt函数,以适应多级评论
-   *
-   * @access public
-   * @return void
-   */
-  public function alt(...$args)
-  {
-    $args = func_get_args();
-    $num = func_num_args();
-
-    $sequence = $this->levels <= 0 ? $this->sequence : $this->order;
-
-    $split = $sequence % $num;
-    echo $args[(0 == $split ? $num : $split) - 1];
-  }
-
-  /**
-   * 根据深度余数输出
-   *
-   * @access public
-   * @param string $param 需要输出的值
-   * @return void
-   */
-  public function levelsAlt()
-  {
-    $args = func_get_args();
-    $num = func_num_args();
-    $split = $this->levels % $num;
-    echo $args[(0 == $split ? $num : $split) - 1];
-  }
-
-  /**
    * 评论回复链接
    *
    * @access public
