@@ -209,17 +209,30 @@ class Cuckoo_Comments_Archive extends Archive {
    * @return string
    */
   protected function ___permalink() : string {
+    if (self::isTypechoVersion()) {
+      // Typecho 1.3.0 \Widget\Base\Comment ___permalink 方法
+      if ($this->options->commentsPageBreak) {
+        return Router::url(
+            'comment_page',
+            $this,
+            $this->options->index
+          ) . '#' . $this->theId;
+      }
 
-    if ($this->options->commentsPageBreak) {
-      $pageRow = array('permalink' => $this->parentContent['pathinfo'], 'commentPage' => $this->_currentPage);
-      return Typecho_Router::url(
-        'comment_page',
-        $pageRow,
-        $this->options->index
-      ) . '#' . $this->theId;
+      return $this->parentContent->permalink . '#' . $this->theId;
+    } else {
+      // Typecho 1.3.0- \Widget\Comments\Archive ___permalink 方法
+      if ($this->options->commentsPageBreak) {
+        $pageRow = array('permalink' => $this->parentContent['pathinfo'], 'commentPage' => $this->currentPage);
+        return Router::url(
+            'comment_page',
+            $pageRow,
+            $this->options->index
+          ) . '#' . $this->theId;
+      }
+
+      return $this->parentContent['permalink'] . '#' . $this->theId;
     }
-
-    return $this->parentContent['permalink'] . '#' . $this->theId;
   }
 
   /**
