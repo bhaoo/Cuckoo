@@ -66,17 +66,22 @@ class Cuckoo_Comments_Archive extends Archive {
   private ?Config $singleCommentOptions = NULL;
 
   /**
+   * @param Config $parameter
+   */
+  protected function initParameter(Config $parameter) {
+    $parameter->setDefault([
+      'parentId' => 0,
+      'respondId' => '',
+      'commentPage' => 0,
+      'commentsNum' => 0,
+      'allowComment' => 1,
+      'parentContent' => null,
+    ]);
+  }
+
    *
    * @access public
-   * @param mixed $request request对象
-   * @param mixed $response response对象
-   * @param mixed $params 参数列表
-   * @return void
    */
-  public function __construct($request, $response, $params = NULL)
-  {
-    parent::__construct($request, $response, $params);
-    $this->parameter->setDefault('parentId=0&commentPage=0&commentsNum=0&allowComment=1');
   }
 
   /**
