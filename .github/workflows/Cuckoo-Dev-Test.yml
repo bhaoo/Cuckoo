@@ -15,10 +15,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.2', '7.3', '7.4', '8.0', '8.1']
+        php: ['7.4', '8.0', '8.1', '8.2']
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -29,12 +29,12 @@ jobs:
   build:
     name: Cuckoo Dev Build
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci') && github.event_name != 'pull_request'"
+    if: "!contains(github.event.head_commit.message, 'skip ci') && github.event_name != 'pull_request' && github.repository == 'bhaoo/Cuckoo'"
     needs:
       - php
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Build
         run: |
           mkdir build
