@@ -126,7 +126,11 @@ function parseContent($content) {
   if (Helper::options()->isImageRewrite && in_array('open', Helper::options()->isImageRewrite)) {
     $patt_img = '/<img(.*?)src="\.(.*?)"(.*?)>/s';
     $imageURL = Helper::options()->imageRewriteUrl;
-    $text_image = '<img${1}src="'.$imageURL.'${2}"${3}>';
+    $text_image = '<img${1}src="'.$imageURL.'${2}"${3} loading="lazy">';
+    $content = preg_replace($patt_img, $text_image, $content);
+  } else {
+    $patt_img = '/<img(.*?)>/s';
+    $text_image = '<img ${1} loading="lazy">';
     $content = preg_replace($patt_img, $text_image, $content);
   }
   echo $content;
