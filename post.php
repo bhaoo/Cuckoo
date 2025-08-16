@@ -19,6 +19,15 @@ if (@$_SERVER['HTTP_X_PJAX'] == true) {
     Typecho_Response::getInstance()->setStatus(200);
 }
 $this->need('includes/header.php'); ?>
+
+<?php
+//使用gallery.php替换原有页面
+//未解密使用原post页面
+if ($this->fields->articleType == "gallery" && !($this->hidden)) {
+  $this->need('includes/gallery.php');
+}else{
+?>
+
 <div class="index-container">
   <div class="mdui-col-md-8">
     <div class="mdui-card post-card">
@@ -48,3 +57,4 @@ $this->need('includes/header.php'); ?>
 </div>
 <?php $this -> need('includes/footer.php'); ?>
 
+<?php } ?>

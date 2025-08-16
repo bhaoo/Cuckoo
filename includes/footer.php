@@ -19,7 +19,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 </div>
 <div onclick="tocOverlay()" class="toc-overlay"></div>
 <button class="mdui-fab mdui-fab-fixed mdui-ripple top mdui-color-theme-accent"><i class="mdui-icon material-icons">arrow_upward</i></button>
-<footer>
+<footer <?php if($this->fields->articleType == "gallery"){echo 'class="gallery-footer-margin"';}; ?>>
   <?php Footer() ?>
 </footer>
 <script src="<?php staticFiles('js/mdui.min.js') ?>"></script>

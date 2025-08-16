@@ -55,6 +55,12 @@ $accentColor = $this->options->accentColor;
   <link rel="stylesheet" href="<?php staticFiles('css/fancybox.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/katex.min.css') ?>">
   <link rel="stylesheet" href="<?php staticFiles('css/cuckoo.min.css') ?>">
+  <?php if ($this->fields->articleType == "gallery") { ?>
+  <link rel="stylesheet" href="<?php staticFiles('css/gallery.css') ?>">
+  <script src="<?php staticFiles('js/jquery-3.7.1.min.js') ?>"></script>
+  <script src="<?php staticFiles('js/masonry.pkgd.min.js') ?>"></script>
+  <script src="<?php staticFiles('js/imagesloaded.pkgd.min.js') ?>"></script> 
+  <?php } ?>
   <script src="<?php staticFiles('js/tocbot.min.js') ?>"></script>
   <script src="<?php staticFiles('js/nprogress.min.js') ?>"></script>
   <?php fontFamily(); $this->header('antiSpam=&commentReply='); bgUrl(); otherCss();?>

@@ -49,7 +49,7 @@ if ($sticky && $this->is('index') || $this->is('front')) {
     <div class="article">
 <?php if ($this->have()) :
   while ($this->next()) :
-    if ($this->fields->articleType == "article" or $this->fields->articleType == NULL) { ?>
+    if ($this->fields->articleType == "article" or $this->fields->articleType == NULL or $this->fields->articleType == "gallery") { ?>
       <a class="post" href="<?php $this -> permalink() ?>">
         <div class="mdui-card index-card mdui-hoverable">
           <div class="mdui-card-media index-img-media">
@@ -59,9 +59,12 @@ if ($sticky && $this->is('index') || $this->is('front')) {
               <div class="mdui-card-primary index-primary">
                 <div class="mdui-card-primary-title"><?php $this->sticky();$this -> title(); ?></div>
                 <div class="mdui-card-primary-subtitle index-info"><?php $this -> date(); ?>
-                  <?php if ($this->options->showComments) {
+                  <?php if ($this->options->showComments and $this->fields->articleType != "gallery") {
                     echo '｜'; $this -> commentsNum('0 条评论', '1 条评论', '%d 条评论');
-                  } ?>
+                  }elseif ($this->fields->articleType == "gallery") {
+                    echo '｜画廊';
+                  };
+                  ?>
                 </div>
                 <div class="mdui-card-primary-subtitle index-subtitle"><?php $this -> excerpt(); ?></div>
               </div>
