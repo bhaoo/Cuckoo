@@ -24,7 +24,7 @@ require_once("includes/owo.php");
 
 // 文章自定义设置
 function themeFields($layout) {
-  $articleType = new Typecho_Widget_Helper_Form_Element_Select('articleType',array('article' => '文章', 'daily' => '日常', 'normal' => '无封面'), 'article', _t('文章类型'));
+  $articleType = new Typecho_Widget_Helper_Form_Element_Select('articleType',array('article' => '文章', 'daily' => '日常', 'normal' => '无封面', 'gallery' => '画廊'), 'article', _t('文章类型'));
   $layout->addItem($articleType);
   $wzimg = new Typecho_Widget_Helper_Form_Element_Text('wzimg', NULL, NULL, _t('文章/独立页面封面图'), _t('如果不填将显示随机封面图'));
   $layout->addItem($wzimg);
