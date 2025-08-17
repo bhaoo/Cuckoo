@@ -40,21 +40,32 @@ function parseGallery($content) {
 
 ?>
 
-<div class="gallery-container">
+<div class="gallery-container" id="gallery-container">
     <div class="gallery-sizer"></div>
     <?php parseGallery($this->content); ?>
 </div>
 
 <script>
+
 var grid = document.querySelector('.gallery-container');
 var msnry = new Masonry(grid,{
   itemSelector: '.gallery-item',
   columnWidth: '.gallery-sizer',
-  gutter: 20,
+  gutter: 0,
   percentPosition: true
 });
 imagesLoaded(grid).on('progress',function(){
   msnry.layout();
+  
+  //footer定位
+  var document_height = innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  var gallery_container_height = document.getElementById('gallery-container').offsetHeight;
+  var total_height = gallery_container_height + 150;
+  
+  if (document_height < total_height) {
+    document.getElementById('footer').classList.remove('gallery-footer');
+  }
+  
 });
 </script>
 
