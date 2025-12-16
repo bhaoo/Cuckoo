@@ -31,8 +31,6 @@ $accentColor = $this->options->accentColor;
     <meta property="og:title" content="<?php $this->options->webTitle();?>"/>
     <meta property="og:image" content="<?php $this->options->logoUrl();?>"/>
     <meta property="og:author" content="<?php $this->author->name();?>"/>
-    <meta name="keywords"  content="<?php $this->keywords();?>">
-    <meta name="description"  content="<?php $this->options->description();?>">
   <?php endif;?>
   <?php if ($this->is('post') || $this->is('page') || $this->is('attachment')): ?>
     <meta property="og:url" content="<?php $this->permalink();?>"/>
@@ -43,8 +41,6 @@ $accentColor = $this->options->accentColor;
     <meta property="og:description" content="<?php $this->excerpt(); ?>"/>
     <meta property="article:published_time" content="<?php $this->date('c'); ?>"/>
     <meta property="article:published_first" content="<?php $this->options->title() ?>, <?php $this->permalink() ?>" />
-    <meta name="keywords" content="<?=$this->keywords()?>">
-    <meta name="description" content="<?=$this->getDescription()?>" />
   <?php endif;?>
   <title><?php $this->archiveTitle(array('category' => _t('分类 %s 下的文章'), 'search' => _t('包含关键字 %s 的文章'), 'tag' => _t('标签 %s 下的文章'), 'author' => _t('%s 发布的文章')), '', ' - ');$this->options->webTitle(); ?></title>
   <link rel="shortcut icon" href="<?php setting("favicon", "images/favicon.ico"); ?>" />
