@@ -20,7 +20,7 @@ $primaryColor = $this->options->primaryColor;
 $accentColor = $this->options->accentColor;
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
