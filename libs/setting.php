@@ -22,6 +22,18 @@ class Cuckoo_Setting {
   private $form;
   public $security;
 
+  private function escapeFormValue($value, $fallback = '') {
+    if ($value === NULL) {
+      $value = $fallback;
+    }
+
+    if (!is_scalar($value)) {
+      $value = '';
+    }
+
+    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+  }
+
   public function __construct($form) {
     $this->form = $form;
     Typecho_Widget::widget('Widget_Security')->to($security);
@@ -36,9 +48,10 @@ class Cuckoo_Setting {
       $description = ($description) ? '<div class="mdui-textfield-helper">' . $description . '</div>' : NULL;
     }
     $userOption = themeOptions($name);
+    $escapedValue = $this->escapeFormValue($userOption, $default);
     $string .= '<div class="mdui-textfield">';
     $string .= '<label class="mdui-textfield-label">' . $display . '</label>';
-    $string .= '<input class="mdui-textfield-input" type="text" name="' . $name . '" value="' . htmlspecialchars($userOption) . '" />';
+    $string .= '<input class="mdui-textfield-input" type="text" name="' . $name . '" value="' . $escapedValue . '" />';
     $string .= $description;
     $string .= '</div>';
 
@@ -78,9 +91,10 @@ class Cuckoo_Setting {
     $string = "";
     $rows = ($rows) ? ' rows="' . $rows . '" ' : NULL;
     $userOption = themeOptions($name);
+    $escapedValue = $this->escapeFormValue($userOption, $default);
     $description = ($description) ? '<div class="mdui-textfield-helper">' . $description . '</div>' : NULL;
     $floatingLabel = ($userOption == "") ? " mdui-textfield-floating-label" : NULL;
-    $string .= '<div class="mdui-textfield"><label class="mdui-textfield-label">' . $display . '</label><textarea class="mdui-textfield-input" type="text" name="' . $name . '"' . $rows . '/>' . htmlspecialchars($userOption) . '</textarea>' . $description . '</div>';
+    $string .= '<div class="mdui-textfield"><label class="mdui-textfield-label">' . $display . '</label><textarea class="mdui-textfield-input" type="text" name="' . $name . '"' . $rows . '/>' . $escapedValue . '</textarea>' . $description . '</div>';
     $$name = new Typecho_Widget_Helper_Form_Element_Textarea($name, null, _t($default), _t($display), _t($description));
     $this->form->addInput($$name);
     return $string;
