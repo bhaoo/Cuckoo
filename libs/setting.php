@@ -87,14 +87,14 @@ class Cuckoo_Setting {
     return $string;
   }
 
-  public function textarea($name, $display = NULL, $description = NULL, $default = "", $rows = NULL) {
+  public function textarea($name, $display = NULL, $description = NULL, $default = "", $rows = 5) {
     $string = "";
     $rows = ($rows) ? ' rows="' . $rows . '" ' : NULL;
     $userOption = themeOptions($name);
     $escapedValue = $this->escapeFormValue($userOption, $default);
     $description = ($description) ? '<div class="mdui-textfield-helper">' . $description . '</div>' : NULL;
     $floatingLabel = ($userOption == "") ? " mdui-textfield-floating-label" : NULL;
-    $string .= '<div class="mdui-textfield"><label class="mdui-textfield-label">' . $display . '</label><textarea class="mdui-textfield-input" type="text" name="' . $name . '"' . $rows . '/>' . $escapedValue . '</textarea>' . $description . '</div>';
+    $string .= '<div class="mdui-textfield"><label class="mdui-textfield-label">' . $display . '</label><textarea class="mdui-textfield-input" type="text" name="' . $name . '"' . $rows . '>' . $escapedValue . '</textarea>' . $description . '</div>';
     $$name = new Typecho_Widget_Helper_Form_Element_Textarea($name, null, _t($default), _t($display), _t($description));
     $this->form->addInput($$name);
     return $string;
