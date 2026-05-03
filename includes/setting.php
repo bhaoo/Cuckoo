@@ -44,7 +44,18 @@ function themeOptions($name) {
     $db = Typecho_Db::get();
     $query = $db->select('value')->from('table.options')->where('name = ?', 'theme:'.getTheme());
     $result = $db->fetchAll($query);
-    $themeOptions = unserialize($result[0]["value"]);
+
+    $value = $result[0]["value"];
+    $trimmedValue = trim($value);
+    if (strpos($trimmedValue, '{') === 0 || strpos($trimmedValue, '[') === 0) {
+      $themeOptions = json_decode($value, true);
+    } else {
+      $themeOptions = unserialize($value);
+    }
+
+    if (!is_array($themeOptions)) {
+      $themeOptions = [];
+    }
   }
 
   return ($name === NULL) ? $themeOptions : (isset($themeOptions[$name]) ? $themeOptions[$name] : NULL);
@@ -97,7 +108,7 @@ function themeConfig($form) {
       </div>
     </div>
   </div>
-  <form id="cuckoo-form" class="mdui-typo" action="<?php echo $config->security->getIndex('/action/themes-edit?config') ?>" method="post" enctype="application/x-www-form-urlencoded" style="display: block!important">
+  <form id="cuckoo-form" class="mdui-typo" action="<?php echo $config->security->getIndex('/action/themes-edit?config='. getTheme()) ?>" method="post" enctype="application/x-www-form-urlencoded" style="display: block!important">
     <div id="basic">
       <div class="setting-title">基础设置</div>
       <div class="setting-content">

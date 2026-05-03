@@ -37,7 +37,7 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
       <div class="sidebar-module-title">最新回复</div>
       <li class="mdui-divider mdui-m-y-0"></li>
       <?php $this -> widget('Widget_Comments_Recent') -> to($comments); ?>
-      <?php while($comments -> next()) : if(!$this -> hidden){ ?>
+      <?php while($comments -> next()) : ?>
         <a href="<?php $comments -> permalink(); ?>">
           <li class="mdui-list-item mdui-ripple sidebar-module-list">
             <div class="sidebar-reply-text"><?php $comments -> author(false); ?>
@@ -45,8 +45,7 @@ if(!defined('__TYPECHO_ROOT_DIR__'))
           </li>
           <li class="mdui-divider"></li>
         </a>
-      <?php }
-      endwhile; ?>
+      <?php endwhile; ?>
     </ul>
   </div>
   <?php } if ($this->options->tagCloud != "0") { ?>

@@ -11,13 +11,13 @@
  * 
  * @author Bhao
  * @link https://dwd.moe/
- * @date 2025-03-08
+ * @date 2026-05-03
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 define("THEME_NAME", "Cuckoo");
-define("THEME_VERSION", "2.2.0");
+define("THEME_VERSION", "2.3.0");
 
 require_once("includes/setting.php");
 require_once("includes/owo.php");
@@ -126,7 +126,11 @@ function parseContent($content) {
   if (Helper::options()->isImageRewrite && in_array('open', Helper::options()->isImageRewrite)) {
     $patt_img = '/<img(.*?)src="\.(.*?)"(.*?)>/s';
     $imageURL = Helper::options()->imageRewriteUrl;
-    $text_image = '<img${1}src="'.$imageURL.'${2}"${3}>';
+    $text_image = '<img${1}src="'.$imageURL.'${2}"${3} loading="lazy">';
+    $content = preg_replace($patt_img, $text_image, $content);
+  } else {
+    $patt_img = '/<img(.*?)>/s';
+    $text_image = '<img ${1} loading="lazy">';
     $content = preg_replace($patt_img, $text_image, $content);
   }
   echo $content;
@@ -326,11 +330,21 @@ function otherCss(){
 function otherJs(){
   $string = "";
   if(Helper::options()->brightTime || Helper::options()->statisticsBaidu || (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) || Helper::options()->otherJs || !Helper::options()->describe){
-    $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : '';
+    $brightTime_arr = (Helper::options()->brightTime) ? explode(',', Helper::options()->brightTime) : [];
     $string = '<script>';
+    if (count($brightTime_arr) === 3) {
+      $startHour = (int)$brightTime_arr[0];
+      $endHour = (int)$brightTime_arr[1];
+      $content = $brightTime_arr[2];
+      $string .= "var nowHour = new Date().getHours();";
+      if ($startHour < $endHour) {
+        $string .= "if(nowHour >= {$startHour} && nowHour < {$endHour}){darkContent('{$content}')};";
+      } else {
+        $string .= "if(nowHour >= {$startHour} || nowHour < {$endHour}){darkContent('{$content}')};";
+      }
+    }
     $string .= (Helper::options()->statisticsBaidu) ? "var _hmt = _hmt || [];(function() {var hm = document.createElement('script');hm.src = 'https://hm.baidu.com/hm.js?". Helper::options()->statisticsBaidu ."';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s);})();" : '';
     $string .= (Helper::options()->qrcode && in_array('open', Helper::options()->qrcode)) ? "qrcode(true);" : '';
-    $string .= ($brightTime_arr) ? "var nowHour=new Date().getHours();if(nowHour>".$brightTime_arr[0]." && nowHour<".$brightTime_arr[1]."){darkContent('".$brightTime_arr[2]."')};" : '';
     $string .= (Helper::options()->katexOption) ? 'renderMath=function(className){renderMathInElement(className,'. Helper::options()->katexOption .')};if($(".post-content").length){renderMath($(".post-content")[0])}' : '';
     $string .= (Helper::options()->otherJs) ? Helper::options()->otherJs : '';
     $string .= '</script>';
