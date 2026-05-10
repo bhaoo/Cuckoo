@@ -255,6 +255,8 @@ function randPic(){
     $output = preg_replace('/{rand}/', $rand, $setting_cdn);
   }else if ($setting == 'dmoe.cc'){
     $output = 'https://www.dmoe.cc/random.php?rand='.$rand;
+  } else {
+    $output = Helper::options()->siteUrl.'usr/themes/Cuckoo/assets/images/bg.jpg';
   }
   print_r($output);
 }
